@@ -11,6 +11,7 @@ import {
 
 import RootLayout from "./layouts/RootLayout.tsx";
 import Login from "./pages/Login.tsx";
+import { AuthProvider } from "./providers/AuthProvider.tsx";
 
 
 const router = createBrowserRouter(createRoutesFromElements(
@@ -22,6 +23,8 @@ const router = createBrowserRouter(createRoutesFromElements(
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <AuthProvider>
+            <RouterProvider router={router} />
+        </AuthProvider>
     </React.StrictMode>,
 );

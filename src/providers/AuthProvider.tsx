@@ -3,7 +3,13 @@ import { useContext, createContext, useState, ReactNode } from "react";
 import { constants } from "../constants";
 import { LoginSchema, Login } from "../schemas";
 
-const AuthContext = createContext<{}>({})
+type AuthContextType = {
+    accessToken: string|null;
+    login(loginCred: Login) : Promise<number|undefined>;
+    logout() : void
+}
+
+const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 
 export function AuthProvider({children}: {children: ReactNode}) {
     const [ accessToken, setAccessToken ] = useState<string|null>(null)
@@ -25,12 +31,26 @@ export function AuthProvider({children}: {children: ReactNode}) {
         }
     }
 
+    function logout() {
+        setAccessToken(null)
+        localStorage.removeItem('jwt')
+    }
+
+
     return (
         <AuthContext.Provider value={{
-            login,
             accessToken,
+            login,
+            logout,
         }}>
         {children}
         </AuthContext.Provider>
     )
+}
+
+export function useAuthContext() {
+        if (!AuthContext) {
+            throw new Error('missing context')
+        }
+        return useContext(AuthContext)
 }
