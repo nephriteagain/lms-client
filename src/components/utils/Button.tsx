@@ -1,13 +1,13 @@
-import {  ReactNode, ButtonHTMLAttributes, useState, useLayoutEffect, useRef  } from 'react'
+import {  ReactNode, ButtonHTMLAttributes  } from 'react'
 import LoadingSvg from './LoadingSvg'
 
 type ButtonProps  =  {    
     children?: ReactNode;
-    loading: boolean;
+    loading?: boolean;
     loadingSize?: number
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
-export default function Button({ children, loading, loadingSize, ...props }: ButtonProps ) {
+export default function Button({ children, loading=false, loadingSize, ...props }: ButtonProps ) {
 
 
     return (

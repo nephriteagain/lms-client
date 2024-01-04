@@ -1,5 +1,5 @@
 
-import { useContext, createContext, useState, ReactNode } from "react";
+import { useContext, createContext, useState, ReactNode, useEffect } from "react";
 import { constants } from "../constants";
 import { LoginSchema, Login } from "../schemas";
 
@@ -27,6 +27,7 @@ export function AuthProvider({children}: {children: ReactNode}) {
             if (response.ok) {
                 const data : Awaited<{access_token:string}> = await response.json()            
                 setAccessToken(data.access_token)
+                localStorage.setItem('jwt', data.access_token)
             }
             return response.status
         } catch (error) {
@@ -38,6 +39,13 @@ export function AuthProvider({children}: {children: ReactNode}) {
         setAccessToken(null)
         localStorage.removeItem('jwt')
     }
+
+    useEffect(() => {
+        const localJwt = localStorage.getItem('jwt')
+        if (localJwt) {
+            setAccessToken(localJwt)
+        }
+    }, [])
 
 
 

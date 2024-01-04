@@ -1,7 +1,7 @@
 import { FormEvent, useState, useEffect } from "react"
 import { useAuthContext } from "../providers/AuthProvider"
 import { LoginSchema, Login as LoginType } from "../schemas"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, redirect } from "react-router-dom"
 import Button from "../components/utils/Button"
 
 export default function Login() {
@@ -10,7 +10,7 @@ export default function Login() {
     const [ disabled, setDisabled ] = useState(true)
     const [ loading, setLoading ] = useState(false)
 
-    const { login } = useAuthContext()
+    const { login, accessToken } = useAuthContext()
 
     const navigate = useNavigate()    
 
@@ -31,6 +31,12 @@ export default function Login() {
         }
 
     }
+
+    useEffect(() => {
+        if (accessToken) {
+            navigate('/', {replace:true})
+        }
+    }, [accessToken])
 
     useEffect(() => {
         try {
