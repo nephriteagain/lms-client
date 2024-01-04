@@ -20,9 +20,7 @@ export function AuthProvider({children}: {children: ReactNode}) {
             const response = await fetch(`${constants.server}/auth/login`, {
                 method: 'POST',
                 body: JSON.stringify({email, password}),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: constants.jsonHeaders
             })
             if (response.ok) {
                 const data : Awaited<{access_token:string}> = await response.json()            

@@ -1,7 +1,7 @@
 import { FormEvent, useState, useEffect } from "react"
 import { useAuthContext } from "../providers/AuthProvider"
 import { LoginSchema, Login as LoginType } from "../schemas"
-import { useNavigate, redirect } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Button from "../components/utils/Button"
 
 export default function Login() {
