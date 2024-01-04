@@ -2,11 +2,13 @@ import { FormEvent, useState, useEffect } from "react"
 import { useAuthContext } from "../providers/AuthProvider"
 import { LoginSchema, Login as LoginType } from "../schemas"
 import { useNavigate } from "react-router-dom"
+import Button from "../components/utils/Button"
 
 export default function Login() {
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
     const [ disabled, setDisabled ] = useState(true)
+    const [ loading, setLoading ] = useState(false)
 
     const { login } = useAuthContext()
 
@@ -15,20 +17,19 @@ export default function Login() {
     async function loginUser(e: FormEvent, loginCred: LoginType) {
         e.preventDefault()
 
+        setLoading(true)           
         try {
             LoginSchema.parse(loginCred)            
-        } catch (error) {
-            console.error(error)
-        }
-
-        try {
-          const responseStatus = await login(loginCred)
+            const responseStatus = await login(loginCred)
           if (responseStatus === 200) {
             navigate('/', {replace:true})
           }
         } catch (error) {
             console.error(error)
+        } finally {
+            setLoading(false)
         }
+
     }
 
     useEffect(() => {
@@ -37,6 +38,7 @@ export default function Login() {
             setDisabled(false)
         } catch (error) {
             setDisabled(true)
+            setLoading(false)
         }
 
     }, [ email, password ])
@@ -65,13 +67,15 @@ export default function Login() {
                         onChange={(e) => setPassword(e.currentTarget.value)}
                     />                        
                 </div>
-                <div className="pt-4 py-2">
-                    <input 
-                        type="submit" 
-                        value='login' 
+                <div className="pt-4 py-2">                    
+                    <Button 
+                        loading={loading}
+                        type="submit"
                         className="disabled:opacity-60 bg-green-400 w-fit px-4 py-2 text-lg font-semibold shadow-md rounded-md hover:scale-115 hover:px-6 hover:bg-green-500 transition-all duration-150"
-                        disabled={disabled}
-                    />
+                        disabled={disabled || loading}
+                    >
+                        login
+                    </Button>
                 </div>
             </form>
         </div>

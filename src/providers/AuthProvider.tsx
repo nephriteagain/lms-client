@@ -19,11 +19,14 @@ export function AuthProvider({children}: {children: ReactNode}) {
             LoginSchema.parse({email, password})
             const response = await fetch(`${constants.server}/auth/login`, {
                 method: 'POST',
-                body: JSON.stringify({email, password})                
+                body: JSON.stringify({email, password}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
             if (response.ok) {
-                const data : Awaited<{acess_token:string}> = await response.json()            
-                setAccessToken(data.acess_token)
+                const data : Awaited<{access_token:string}> = await response.json()            
+                setAccessToken(data.access_token)
             }
             return response.status
         } catch (error) {
@@ -35,6 +38,7 @@ export function AuthProvider({children}: {children: ReactNode}) {
         setAccessToken(null)
         localStorage.removeItem('jwt')
     }
+
 
 
     return (
