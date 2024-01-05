@@ -1,5 +1,6 @@
 import {  ReactNode, ButtonHTMLAttributes  } from 'react'
 import LoadingSvg from './LoadingSvg'
+import { cn } from '@/lib/utils'
 
 type ButtonProps  =  {    
     children?: ReactNode;
@@ -7,11 +8,11 @@ type ButtonProps  =  {
     loadingSize?: number
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
-export default function Button({ children, loading=false, loadingSize, ...props }: ButtonProps ) {
+export default function Button({ children, className, loading=false, loadingSize, ...props }: ButtonProps ) {
 
 
     return (
-        <button {...props} className={`relative ${props.className}`}>
+        <button {...props} className={cn('relative disabled:opacity-60', className)}>
             <>
             { loading && <LoadingSvg loadingSize={loadingSize} /> }
             { children }
