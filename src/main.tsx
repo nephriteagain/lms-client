@@ -15,14 +15,14 @@ import Home from "./pages/Home.tsx";
 
 import { getBooks } from "./loaders/getBooks.ts";
 
-
-
-const router = createBrowserRouter(createRoutesFromElements(        
-    <Route path="/" element={<RootLayout />}>
-        <Route index element={<Home />} loader={getBooks} />
-        <Route path="login" element={<Login />} />
-    </Route>
-))
+const router = createBrowserRouter(
+    createRoutesFromElements(
+        <Route path="/" element={<RootLayout />}>
+            <Route index element={<Home />} loader={getBooks} />
+            <Route path="login" element={<Login />} />
+        </Route>,
+    ),
+);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
