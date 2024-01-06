@@ -28,9 +28,9 @@ export default function Book() {
                     <p className="font-semibold">Date Added</p>
                     <p>{new Date(dateAdded).toDateString().split(' ').splice(1).join(' ')}</p>
                 </div>
-                <div>
-                    <Link to={'update'} state={bookInfo}>
-                        update
+                <div className="text-center py-4">
+                    <Link to={'update'} state={bookInfo} className="bg-slate-600 hover:bg-slate-700 text-white font-semibold px-3 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-150">
+                        UPDATE
                     </Link>
                 </div>
             </section>

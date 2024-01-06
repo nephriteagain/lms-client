@@ -36,7 +36,7 @@ export default function InputList({ inputList, setInputList, defaultValue }: Inp
                         <li key={id} className="flex flex-row gap-2">
                             <input
                                 type="text"                                
-                                className="bg-gray-200 w-5/6 rounded-md px-3 py-1"
+                                className="bg-gray-200 w-5/6 rounded-md px-3 py-1 shadow-md"
                                 placeholder={`author #${index+1}`}
                                 name={`author-${id}`}
                                 {...val}

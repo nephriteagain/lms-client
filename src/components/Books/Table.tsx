@@ -54,7 +54,16 @@ function BookTableRow({ title, authors, yearPublished, dateAdded, _id }: Book) {
     const navigate = useNavigate()
 
     return (
-        <TableRow className="hover:bg-slate-300 cursor-pointer" onClick={() => navigate(`books/${_id}`)}>
+        <TableRow 
+        tabIndex={5} 
+        className="hover:bg-slate-300 cursor-pointer" 
+        onClick={() => navigate(`books/${_id}`)}
+        onKeyUp={(e) => {
+            if (e.key === 'Enter') {
+                e.currentTarget.click()
+            }
+        }}
+        >
             <TableCell>{title}</TableCell>
             <TableCell>{authors.join()}</TableCell>
             <TableCell>{yearPublished}</TableCell>

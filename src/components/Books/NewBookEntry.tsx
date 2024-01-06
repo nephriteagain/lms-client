@@ -33,14 +33,14 @@ export default function NewBookEntryBtn() {
                     <DialogHeader>
                         <DialogTitle>New Book Entry</DialogTitle>
                     </DialogHeader>
-            <fetcher.Form action='' method="post"  >
+                    <fetcher.Form action='' method="post"  >
                     <div className="flex flex-col gap-3">
                         <div className="flex flex-col items-start">
                             <p className="font-semibold text-lg">Title</p>
                             <input
                                 type="text"
                                 placeholder="title"
-                                className="bg-gray-200 w-5/6 rounded-md px-3 py-1"
+                                className="bg-gray-200 w-5/6 rounded-md px-3 py-1 shadow-md"
                                 name="title"
                             />
                         </div>
@@ -57,7 +57,7 @@ export default function NewBookEntryBtn() {
                             </p>
                             <input
                                 type="number"
-                                className="bg-gray-200 w-5/6 rounded-md px-3 py-1"
+                                className="bg-gray-200 w-5/6 rounded-md px-3 py-1 shadow-md"
                                 placeholder="year"
                                 name="yearPublished"
                             />
@@ -68,7 +68,7 @@ export default function NewBookEntryBtn() {
                             </p>
                             <input
                                 type="number"
-                                className="bg-gray-200 w-5/6 rounded-md px-3 py-1"
+                                className="bg-gray-200 w-5/6 rounded-md px-3 py-1 shadow-md"
                                 placeholder="total"
                                 name="total"
                             />
