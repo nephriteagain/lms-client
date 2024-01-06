@@ -1,4 +1,4 @@
-import { Book } from "../../types";
+import { Book } from "../../schemas";
 import { Link } from "react-router-dom";
 
 import {

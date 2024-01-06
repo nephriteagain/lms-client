@@ -1,6 +1,6 @@
 import { constants } from "../constants";
 import { injectJwtToken } from "../lib/utils";
-import { Book } from "../types";
+import { Book } from "../schemas";
 export async function getBooks({
     request,
 }: {

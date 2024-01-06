@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import { Book } from "../types";
+import { Book } from "../schemas";
 
 import BookTable from "../components/Home/Table";
 import SearchBar from "@/components/Home/SearchBar";
