@@ -24,7 +24,7 @@ export default function BookUpdate() {
             <div className="w-[95%] xs:w-[500px] bg-slate-300 p-6 rounded-lg shadow-lg">
                 <fetcher.Form className="flex flex-col gap-8">
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="title">Title</label>
+                        <label htmlFor="title" className="font-semibold">Title</label>
                         <input 
                         type="text" 
                         name="title" 
@@ -32,8 +32,8 @@ export default function BookUpdate() {
                         className="bg-gray-200 w-5/6 rounded-md px-3 py-1 shadow-md"
                         />  
                     </div>
-                    <div>
-                        <label>Authors</label>
+                    <div className="flex flex-col gap-2">
+                        <label className="font-semibold">Authors</label>
                         <InputList 
                         inputList={inputList} 
                         setInputList={setInputList} 
@@ -41,7 +41,7 @@ export default function BookUpdate() {
                         />
                     </div>
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="yearPublished">Year Published</label>
+                        <label htmlFor="yearPublished" className="font-semibold">Year Published</label>
                         <input 
                         type="number" 
                         name="yearPublished" 
