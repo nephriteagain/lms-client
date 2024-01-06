@@ -11,7 +11,7 @@ import { AuthProvider } from "./providers/AuthProvider.tsx";
 
 import RootLayout from "./layouts/RootLayout.tsx";
 import Login from "./pages/Login.tsx";
-import Home from "./pages/Home.tsx";
+import Books from "./pages/Books.tsx";
 import Book from "./pages/Book.tsx";
 
 import { getBooks } from "./loaders/getBooks.ts";
@@ -22,7 +22,7 @@ import { createBook } from "./actions/newBook.ts";
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<RootLayout />}>
-            <Route index element={<Home />} loader={getBooks} action={createBook} />
+            <Route index element={<Books />} loader={getBooks} action={createBook} />
             <Route path="/books/:id" element={<Book />} loader={getBook} />
             <Route path="login" element={<Login />} />
         </Route>,

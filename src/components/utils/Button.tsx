@@ -1,4 +1,4 @@
-import { ReactNode, ButtonHTMLAttributes } from "react";
+import { ReactNode, HTMLAttributes, forwardRef, ForwardedRef } from "react";
 import LoadingSvg from "./LoadingSvg";
 import { cn } from "@/lib/utils";
 
@@ -6,22 +6,23 @@ type ButtonProps = {
     children?: ReactNode;
     loading?: boolean;
     loadingSize?: number;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
+} & HTMLAttributes<HTMLButtonElement>;
 
-export default function Button({
+export default forwardRef(function Button({
     children,
     className,
     loading = false,
-    loadingSize,
+    loadingSize,            
     ...props
-}: ButtonProps) {
+}: ButtonProps, ref?: ForwardedRef<HTMLButtonElement>) {
     return (
         <button
-            {...props}
+            ref={ref}
             className={cn("relative disabled:opacity-60", className)}
+            {...props}
         >
             {loading && <LoadingSvg loadingSize={loadingSize} />}
             {children}
         </button>
     );
-}
+})

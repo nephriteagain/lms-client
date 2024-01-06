@@ -16,14 +16,14 @@ export default function Navbar() {
     return (
         <div className="px-4 py-2 w-full flex flex-row items-center gap-4 border-b shadow-md">
             <NavLink
-                to={"/"}
+                to={""}
                 className={({ isActive }) =>
                     isActive
                         ? "border-b-2 font-semibold text-lg  border-transparent hover:border-black transition-all duration-150"
                         : "border-b font-semibold text-lg  border-black hover:border-black transition-all duration-150"
                 }
             >
-                Home
+                Books
             </NavLink>
             {!!accessToken && (
                 <Button
