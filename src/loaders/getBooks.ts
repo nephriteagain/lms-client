@@ -23,7 +23,6 @@ export async function getBooks({
     });
     if (response.ok) {
         const books: Book[] = await response.json();
-        console.log(books);
         return books;
     }
     return [];

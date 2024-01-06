@@ -10,14 +10,13 @@ import {
 
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { generateRandomString } from "@/lib/utils";
+import { Form, useActionData } from "react-router-dom";
 
 import Button from "../utils/Button";
 import { FiPlus, FiMinus } from "react-icons/fi";
 
 export default function NewBookEntryBtn() {
-    const [inputList, setInputList] = useState([
-        { id: generateRandomString(), text: "" },
-    ]);
+    const [inputList, setInputList] = useState([generateRandomString()]);
 
     return (
         <Dialog>
@@ -26,11 +25,11 @@ export default function NewBookEntryBtn() {
                     Add New Book
                 </Button>
             </DialogTrigger>
-            <form>
                 <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
                         <DialogTitle>New Book Entry</DialogTitle>
                     </DialogHeader>
+            <Form action='' method="post" >
                     <div className="flex flex-col gap-3">
                         <div className="flex flex-col items-start">
                             <p className="font-semibold text-lg">Title</p>
@@ -38,6 +37,7 @@ export default function NewBookEntryBtn() {
                                 type="text"
                                 placeholder="title"
                                 className="bg-gray-200 w-3/4 rounded-md px-3 py-1"
+                                name="title"
                             />
                         </div>
                         <div className="flex flex-col items-start">
@@ -54,6 +54,8 @@ export default function NewBookEntryBtn() {
                             <input
                                 type="number"
                                 className="bg-gray-200 w-3/4 rounded-md px-3 py-1"
+                                placeholder="year"
+                                name="yearPublished"
                             />
                         </div>
                         <div className="flex flex-col items-start">
@@ -63,63 +65,54 @@ export default function NewBookEntryBtn() {
                             <input
                                 type="number"
                                 className="bg-gray-200 w-3/4 rounded-md px-3 py-1"
+                                placeholder="total"
+                                name="total"
                             />
                         </div>
                     </div>
-                    <DialogFooter className="pt-4">
                         <Button
-                            type="submit"
                             className="bg-green-300 hover:bg-green-400 active:bg-green-400 rounded-lg hover:rounded-xl px-4 py-1 text-xl font-bold shadow-lg hover:shadow-xl transition-all duration-150"
                         >
                             Save changes
                         </Button>
-                    </DialogFooter>
+                    </Form>
+                    
                 </DialogContent>
-            </form>
         </Dialog>
     );
 }
 
 type InputListProps = {
-    inputList: {
-        id: string;
-        text: string;
-    }[];
-    setInputList: Dispatch<SetStateAction<{ id: string; text: string }[]>>;
+    inputList: string[]
+    setInputList: Dispatch<SetStateAction<string[]>>;
 };
 
 function InputList({ inputList, setInputList }: InputListProps) {
     function addInput() {
         setInputList((list) => [
             ...list,
-            { id: generateRandomString(), text: "" },
+            generateRandomString(),
         ]);
     }
     function removeInput(id: string) {
         if (inputList.length === 1) {
             return;
         }
-        setInputList((list) => list.filter((li) => li.id !== id));
+        setInputList((list) => list.filter((li) => li !== id));
     }
 
-    function onInputChange(e: ChangeEvent<HTMLInputElement>, id: string) {
-        const v = e.currentTarget.value;
-        setInputList((list) =>
-            list.map((li) => (li.id === id ? { ...li, text: v } : li)),
-        );
-    }
 
     return (
         <div className="flex flex-col gap-2 w-full">
             <div className="flex flex-col gap-2">
-                {inputList.map(({ id, text }) => {
+                {inputList.map((id, index) => {
                     return (
                         <li key={id} className="flex flex-row gap-2">
                             <input
-                                type="text"
-                                value={text}
-                                onChange={(e) => onInputChange(e, id)}
+                                type="text"                                
                                 className="bg-gray-200 w-3/4 rounded-md px-3 py-1"
+                                placeholder={`author #${index+1}`}
+                                name={`author-${id}`}
                             />
                             <button
                                 type="button"

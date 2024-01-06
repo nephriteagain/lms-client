@@ -14,11 +14,12 @@ import Login from "./pages/Login.tsx";
 import Home from "./pages/Home.tsx";
 
 import { getBooks } from "./loaders/getBooks.ts";
+import { createBook } from "./actions/newBook.ts";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<RootLayout />}>
-            <Route index element={<Home />} loader={getBooks} />
+            <Route index element={<Home />} loader={getBooks} action={createBook} />
             <Route path="login" element={<Login />} />
         </Route>,
     ),
