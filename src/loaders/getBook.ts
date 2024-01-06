@@ -1,4 +1,4 @@
-import { constants } from "@/constants";
+import { constants, dev } from "@/constants";
 import { Book, BookInventory } from "@/schemas";
 import { LoaderFunctionArgs } from "react-router-dom";
 
@@ -6,7 +6,7 @@ export async function getBook({ params}  : LoaderFunctionArgs) : Promise<[Book, 
     if (!params?.id) {
         throw new Error('missing id')
     }
-    console.log('get book loader')
+    dev.log('get book loader')
 
     const book = fetch(`${constants.server}/books/${params.id}`)
     const bookSupply =  fetch(`${constants.server}/inventory/${params.id}`)

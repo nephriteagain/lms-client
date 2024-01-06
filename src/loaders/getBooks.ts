@@ -1,12 +1,14 @@
-import { constants } from "../constants";
+import { constants, dev } from "../constants";
 import { injectJwtToken } from "../lib/utils";
 import { Book } from "../schemas";
+
+
 export async function getBooks({
     request,
 }: {
     request: Request;
 }): Promise<Book[]> {
-    console.log("getbooks loader");
+    dev.log("getbooks loader");
     const url = new URL(request.url);
     const title = url.searchParams.get("title");
     const authors = url.searchParams.get("authors");

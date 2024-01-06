@@ -5,7 +5,6 @@ import { BookData } from "@/schemas"
 export default function Book() {
     const [ bookInfo, bookInventory ] = useLoaderData() as BookData
     
-    console.log(bookInfo, bookInventory)
     const { title, authors, yearPublished, dateAdded } = bookInfo
     const { available, borrowed, total } = bookInventory
 
