@@ -1,5 +1,5 @@
 import { Book } from "../../schemas";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
     Table,
@@ -13,6 +13,8 @@ import {
 
 // TODO: pagination
 export default function BookTable({ books }: { books: Book[] }) {
+
+
     return (
         <Table className="bg-slate-100 rounded-xl shadow-lg w-[95%] xs:w-[500px] sm:w-[600px] md:w-[700px] overflow-hidden">
             <TableCaption>List of Registered Books</TableCaption>
@@ -47,9 +49,12 @@ export default function BookTable({ books }: { books: Book[] }) {
     );
 }
 
-function BookTableRow({ title, authors, yearPublished, dateAdded }: Book) {
+function BookTableRow({ title, authors, yearPublished, dateAdded, _id }: Book) {
+
+    const navigate = useNavigate()
+
     return (
-        <TableRow className="hover:bg-slate-300">
+        <TableRow className="hover:bg-slate-300" onClick={() => navigate(`books/${_id}`)}>
             <TableCell>{title}</TableCell>
             <TableCell>{authors.join()}</TableCell>
             <TableCell>{yearPublished}</TableCell>

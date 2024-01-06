@@ -15,13 +15,15 @@ import Home from "./pages/Home.tsx";
 import Book from "./pages/Book.tsx";
 
 import { getBooks } from "./loaders/getBooks.ts";
+import { getBook } from "./loaders/getBook.ts";
+
 import { createBook } from "./actions/newBook.ts";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<RootLayout />}>
             <Route index element={<Home />} loader={getBooks} action={createBook} />
-            <Route path="/books/:id" element={<Book />} />
+            <Route path="/books/:id" element={<Book />} loader={getBook} />
             <Route path="login" element={<Login />} />
         </Route>,
     ),
