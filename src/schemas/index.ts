@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+export type P<T> = Promise<T>
+
 export const LoginSchema = z
     .object({
         email: z.string().email(),
@@ -22,3 +24,13 @@ export type Book = Omit<NewBook, 'total'> & {
     _id: string;
     dateAdded: number;
 }
+
+export const InventorySchema = z.object({
+    _id: z.string(),
+    title: z.string(),
+    available: z.number(),
+    borrowed: z.number(),
+    total: z.number(),
+})
+
+export type BookInventory = z.infer<typeof InventorySchema>

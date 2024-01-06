@@ -14,7 +14,7 @@ import {
 // TODO: pagination
 export default function BookTable({ books }: { books: Book[] }) {
     return (
-        <Table className="bg-slate-100 rounded-xl shadow-lg w-[95%] xs:w-[500px] sm:w-[600px] md:w-[700px]">
+        <Table className="bg-slate-100 rounded-xl shadow-lg w-[95%] xs:w-[500px] sm:w-[600px] md:w-[700px] overflow-hidden">
             <TableCaption>List of Registered Books</TableCaption>
             <TableHeader className="bg-slate-200">
                 <TableRow>
