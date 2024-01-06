@@ -6,17 +6,21 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
+    DialogClose
 } from "@/components/ui/dialog";
 
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import {  Dispatch, SetStateAction, useState } from "react";
 import { generateRandomString } from "@/lib/utils";
-import { Form, useActionData } from "react-router-dom";
+import {  useFetcher,  } from "react-router-dom";
 
 import Button from "../utils/Button";
 import { FiPlus, FiMinus } from "react-icons/fi";
 
 export default function NewBookEntryBtn() {
-    const [inputList, setInputList] = useState([generateRandomString()]);
+    const [inputList, setInputList] = useState([generateRandomString()]);    
+    const fetcher = useFetcher({key: 'create_book'})
+        
+
 
     return (
         <Dialog>
@@ -29,14 +33,14 @@ export default function NewBookEntryBtn() {
                     <DialogHeader>
                         <DialogTitle>New Book Entry</DialogTitle>
                     </DialogHeader>
-            <Form action='' method="post" >
+            <fetcher.Form action='' method="post"  >
                     <div className="flex flex-col gap-3">
                         <div className="flex flex-col items-start">
                             <p className="font-semibold text-lg">Title</p>
                             <input
                                 type="text"
                                 placeholder="title"
-                                className="bg-gray-200 w-3/4 rounded-md px-3 py-1"
+                                className="bg-gray-200 w-5/6 rounded-md px-3 py-1"
                                 name="title"
                             />
                         </div>
@@ -53,7 +57,7 @@ export default function NewBookEntryBtn() {
                             </p>
                             <input
                                 type="number"
-                                className="bg-gray-200 w-3/4 rounded-md px-3 py-1"
+                                className="bg-gray-200 w-5/6 rounded-md px-3 py-1"
                                 placeholder="year"
                                 name="yearPublished"
                             />
@@ -64,18 +68,23 @@ export default function NewBookEntryBtn() {
                             </p>
                             <input
                                 type="number"
-                                className="bg-gray-200 w-3/4 rounded-md px-3 py-1"
+                                className="bg-gray-200 w-5/6 rounded-md px-3 py-1"
                                 placeholder="total"
                                 name="total"
                             />
                         </div>
                     </div>
-                        <Button
-                            className="bg-green-300 hover:bg-green-400 active:bg-green-400 rounded-lg hover:rounded-xl px-4 py-1 text-xl font-bold shadow-lg hover:shadow-xl transition-all duration-150"
-                        >
-                            Save changes
-                        </Button>
-                    </Form>
+                        <DialogFooter className="pt-8">
+                            <Button
+                                className="bg-green-300 hover:bg-green-400 active:bg-green-400 rounded-lg hover:rounded-xl px-4 py-1 text-xl font-bold shadow-lg hover:shadow-xl transition-all duration-150"
+                                disabled={fetcher.state === 'submitting'}
+                                loading={fetcher.state === 'submitting'}
+                            >
+                                    Save changes
+                            </Button>
+                        </DialogFooter>                        
+                        <DialogClose  />
+                    </fetcher.Form>
                     
                 </DialogContent>
         </Dialog>
@@ -110,7 +119,7 @@ function InputList({ inputList, setInputList }: InputListProps) {
                         <li key={id} className="flex flex-row gap-2">
                             <input
                                 type="text"                                
-                                className="bg-gray-200 w-3/4 rounded-md px-3 py-1"
+                                className="bg-gray-200 w-5/6 rounded-md px-3 py-1"
                                 placeholder={`author #${index+1}`}
                                 name={`author-${id}`}
                             />

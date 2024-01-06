@@ -34,3 +34,12 @@ export function generateRandomString() {
     }
     return result;
 }
+
+
+export async function sleep(t:number) {
+    await new Promise((res) => {
+        setTimeout(() => {
+            res('artificial sleep')
+        },t)
+    })
+}

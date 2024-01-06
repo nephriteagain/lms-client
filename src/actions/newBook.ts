@@ -1,7 +1,11 @@
 import { NewBookSchema, NewBook } from "@/schemas"
 import { constants } from "@/constants"
 import { injectJwtToken } from "@/lib/utils"
+
+import { sleep } from "@/lib/utils"
 export async function createBook({request}:{request:Request}) {
+    await sleep(3000)
+
     const formData = await request.formData()
     const data  = Object.fromEntries(formData) as {
         [key:string] : string
