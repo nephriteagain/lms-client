@@ -34,3 +34,5 @@ export const InventorySchema = z.object({
 })
 
 export type BookInventory = z.infer<typeof InventorySchema>
+
+export type BookData = [Book, BookInventory]

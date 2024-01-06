@@ -1,4 +1,4 @@
-import { ReactNode, HTMLAttributes, forwardRef, ForwardedRef } from "react";
+import { ReactNode, ButtonHTMLAttributes, forwardRef, ForwardedRef } from "react";
 import LoadingSvg from "./LoadingSvg";
 import { cn } from "@/lib/utils";
 
@@ -6,7 +6,7 @@ type ButtonProps = {
     children?: ReactNode;
     loading?: boolean;
     loadingSize?: number;
-} & HTMLAttributes<HTMLButtonElement>;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default forwardRef(function Button({
     children,

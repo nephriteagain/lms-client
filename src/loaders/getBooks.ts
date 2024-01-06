@@ -6,7 +6,7 @@ export async function getBooks({
 }: {
     request: Request;
 }): Promise<Book[]> {
-    console.log("loader running");
+    console.log("getbooks loader");
     const url = new URL(request.url);
     const title = url.searchParams.get("title");
     const authors = url.searchParams.get("authors");
