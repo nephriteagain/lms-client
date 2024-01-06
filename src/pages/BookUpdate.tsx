@@ -1,6 +1,6 @@
 
 import { useState } from "react"
-import { useLocation, useFetcher } from "react-router-dom"
+import { useLocation, useFetcher, Link } from "react-router-dom"
 import { Book } from "@/schemas"
 
 import { generateRandomString } from "@/lib/utils"
@@ -49,7 +49,7 @@ export default function BookUpdate() {
                         className="bg-gray-200 w-5/6 rounded-md px-3 py-1 shadow-md"
                         />
                     </div>
-                    <div>
+                    <div className="w-full flex flex-row items-center justify-between font-semibold">
                         <Button 
                         className="bg-green-300 hover:bg-green-400 active:bg-green-400 px-3 py-2 rounded-md shadow-md hover:shadow-md hover:scale-105 transition-all duration-200"
                         loading={loading}
@@ -57,6 +57,12 @@ export default function BookUpdate() {
                         >
                             Save
                         </Button>
+                        <Link 
+                        to='..'
+                        className="bg-red-300 hover:bg-red-400 active:bg-red-400 px-3 py-2 rounded-md shadow-md hover:shadow-md hover:scale-105 transition-all duration-200"
+                        >
+                            Cancel
+                        </Link>
                     </div>
                 </fetcher.Form>
             </div>

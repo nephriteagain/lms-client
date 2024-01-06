@@ -10,6 +10,7 @@ export default function Book() {
     const { available, borrowed, total } = bookInventory
 
     return (
+        <div className="py-12">
         <div className="flex flex-col gap-6 p-6 w-[95vw] xs:w-[500px] bg-slate-200 rounded-xl shadow-xl">
              <section className="flex flex-col gap-3 p-4 bg-zinc-200 rounded-lg shadow-inner shadow-gray-400">
                 <div className="text-center">
@@ -52,6 +53,8 @@ export default function Book() {
             <Link to={'..'} className="font-semibold border-b border-black hover:border-b-2 active:border-b-2">back</Link>
             </div>
         </div>
+        </div>
+
        
     )
 }

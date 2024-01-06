@@ -14,7 +14,7 @@ export default function Navbar() {
     }
 
     return (
-        <div className="px-4 py-2 w-full flex flex-row items-center gap-4 border-b shadow-md">
+        <div className="fixed top-0 left-0 px-4 py-2 w-full flex flex-row items-center gap-4 border-b shadow-md">
             <NavLink
                 to={""}
                 className={({ isActive }) =>
