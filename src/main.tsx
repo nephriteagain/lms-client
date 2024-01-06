@@ -19,13 +19,14 @@ import { getBooks } from "./loaders/getBooks.ts";
 import { getBook } from "./loaders/getBook.ts";
 
 import { createBook } from "./actions/newBook.ts";
+import { updateBook } from "./actions/updateBook.ts";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<RootLayout />}>
             <Route index element={<Books />} loader={getBooks} action={createBook} />
             <Route path="/books/:id" element={<Book />} loader={getBook} />            
-            <Route path="/books/:id/update" element={<BookUpdate />} />
+            <Route path="/books/:id/update" element={<BookUpdate />} action={updateBook} />
             <Route path="login" element={<Login />} />
         </Route>,
     ),

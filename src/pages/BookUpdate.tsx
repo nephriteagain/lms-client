@@ -1,6 +1,6 @@
 
 import { useState } from "react"
-import { useLocation, useFetcher, Link } from "react-router-dom"
+import { useLocation, useFetcher, Link, useActionData } from "react-router-dom"
 import { Book } from "@/schemas"
 
 import { generateRandomString } from "@/lib/utils"
@@ -17,12 +17,14 @@ export default function BookUpdate() {
     const { title, authors, yearPublished } = bookToUpdate
     const [ inputList, setInputList ] = useState(Array.from(authors, () => generateRandomString()))    
 
-    const [ loading, setLoading ] = useState(false)
+    const loading = Boolean(fetcher.state === 'submitting')
+    const action = useActionData()
+
 
     return (
         <div className="py-12">
             <div className="w-[95%] xs:w-[500px] bg-slate-300 p-6 rounded-lg shadow-lg">
-                <fetcher.Form className="flex flex-col gap-8">
+                <fetcher.Form className="flex flex-col gap-8" method="patch" action="">
                     <div className="flex flex-col gap-2">
                         <label htmlFor="title" className="font-semibold">Title</label>
                         <input 
@@ -51,6 +53,7 @@ export default function BookUpdate() {
                     </div>
                     <div className="w-full flex flex-row items-center justify-between font-semibold">
                         <Button 
+                        type="submit"
                         className="bg-green-300 hover:bg-green-400 active:bg-green-400 px-3 py-2 rounded-md shadow-md hover:shadow-md hover:scale-105 transition-all duration-200"
                         loading={loading}
                         disabled={loading}
@@ -59,7 +62,7 @@ export default function BookUpdate() {
                         </Button>
                         <Link 
                         to='..'
-                        className="bg-red-300 hover:bg-red-400 active:bg-red-400 px-3 py-2 rounded-md shadow-md hover:shadow-md hover:scale-105 transition-all duration-200"
+                        className="bg-red-300 hover:bg-red-400 active:bg-red-400 px-3 py-2 rounded-md shadow-md hover:shadow-md hover:scale-105 transition-all duration-200"                        
                         >
                             Cancel
                         </Link>

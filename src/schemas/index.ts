@@ -36,3 +36,11 @@ export const InventorySchema = z.object({
 export type BookInventory = z.infer<typeof InventorySchema>
 
 export type BookData = [Book, BookInventory]
+
+export const UpdateBookSchema = z.object({
+    title: z.string().min(1),
+    authors: z.array(z.string().min(1)).min(1),
+    yearPublished: z.number().int().positive()
+})
+
+export type UpdateBook = z.infer<typeof UpdateBookSchema>

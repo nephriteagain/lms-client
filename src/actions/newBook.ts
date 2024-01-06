@@ -1,15 +1,14 @@
 import { NewBookSchema, NewBook } from "@/schemas"
 import { constants } from "@/constants"
 import { injectJwtToken } from "@/lib/utils"
+import { redirect } from "react-router-dom"
 
 import { sleep } from "@/lib/utils"
 export async function createBook({request}:{request:Request}) {
-    await sleep(3000)
+    await sleep(200)
 
     const formData = await request.formData()
-    const data  = Object.fromEntries(formData) as {
-        [key:string] : string
-    }
+    const data  = Object.fromEntries(formData)
 
     const newBookEntry = {} as any
     for ( const key in data) {
@@ -34,12 +33,11 @@ export async function createBook({request}:{request:Request}) {
     
     const schema = newBookEntry as NewBook
     NewBookSchema.parse(schema)
-    const res = await fetch(`${constants.server}/books`, {        
+    await fetch(`${constants.server}/books`, {        
         method: 'POST',
         body: JSON.stringify(schema),
         headers: injectJwtToken(constants.jsonHeaders)
     })
-    const json = await res.json()
 
-    return json
+    return redirect('/')
 }

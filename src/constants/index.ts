@@ -8,5 +8,5 @@ const jsonHeaders = {
 
 export const constants = {
     server,
-    jsonHeaders: jsonHeaders,
+    jsonHeaders
 };
