@@ -6,21 +6,19 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-    DialogClose
+    DialogClose,
 } from "@/components/ui/dialog";
 
 import { useState } from "react";
 import { generateRandomString } from "@/lib/utils";
-import {  useFetcher,  } from "react-router-dom";
+import { useFetcher } from "react-router-dom";
 
 import InputList from "../utils/InputList";
 import Button from "../utils/Button";
 
 export default function NewBookEntryBtn() {
-    const [inputList, setInputList] = useState([generateRandomString()]);    
-    const fetcher = useFetcher({key: 'create_book'})
-        
-
+    const [inputList, setInputList] = useState([generateRandomString()]);
+    const fetcher = useFetcher({ key: "create_book" });
 
     return (
         <Dialog>
@@ -29,11 +27,11 @@ export default function NewBookEntryBtn() {
                     Add New Book
                 </Button>
             </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
-                    <DialogHeader>
-                        <DialogTitle>New Book Entry</DialogTitle>
-                    </DialogHeader>
-                    <fetcher.Form action='' method="post"  >
+            <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                    <DialogTitle>New Book Entry</DialogTitle>
+                </DialogHeader>
+                <fetcher.Form action="" method="post">
                     <div className="flex flex-col gap-3">
                         <div className="flex flex-col items-start">
                             <p className="font-semibold text-lg">Title</p>
@@ -74,21 +72,18 @@ export default function NewBookEntryBtn() {
                             />
                         </div>
                     </div>
-                        <DialogFooter className="pt-8">
-                            <Button
-                                className="bg-green-300 hover:bg-green-400 active:bg-green-400 rounded-lg hover:rounded-xl px-4 py-1 text-xl font-bold shadow-lg hover:shadow-xl transition-all duration-150"
-                                disabled={fetcher.state === 'submitting'}
-                                loading={fetcher.state === 'submitting'}
-                            >
-                                    Save changes
-                            </Button>
-                        </DialogFooter>                        
-                        <DialogClose  />
-                    </fetcher.Form>
-                    
-                </DialogContent>
+                    <DialogFooter className="pt-8">
+                        <Button
+                            className="bg-green-300 hover:bg-green-400 active:bg-green-400 rounded-lg hover:rounded-xl px-4 py-1 text-xl font-bold shadow-lg hover:shadow-xl transition-all duration-150"
+                            disabled={fetcher.state === "submitting"}
+                            loading={fetcher.state === "submitting"}
+                        >
+                            Save changes
+                        </Button>
+                    </DialogFooter>
+                    <DialogClose />
+                </fetcher.Form>
+            </DialogContent>
         </Dialog>
     );
 }
-
-

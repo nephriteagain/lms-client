@@ -13,8 +13,6 @@ import {
 
 // TODO: pagination
 export default function BookTable({ books }: { books: Book[] }) {
-
-
     return (
         <Table className="bg-slate-100 rounded-xl shadow-lg w-[95%] xs:w-[500px] sm:w-[600px] md:w-[700px] overflow-hidden">
             <TableCaption>List of Registered Books</TableCaption>
@@ -50,19 +48,18 @@ export default function BookTable({ books }: { books: Book[] }) {
 }
 
 function BookTableRow({ title, authors, yearPublished, dateAdded, _id }: Book) {
-
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     return (
-        <TableRow 
-        tabIndex={5} 
-        className="hover:bg-slate-300 cursor-pointer" 
-        onClick={() => navigate(`books/${_id}`)}
-        onKeyUp={(e) => {
-            if (e.key === 'Enter') {
-                e.currentTarget.click()
-            }
-        }}
+        <TableRow
+            tabIndex={5}
+            className="hover:bg-slate-300 cursor-pointer"
+            onClick={() => navigate(`books/${_id}`)}
+            onKeyUp={(e) => {
+                if (e.key === "Enter") {
+                    e.currentTarget.click();
+                }
+            }}
         >
             <TableCell>{title}</TableCell>
             <TableCell>{authors.join()}</TableCell>

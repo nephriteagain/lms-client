@@ -1,11 +1,9 @@
 import { useLoaderData } from "react-router-dom";
 import { Book } from "../schemas";
 
-
 import BookTable from "@/components/Books/Table";
 import SearchBar from "@/components/Books/SearchBar";
 import NewBookEntryBtn from "@/components/Books/NewBookEntry";
-
 
 export default function Books() {
     const books = useLoaderData() as Awaited<Book[]>;

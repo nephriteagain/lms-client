@@ -1,4 +1,9 @@
-import { ReactNode, ButtonHTMLAttributes, forwardRef, ForwardedRef } from "react";
+import {
+    ReactNode,
+    ButtonHTMLAttributes,
+    forwardRef,
+    ForwardedRef,
+} from "react";
 import LoadingSvg from "./LoadingSvg";
 import { cn } from "@/lib/utils";
 
@@ -8,13 +13,16 @@ type ButtonProps = {
     loadingSize?: number;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export default forwardRef(function Button({
-    children,
-    className,
-    loading = false,
-    loadingSize,            
-    ...props
-}: ButtonProps, ref?: ForwardedRef<HTMLButtonElement>) {
+export default forwardRef(function Button(
+    {
+        children,
+        className,
+        loading = false,
+        loadingSize,
+        ...props
+    }: ButtonProps,
+    ref?: ForwardedRef<HTMLButtonElement>,
+) {
     return (
         <button
             ref={ref}
@@ -25,4 +33,4 @@ export default forwardRef(function Button({
             {children}
         </button>
     );
-})
+});

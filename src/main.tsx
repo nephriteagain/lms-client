@@ -24,9 +24,18 @@ import { updateBook } from "./actions/updateBook.ts";
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<RootLayout />}>
-            <Route index element={<Books />} loader={getBooks} action={createBook} />
-            <Route path="/books/:id" element={<Book />} loader={getBook} />            
-            <Route path="/books/:id/update" element={<BookUpdate />} action={updateBook} />
+            <Route
+                index
+                element={<Books />}
+                loader={getBooks}
+                action={createBook}
+            />
+            <Route path="/books/:id" element={<Book />} loader={getBook} />
+            <Route
+                path="/books/:id/update"
+                element={<BookUpdate />}
+                action={updateBook}
+            />
             <Route path="login" element={<Login />} />
         </Route>,
     ),
