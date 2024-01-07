@@ -1,16 +1,67 @@
-import { dev } from "@/constants";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation, useFetcher } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+  } from "@/components/ui/alert-dialog"
 
 export default function MemberDelete() {
-    const {state} = useLocation()
-    dev.log(state)
+
+    const [ disableBtn, setDisableBtn ] = useState(true)
+    const [ seconds, setSeconds ] = useState(3)
+    const { state } = useLocation()
+    const { name } = state as {name: string}
+    const navigate = useNavigate()
+    const fetcher = useFetcher()
+    const submitState = fetcher.state
+
+    useEffect(() => {
+        if (seconds === 0) {
+            setDisableBtn(false)
+            return
+        }
+        const timeout = setTimeout(() => {
+            setSeconds(s => s-1)
+        }, 1000)
+        return () => clearTimeout(timeout)
+    }, [seconds])
+
 
     return (
         <div className="fixed top-0 left-0 w-screen h-screen">
-            <Link to='..' className="fixed top-0 left-0 w-screen h-screen bg-black opacity-60" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-[95%] xs:w-[500px] bg-slate-200">
-                {JSON.stringify(state)}
-            </div>
+            <AlertDialog open={true}>      
+            <AlertDialogContent className="bg-slate-200">
+                <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete the
+                    user data from the database.
+                </AlertDialogDescription>
+                </AlertDialogHeader>
+                <fetcher.Form method="delete" action="">
+                    <AlertDialogFooter>
+                    <AlertDialogCancel onClick={() => navigate('..')}>
+                        Cancel
+                    </AlertDialogCancel>
+                    <AlertDialogAction 
+                    disabled={disableBtn || submitState === 'submitting'} 
+                    className="bg-red-600 hover:bg-red-700 transition-all"
+                    type="submit"
+                    >
+                        {disableBtn ? `Disabled for ${seconds} ${seconds === 0 ? 'second':'seconds'}` : `Delete ${name}`}
+                    </AlertDialogAction>
+                    </AlertDialogFooter>
+                </fetcher.Form>
+
+            </AlertDialogContent>
+    </AlertDialog>
         </div>
     )
 }

@@ -25,7 +25,7 @@ export default function Members() {
     return (
         <div className='py-12'>
             <Table className="bg-slate-100 rounded-xl shadow-lg w-[95%] xs:w-[500px] sm:w-[600px] md:w-[700px] overflow-hidden">
-                <TableCaption>list of book inventory.</TableCaption>
+                <TableCaption>list of current members.</TableCaption>
                 <TableHeader className="bg-slate-200">
                     <TableRow>
                     <TableHead>name</TableHead>
@@ -49,7 +49,7 @@ export default function Members() {
                         <TableCell className="text-center w-3/12 ">{approvedBy}</TableCell>
                         <TableCell 
                         className="w-1/12 relative hover:bg-red-300 active:bg-red-300 transition-all duration-200 cursor-hover"
-                        onClick={() => navigate(`${_id}`, {state: item})}
+                        onClick={() => navigate(`${_id}/delete`, {state: {name}})}
                         >
                             <MdDelete className="fill-red-600 hover:fill-red-700 active:fill-red-700 text-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:scale-105 active:scale-105 transition-all duration-200" />
                         </TableCell>

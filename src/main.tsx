@@ -55,7 +55,7 @@ const router = createBrowserRouter(
                 />
             </Route>
             <Route path="members" element={<Members />} loader={getMembers}>
-                <Route path=":id" element={<MemberDelete />} />
+                <Route path=":id/delete" element={<MemberDelete />} />
             </Route>
             <Route path="login" element={<Login />} 
             />
