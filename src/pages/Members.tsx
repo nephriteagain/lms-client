@@ -12,18 +12,22 @@ import {
 
 import { dev } from '@/constants';
 import { Member } from '@/schemas'
-import { useLoaderData, useNavigate, Outlet } from 'react-router-dom'
+import { useLoaderData, useNavigate, Outlet, Link } from 'react-router-dom'
 
 import { MdDelete } from "react-icons/md";
 
 export default function Members() {
     const members = useLoaderData() as Member[];
-    dev.log(members)
 
     const navigate = useNavigate()
 
     return (
         <div className='py-12'>
+            <div className="pb-8 flex justify-center">
+                <Link to='create' className="bg-green-300 px-4 py-2 font-bold rounded-lg hover:rounded-xl active:rounded-xl shadow-lg hover:shadow-xl active:shadow-xl hover:scale-105 active:scale-95 transition-all duration-150">
+                    Add New Member
+                </Link>
+            </div>
             <Table className="bg-slate-100 rounded-xl shadow-lg w-[95%] xs:w-[500px] sm:w-[600px] md:w-[700px] overflow-hidden">
                 <TableCaption>list of current members.</TableCaption>
                 <TableHeader className="bg-slate-200">

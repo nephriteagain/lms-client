@@ -90,3 +90,10 @@ export type Member = {
     joinDate: string;
     approvedBy: string;
 }
+
+export const NewMemberSchema = z.object({
+    name: z.string().min(1),
+    age: z.number().int().positive().max(150).min(6)
+})
+
+export type NewMember = z.infer<typeof NewMemberSchema>

@@ -18,6 +18,7 @@ import Inventory from "./pages/Inventory.tsx";
 import InventoryUpdate from "./pages/InventoryUpdate.tsx";
 import Members from "./pages/Members.tsx";
 import MemberDelete from "./pages/MemberDelete.tsx";
+import MemberCreate from "./pages/MemberCreate.tsx";
 
 import { getBooks } from "./loaders/getBooks.ts";
 import { getBook } from "./loaders/getBook.ts";
@@ -27,6 +28,7 @@ import { getMembers } from "./loaders/getMembers.ts";
 import { createBook } from "./actions/newBook.ts";
 import { updateBook } from "./actions/updateBook.ts";
 import { updateInventory } from "./actions/updateInventory.ts";
+import { createMember } from "./actions/createMember.ts";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -56,6 +58,7 @@ const router = createBrowserRouter(
             </Route>
             <Route path="members" element={<Members />} loader={getMembers}>
                 <Route path=":id/delete" element={<MemberDelete />} />
+                <Route path="create" element={<MemberCreate />} action={createMember} />
             </Route>
             <Route path="login" element={<Login />} 
             />

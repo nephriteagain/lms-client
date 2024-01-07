@@ -20,7 +20,6 @@ export default function MemberDelete() {
     const { name } = state as {name: string}
     const navigate = useNavigate()
     const fetcher = useFetcher()
-    const submitState = fetcher.state
 
     useEffect(() => {
         if (seconds === 0) {
@@ -51,7 +50,7 @@ export default function MemberDelete() {
                         Cancel
                     </AlertDialogCancel>
                     <AlertDialogAction 
-                    disabled={disableBtn || submitState === 'submitting'} 
+                    disabled={disableBtn || fetcher.state === 'submitting'} 
                     className="bg-red-600 hover:bg-red-700 transition-all"
                     type="submit"
                     >
