@@ -53,3 +53,31 @@ export const UpdateInventorySchema = z.object({
 }).required()
 
 export type UpdateInventory = z.infer<typeof UpdateInventorySchema>
+
+/**
+ * gte 0
+ */
+export const nonNegativeInt = z.number().int().nonnegative() 
+/**
+ * gt 0
+ */
+export const positiveInt = z.number().int().positive() 
+
+function isSumEqTotal(data:unknown) {
+    if (typeof data !== 'object' || data === null) {
+        return false;
+      }
+    
+      const { total, args } = data as { total: number; args: number[] };
+    
+      if (typeof total !== 'number' || !Array.isArray(args)) {
+        return false;
+      }
+    
+      return total === args.reduce((acc, curr) => acc + curr, 0);
+}
+
+/**
+ * total = borrowed + available0
+ */
+export const totalSum = z.custom<{total:number;args:number[]}>(isSumEqTotal)
