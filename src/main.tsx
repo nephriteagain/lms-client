@@ -14,9 +14,12 @@ import Login from "./pages/Login.tsx";
 import Books from "./pages/Books.tsx";
 import Book from "./pages/Book.tsx";
 import BookUpdate from "./pages/BookUpdate.tsx";
+import Inventory from "./pages/Inventory.tsx";
+import InventoryUpdate from "./pages/InventoryUpdate.tsx";
 
 import { getBooks } from "./loaders/getBooks.ts";
 import { getBook } from "./loaders/getBook.ts";
+import { getInventory } from "./loaders/getInventory.ts";
 
 import { createBook } from "./actions/newBook.ts";
 import { updateBook } from "./actions/updateBook.ts";
@@ -25,18 +28,28 @@ const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<RootLayout />}>
             <Route
-                index
-                element={<Books />}
-                loader={getBooks}
-                action={createBook}
+            index
+            element={<Books />}
+            loader={getBooks}
+            action={createBook}
             />
             <Route path="/books/:id" element={<Book />} loader={getBook} />
             <Route
-                path="/books/:id/update"
-                element={<BookUpdate />}
-                action={updateBook}
+            path="/books/:id/update"
+            element={<BookUpdate />}
+            action={updateBook}
             />
-            <Route path="login" element={<Login />} />
+            <Route 
+            path="inventory" 
+            element={<Inventory />} 
+            loader={getInventory}
+            >
+                <Route path="update/:id" element={<InventoryUpdate />} />
+            </Route>
+            <Route 
+            path="login" 
+            element={<Login />} 
+            />
         </Route>,
     ),
 );

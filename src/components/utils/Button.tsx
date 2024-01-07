@@ -18,6 +18,7 @@ export default forwardRef(function Button(
         children,
         className,
         loading = false,
+        disabled = false,
         loadingSize,
         ...props
     }: ButtonProps,
@@ -27,7 +28,9 @@ export default forwardRef(function Button(
         <button
             ref={ref}
             className={cn("relative disabled:opacity-60", className)}
-            {...props}
+            // if document loading, auto disable, used to to prevent multiple fetch
+            disabled={loading||disabled}
+            {...props}            
         >
             {loading && <LoadingSvg loadingSize={loadingSize} />}
             {children}

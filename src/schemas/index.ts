@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+/** @description shorthand for Promise*/
 export type P<T> = Promise<T>;
 
 export const LoginSchema = z
