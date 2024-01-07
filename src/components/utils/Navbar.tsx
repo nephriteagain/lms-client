@@ -35,6 +35,16 @@ export default function Navbar() {
             >
                 Inventory
             </NavLink>
+            <NavLink
+            to={'members'}
+            className={({ isActive }) =>
+                isActive
+                    ? "border-b-2 font-semibold text-lg  border-black hover:border-black transition-all duration-150"
+                    : "border-b-2 font-semibold text-lg  border-transparent hover:border-black transition-all duration-150"
+            }
+            >
+                Members
+            </NavLink>
             {!!accessToken && (
                 <Button
                     className="ms-auto bg-red-300 hover:bg-red-400 rounded-md hover:rounded-lg shadow-md hover:shadow-lg px-2 py-1 transition-all duration-150"

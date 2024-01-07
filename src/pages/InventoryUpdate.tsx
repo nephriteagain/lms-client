@@ -1,5 +1,5 @@
-import { useEffect, useState, ChangeEvent } from "react"
-import { useLocation, useFetcher, Link, useNavigate } from "react-router-dom"
+import { useEffect, useState, } from "react"
+import { useLocation, useFetcher, Link } from "react-router-dom"
 import Button from "@/components/utils/Button"
 import { dev } from "@/constants"
 
@@ -9,7 +9,6 @@ import { positiveInt, nonNegativeInt, totalSum } from "@/schemas"
 export default function InventoryUpdate() {
     const location = useLocation()
     const fetcher = useFetcher()
-    const navigate = useNavigate()    
 
     const { title, total, borrowed, available } = location.state
     const [ t, setT ] = useState<number>(total)
@@ -77,11 +76,9 @@ export default function InventoryUpdate() {
 
     return (
         <div className="fixed top-0 left-0">
-            <div 
+            <Link to={'..'}
             className="fixed top-0 left-0 w-screen h-screen bg-black opacity-60" 
-            onClick={() => {
-                navigate('..')
-            }}/>
+            />
             <fetcher.Form 
                 className="flex flex-col items-center gap-4 z-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-200 p-6 rounded-lg shadow-inner shadow-gray-500"
                 action=""

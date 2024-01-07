@@ -3,6 +3,11 @@ import { z } from "zod";
 /** @description shorthand for Promise*/
 export type P<T> = Promise<T>;
 
+/**
+ * total = borrowed + available0
+ */
+export const totalSum = z.custom<{total:number;args:number[]}>(isSumEqTotal)
+
 export const LoginSchema = z
     .object({
         email: z.string().email(),
@@ -77,7 +82,11 @@ function isSumEqTotal(data:unknown) {
       return total === args.reduce((acc, curr) => acc + curr, 0);
 }
 
-/**
- * total = borrowed + available0
- */
-export const totalSum = z.custom<{total:number;args:number[]}>(isSumEqTotal)
+
+export type Member = {
+    _id: string;
+    name: string;
+    age: string;
+    joinDate: string;
+    approvedBy: string;
+}

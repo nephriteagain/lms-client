@@ -16,10 +16,13 @@ import Book from "./pages/Book.tsx";
 import BookUpdate from "./pages/BookUpdate.tsx";
 import Inventory from "./pages/Inventory.tsx";
 import InventoryUpdate from "./pages/InventoryUpdate.tsx";
+import Members from "./pages/Members.tsx";
+import MemberDelete from "./pages/MemberDelete.tsx";
 
 import { getBooks } from "./loaders/getBooks.ts";
 import { getBook } from "./loaders/getBook.ts";
 import { getInventory } from "./loaders/getInventory.ts";
+import { getMembers } from "./loaders/getMembers.ts";
 
 import { createBook } from "./actions/newBook.ts";
 import { updateBook } from "./actions/updateBook.ts";
@@ -51,9 +54,10 @@ const router = createBrowserRouter(
                 action={updateInventory}
                 />
             </Route>
-            <Route 
-            path="login" 
-            element={<Login />} 
+            <Route path="members" element={<Members />} loader={getMembers}>
+                <Route path=":id" element={<MemberDelete />} />
+            </Route>
+            <Route path="login" element={<Login />} 
             />
         </Route>,
     ),
