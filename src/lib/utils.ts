@@ -41,7 +41,7 @@ export function generateRandomString() {
  */
 export async function sleep(t: number) {
     if (import.meta.env.PROD) {
-        return
+        return;
     }
 
     await new Promise((res) => {

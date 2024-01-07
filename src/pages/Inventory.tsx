@@ -1,6 +1,5 @@
-import { useLoaderData, Outlet, useNavigate } from "react-router-dom"
-import type { BookInventory } from "@/schemas"
-
+import { useLoaderData, Outlet, useNavigate } from "react-router-dom";
+import type { BookInventory } from "@/schemas";
 
 import {
     Table,
@@ -11,11 +10,11 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
 
 export default function Inventory() {
-    const inventory = useLoaderData() as BookInventory[]
-    const navigate = useNavigate()
+    const inventory = useLoaderData() as BookInventory[];
+    const navigate = useNavigate();
 
     return (
         <div className="py-12">
@@ -23,31 +22,43 @@ export default function Inventory() {
                 <TableCaption>list of book inventory.</TableCaption>
                 <TableHeader className="bg-slate-200">
                     <TableRow>
-                    <TableHead>Title</TableHead>
-                    <TableHead>Available</TableHead>
-                    <TableHead>Borrowed</TableHead>
-                    <TableHead>Total</TableHead>
+                        <TableHead>Title</TableHead>
+                        <TableHead>Available</TableHead>
+                        <TableHead>Borrowed</TableHead>
+                        <TableHead>Total</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {inventory.map((item) => {
-                        const {_id, title, available, borrowed, total} = item
-                    return (<TableRow 
-                    key={_id}
-                    tabIndex={5}
-                    className="hover:bg-slate-300 cursor-pointer"
-                    onClick={() => navigate(`update/${_id}`, {state: item})}
-                    >
-                        <TableCell className="text-left w-8/12 font-medium">{title}</TableCell>
-                        <TableCell className="text-center w-1/12">{available}</TableCell>
-                        <TableCell className="text-center w-1/12">{borrowed}</TableCell>
-                        <TableCell className="text-center w-1/12 ">{total}</TableCell>
-                    </TableRow>)
+                        const { _id, title, available, borrowed, total } = item;
+                        return (
+                            <TableRow
+                                key={_id}
+                                tabIndex={5}
+                                className="hover:bg-slate-300 cursor-pointer"
+                                onClick={() =>
+                                    navigate(`update/${_id}`, { state: item })
+                                }
+                            >
+                                <TableCell className="text-left w-8/12 font-medium">
+                                    {title}
+                                </TableCell>
+                                <TableCell className="text-center w-1/12">
+                                    {available}
+                                </TableCell>
+                                <TableCell className="text-center w-1/12">
+                                    {borrowed}
+                                </TableCell>
+                                <TableCell className="text-center w-1/12 ">
+                                    {total}
+                                </TableCell>
+                            </TableRow>
+                        );
                     })}
                 </TableBody>
             </Table>
             {/* this is where the /inventory/update/:id will go */}
             <Outlet />
         </div>
-    )
+    );
 }

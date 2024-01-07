@@ -29,39 +29,44 @@ import { createBook } from "./actions/newBook.ts";
 import { updateBook } from "./actions/updateBook.ts";
 import { updateInventory } from "./actions/updateInventory.ts";
 import { createMember } from "./actions/createMember.ts";
+import Member from "./pages/Member.tsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<RootLayout />}>
             <Route
-            index
-            element={<Books />}
-            loader={getBooks}
-            action={createBook}
+                index
+                element={<Books />}
+                loader={getBooks}
+                action={createBook}
             />
             <Route path="/books/:id" element={<Book />} loader={getBook} />
             <Route
-            path="/books/:id/update"
-            element={<BookUpdate />}
-            action={updateBook}
+                path="/books/:id/update"
+                element={<BookUpdate />}
+                action={updateBook}
             />
-            <Route 
-            path="inventory" 
-            element={<Inventory />} 
-            loader={getInventory}
+            <Route
+                path="inventory"
+                element={<Inventory />}
+                loader={getInventory}
             >
-                <Route 
-                path="update/:id" 
-                element={<InventoryUpdate />} 
-                action={updateInventory}
+                <Route
+                    path="update/:id"
+                    element={<InventoryUpdate />}
+                    action={updateInventory}
                 />
             </Route>
             <Route path="members" element={<Members />} loader={getMembers}>
                 <Route path=":id/delete" element={<MemberDelete />} />
-                <Route path="create" element={<MemberCreate />} action={createMember} />
+                <Route
+                    path="create"
+                    element={<MemberCreate />}
+                    action={createMember}
+                />
+                <Route path=":id" element={<Member />} />
             </Route>
-            <Route path="login" element={<Login />} 
-            />
+            <Route path="login" element={<Login />} />
         </Route>,
     ),
 );

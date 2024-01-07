@@ -16,32 +16,32 @@ export default function Navbar() {
     return (
         <div className="sticky top-0 left-0 px-4 py-2 w-full flex flex-row items-center gap-4 border-b shadow-md">
             <NavLink
-            to={""}
-            className={({ isActive }) =>
-                isActive
-                    ? "border-b-2 font-semibold text-lg  border-black hover:border-black transition-all duration-150"
-                    : "border-b-2 font-semibold text-lg  border-transparent hover:border-black transition-all duration-150"
-            }
+                to={""}
+                className={({ isActive }) =>
+                    isActive
+                        ? "border-b-2 font-semibold text-lg  border-black hover:border-black transition-all duration-150"
+                        : "border-b-2 font-semibold text-lg  border-transparent hover:border-black transition-all duration-150"
+                }
             >
                 Books
             </NavLink>
             <NavLink
-            to={'inventory'}
-            className={({ isActive }) =>
-                isActive
-                    ? "border-b-2 font-semibold text-lg  border-black hover:border-black transition-all duration-150"
-                    : "border-b-2 font-semibold text-lg  border-transparent hover:border-black transition-all duration-150"
-            }
+                to={"inventory"}
+                className={({ isActive }) =>
+                    isActive
+                        ? "border-b-2 font-semibold text-lg  border-black hover:border-black transition-all duration-150"
+                        : "border-b-2 font-semibold text-lg  border-transparent hover:border-black transition-all duration-150"
+                }
             >
                 Inventory
             </NavLink>
             <NavLink
-            to={'members'}
-            className={({ isActive }) =>
-                isActive
-                    ? "border-b-2 font-semibold text-lg  border-black hover:border-black transition-all duration-150"
-                    : "border-b-2 font-semibold text-lg  border-transparent hover:border-black transition-all duration-150"
-            }
+                to={"members"}
+                className={({ isActive }) =>
+                    isActive
+                        ? "border-b-2 font-semibold text-lg  border-black hover:border-black transition-all duration-150"
+                        : "border-b-2 font-semibold text-lg  border-transparent hover:border-black transition-all duration-150"
+                }
             >
                 Members
             </NavLink>

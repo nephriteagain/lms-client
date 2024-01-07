@@ -29,8 +29,8 @@ export default forwardRef(function Button(
             ref={ref}
             className={cn("relative disabled:opacity-60", className)}
             // if document loading, auto disable, used to to prevent multiple fetch
-            disabled={loading||disabled}
-            {...props}            
+            disabled={loading || disabled}
+            {...props}
         >
             {loading && <LoadingSvg loadingSize={loadingSize} />}
             {children}
