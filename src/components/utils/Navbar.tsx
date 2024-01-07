@@ -20,7 +20,7 @@ export default function Navbar() {
             className={({ isActive }) =>
                 isActive
                     ? "border-b-2 font-semibold text-lg  border-black hover:border-black transition-all duration-150"
-                    : "border-b font-semibold text-lg  border-transparent hover:border-black transition-all duration-150"
+                    : "border-b-2 font-semibold text-lg  border-transparent hover:border-black transition-all duration-150"
             }
             >
                 Books
@@ -30,7 +30,7 @@ export default function Navbar() {
             className={({ isActive }) =>
                 isActive
                     ? "border-b-2 font-semibold text-lg  border-black hover:border-black transition-all duration-150"
-                    : "border-b font-semibold text-lg  border-transparent hover:border-black transition-all duration-150"
+                    : "border-b-2 font-semibold text-lg  border-transparent hover:border-black transition-all duration-150"
             }
             >
                 Inventory

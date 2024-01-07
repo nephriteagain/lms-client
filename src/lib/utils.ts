@@ -35,7 +35,15 @@ export function generateRandomString() {
     return result;
 }
 
+/**
+ * @param t milliseconds
+ * @description this function only works on dev mode
+ */
 export async function sleep(t: number) {
+    if (import.meta.env.PROD) {
+        return
+    }
+
     await new Promise((res) => {
         setTimeout(() => {
             res("artificial sleep");

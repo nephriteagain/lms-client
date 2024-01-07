@@ -17,7 +17,7 @@ export const NewBookSchema = z.object({
     authors: z.array(z.string().min(1)),
     yearPublished: z.number().int().positive(),
     total: z.number().int().positive(),
-});
+}).required();
 
 export type NewBook = z.infer<typeof NewBookSchema>;
 
@@ -32,7 +32,7 @@ export const InventorySchema = z.object({
     available: z.number(),
     borrowed: z.number(),
     total: z.number(),
-});
+}).required();
 
 export type BookInventory = z.infer<typeof InventorySchema>;
 
@@ -42,6 +42,14 @@ export const UpdateBookSchema = z.object({
     title: z.string().min(1),
     authors: z.array(z.string().min(1)).min(1),
     yearPublished: z.number().int().positive(),
-});
+}).required();
 
 export type UpdateBook = z.infer<typeof UpdateBookSchema>;
+
+export const UpdateInventorySchema = z.object({
+    total: z.number().int().positive(),
+    available: z.number().int().nonnegative(),
+    borrowed: z.number().int().nonnegative()
+}).required()
+
+export type UpdateInventory = z.infer<typeof UpdateInventorySchema>

@@ -47,10 +47,13 @@ export default function InventoryUpdate() {
                     <Button 
                     type="submit" 
                     className="bg-green-300 hover:bg-green-400 rounded-md shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-60 px-4 py-1  font-semibold"
+                    loading={fetcher.state === 'submitting'}
                     >
                             Save
                     </Button                    >
-                    <Link to='..' className="bg-red-300 hover:bg-red-400 rounded-md shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-60 px-4 py-1  font-semibold">Cancel</Link>
+                    <Link to='..' className="bg-red-300 hover:bg-red-400 rounded-md shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-60 px-4 py-1  font-semibold">
+                        Cancel
+                    </Link>
                 </div>
 
             </fetcher.Form>

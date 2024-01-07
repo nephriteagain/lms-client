@@ -23,6 +23,7 @@ import { getInventory } from "./loaders/getInventory.ts";
 
 import { createBook } from "./actions/newBook.ts";
 import { updateBook } from "./actions/updateBook.ts";
+import { updateInventory } from "./actions/updateInventory.ts";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -44,7 +45,11 @@ const router = createBrowserRouter(
             element={<Inventory />} 
             loader={getInventory}
             >
-                <Route path="update/:id" element={<InventoryUpdate />} />
+                <Route 
+                path="update/:id" 
+                element={<InventoryUpdate />} 
+                action={updateInventory}
+                />
             </Route>
             <Route 
             path="login" 
