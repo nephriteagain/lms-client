@@ -1,9 +1,11 @@
 import { useEffect, useState, ChangeEvent } from "react"
 import { useLocation, useFetcher, Link, useNavigate } from "react-router-dom"
 import Button from "@/components/utils/Button"
+import { dev } from "@/constants"
 
 import { positiveInt, nonNegativeInt, totalSum } from "@/schemas"
 
+// TODO: extract all this logic to a hook
 export default function InventoryUpdate() {
     const location = useLocation()
     const fetcher = useFetcher()
@@ -13,35 +15,65 @@ export default function InventoryUpdate() {
     const [ t, setT ] = useState<number>(total)
     const [ a, setA ] = useState<number>(available)
     const [ b, setB ] = useState<number>(borrowed)
+    
+    const [ noNegativeNum, setNoNegativeNum ] = useState(true)
+    const [ totalNonZero, setTotalNonZero ] = useState(true)
+    const [ totalEqual, setTotalEqual ] = useState(true)
+    
+    const [ difference, setDifference ] = useState((a+b)-t)
     const [ disableSubmit, setDisableSubmit ] = useState<boolean>(true)
-
-    /**
-     * auto updates the available input if there is a increase in total
-     */
-    function onTotalChange(e:ChangeEvent<HTMLInputElement>) {
-        const num = parseInt(e.currentTarget.value);
-        if (isNaN(num)) return;
-        const previousDiff = t - a;
-        const currentDiff = num - a;
-        if (currentDiff > previousDiff) {
-            const discrepancy = currentDiff - previousDiff;            
-            setA(discrepancy)
-        }
-        setT(num)
-    }
+    
 
     useEffect(() => {
-        
         try {
             positiveInt.parse(t)
+            setTotalNonZero(true)
+        } catch (error) {
+            dev.log('positive int')
+            setTotalNonZero(false)
+        }
+    }, [t])
+
+    useEffect(() => {
+        try {
             nonNegativeInt.parse(a)
             nonNegativeInt.parse(b)
-            totalSum.parse({total:t, args: [a,b]})
-            setDisableSubmit(false)
+            nonNegativeInt.parse(t)
+            setNoNegativeNum(true)
         } catch (error) {
+            dev.log('negative total')
+            setNoNegativeNum(false)
+        }
+    }, [t,a,b])
+
+    useEffect(() => {
+        try {
+            totalSum.parse({total:t, args: [a,b]})                        
+            setTotalEqual(true)
+        } catch (error) {
+            dev.log('total not eq')
+            setTotalEqual(false)
+        }
+    }, [t,a,b])
+
+    useEffect(() => {
+        setDifference((a+b)-t)
+    }, [t,a,b])
+
+    useEffect(() => {
+        if (
+        noNegativeNum &&
+        totalNonZero &&
+        totalEqual &&
+        difference === 0
+        ) {
+            dev.log('form data passed!')
+            setDisableSubmit(false)
+        } else {
             setDisableSubmit(true)
         }
-    }, [t, a, b])
+
+    }, [noNegativeNum, totalNonZero, totalEqual, difference])
 
     return (
         <div className="fixed top-0 left-0">
@@ -75,7 +107,13 @@ export default function InventoryUpdate() {
                     <label className="font-semibold">total</label>
                     <input type="number"
                     className="w-1/4 text-center p-[2px] rounded-md shadow-inner shadow-gray-400"
-                    name="total" value={t} onChange={onTotalChange} />                    
+                    name="total" value={t} onChange={(e) => setT(Number(e.currentTarget.value))} />                    
+                </div>
+                <div className="flex flex-col items-center text-sm  w-full text-red-800">
+                    <p className={totalNonZero ? `invisible`: 'visible'} >total should be greater than zero</p>
+                    <p className={noNegativeNum ?` invisible` : 'visible'} >negative numbers is not allowed</p>                    
+                    <p className={totalEqual ?` invisible`: 'visible'} >total should equals to available and borrowed</p>
+                    <p className={difference === 0 ? `invisible`: 'visible'} >difference {difference}</p>
                 </div>
                 <div className="flex flex-row gap-8">
                     <Button 
