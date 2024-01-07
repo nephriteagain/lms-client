@@ -9,6 +9,8 @@ import {
 import { Member as MemberType } from "@/schemas";
 
 import { useLocation, Link } from "react-router-dom";
+import { IoCopyOutline } from "react-icons/io5";
+import { copyToClipboard } from "@/lib/utils";
 
 export default function Member() {
     const { state } = useLocation() as { state: MemberType };
@@ -21,23 +23,43 @@ export default function Member() {
                     <AlertDialogTitle>Member Info</AlertDialogTitle>
                 </AlertDialogHeader>
 
-                <div>
-                    <p>{`${name}, ${age}, member since ${new Date(joinDate)
+                <div className="flex flex-col gap-2">
+                    <div className="font-semibold text-lg">{`${name}, ${age}, member since ${new Date(
+                        joinDate,
+                    )
                         .toDateString()
                         .split(" ")
                         .splice(1)
-                        .join(", ")}`}</p>
+                        .join(", ")}`}</div>
+                    <div className="flex flex-row gap-2 items-center">
+                        <span>id:</span>
+                        <span>{_id}</span>
+                        <span
+                            className="hover:scale-125 p-1 rounded-full shadow-sm active:scale-95 hover:bg-gray-200 active:bg-gray-200 transition-all duration-150"
+                            onClick={() => copyToClipboard(_id)}
+                        >
+                            <IoCopyOutline />
+                        </span>
+                    </div>
                 </div>
                 <div className="flex flex-row items-center justify-around">
                     {/* TODO: complete this after this two endpoint is completed */}
-                    <Link to={`/borrow/${_id}`}>Borrow</Link>
-                    <Link to={`/return/${_id}`}>Return</Link>
+                    <Link
+                        to={`/borrow`}
+                        className="bg-slate-600 hover:bg-slate-700 active:bg-slate-700 text-white px-4 py-1 text-lg rounded-lg shadow-md hover:shadow-lg active:shadow-lg active:scale-95 transition-all duration-200"
+                    >
+                        borrows
+                    </Link>
+                    <Link
+                        to={`/return`}
+                        className="bg-slate-600 hover:bg-slate-700 active:bg-slate-700 text-white px-4 py-1 text-lg rounded-lg shadow-md hover:shadow-lg active:shadow-lg active:scale-95 transition-all duration-200"
+                    >
+                        returns
+                    </Link>
                 </div>
-                <AlertDialogFooter>
-                    <AlertDialogDescription className="flex flex-row gap-2">
-                        <p>Approved by: </p>
-                        <p>{approvedBy}</p>
-                    </AlertDialogDescription>
+                <AlertDialogFooter className="flex flex-row gap-2">
+                    <div>Approved by: </div>
+                    <div>{approvedBy}</div>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

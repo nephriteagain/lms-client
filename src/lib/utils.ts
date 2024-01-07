@@ -1,6 +1,8 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { constants } from "../constants";
+import { constants, dev } from "../constants";
+
+import type { P } from "@/schemas";
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -49,4 +51,13 @@ export async function sleep(t: number) {
             res("artificial sleep");
         }, t);
     });
+}
+
+export async function copyToClipboard(textToCopy: string): P<void> {
+    try {
+        await navigator.clipboard.writeText(textToCopy);
+        dev.log("copied");
+    } catch (error) {
+        dev.error(error);
+    }
 }
