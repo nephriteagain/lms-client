@@ -9,16 +9,28 @@ import {
     DialogClose,
 } from "@/components/ui/dialog";
 
-import { useState } from "react";
-import { generateRandomString } from "@/lib/utils";
+import { useState, useRef, useEffect } from "react";
+import { generateRandomString, getAllChildInputs } from "@/lib/utils";
 import { useFetcher } from "react-router-dom";
 
 import InputList from "../utils/InputList";
 import Button from "../utils/Button";
 
 export default function NewBookEntryBtn() {
-    const [inputList, setInputList] = useState([generateRandomString()]);
     const fetcher = useFetcher({ key: "create_book" });
+    const [inputList, setInputList] = useState([generateRandomString()]);
+
+    const formRef = useRef<HTMLFormElement>(null);
+
+    useEffect(() => {
+        if (!formRef.current) return;
+        if (fetcher.state === "loading") {
+            const inputs = getAllChildInputs(formRef.current);
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].value = "";
+            }
+        }
+    }, [fetcher.state]);
 
     return (
         <Dialog>
@@ -31,7 +43,7 @@ export default function NewBookEntryBtn() {
                 <DialogHeader>
                     <DialogTitle>New Book Entry</DialogTitle>
                 </DialogHeader>
-                <fetcher.Form action="" method="post">
+                <fetcher.Form action="" method="post" ref={formRef}>
                     <div className="flex flex-col gap-3">
                         <div className="flex flex-col items-start">
                             <p className="font-semibold text-lg">Title</p>

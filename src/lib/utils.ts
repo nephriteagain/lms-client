@@ -61,3 +61,51 @@ export async function copyToClipboard(textToCopy: string): P<void> {
         dev.error(error);
     }
 }
+
+//---------------------------------------------------------//
+/**
+ * @description returns all <input> elements inside
+ * @param element the target parent element
+ * @returns array of input elements, possibly empty
+ */
+export function getAllChildInputs(
+    element: ElementWithChildren,
+): HTMLInputElement[] {
+    if (!element) {
+        throw new Error("invalid input");
+    }
+    const inputArr = [] as HTMLInputElement[];
+    traverseAndFindInputElements(element, inputArr);
+    return inputArr;
+}
+
+interface ElementWithChildren extends Element {
+    children: HTMLCollectionOf<ElementWithChildren>;
+}
+
+/**
+ * @description recursive checks an element and its children and appends inputArray with <input> elements
+ * @param el the element to be processed
+ * @param inputArr the array to be modified
+ */
+function traverseAndFindInputElements(
+    el: ElementWithChildren,
+    inputArr: HTMLInputElement[],
+) {
+    if (el.tagName === "INPUT") {
+        inputArr.push(el as HTMLInputElement);
+    }
+
+    for (let i = 0; i < el.children.length; i++) {
+        traverseAndFindInputElements(
+            el.children[i] as ElementWithChildren,
+            inputArr,
+        );
+    }
+}
+//-------------------------------------------------------------//
+
+
+export function numberToDateString(num:number) : string {
+    return new Date(num).toDateString().split(' ').splice(1).join(', ')
+}

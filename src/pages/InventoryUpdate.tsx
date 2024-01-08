@@ -68,7 +68,7 @@ export default function InventoryUpdate() {
     }, [noNegativeNum, totalNonZero, totalEqual, difference]);
 
     return (
-        <div className="fixed top-0 left-0">
+        <div className="z-20 fixed top-0 left-0">
             <Link
                 to={".."}
                 className="fixed top-0 left-0 w-screen h-screen bg-black opacity-60"

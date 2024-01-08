@@ -106,3 +106,13 @@ export const NewMemberSchema = z.object({
 });
 
 export type NewMember = z.infer<typeof NewMemberSchema>;
+
+
+export type Borrow = {
+    _id: string;
+    bookId: string;
+    borrower: string;
+    date: number;
+    promisedReturnDate: number;
+    title: string;
+}
