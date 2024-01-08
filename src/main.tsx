@@ -21,6 +21,8 @@ import MemberDelete from "./pages/MemberDelete.tsx";
 import MemberCreate from "./pages/MemberCreate.tsx";
 import Borrows from "./pages/Borrows.tsx";
 import Returns from "./pages/Returns.tsx";
+import Member from "./pages/Member.tsx";
+import Penalty from "./pages/Penalty.tsx";
 
 import { getBooks } from "./loaders/getBooks.ts";
 import { getBook } from "./loaders/getBook.ts";
@@ -33,7 +35,7 @@ import { createBook } from "./actions/newBook.ts";
 import { updateBook } from "./actions/updateBook.ts";
 import { updateInventory } from "./actions/updateInventory.ts";
 import { createMember } from "./actions/createMember.ts";
-import Member from "./pages/Member.tsx";
+import { getPenalties } from "./loaders/getPenalties.ts";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -72,6 +74,7 @@ const router = createBrowserRouter(
             </Route>
             <Route path="borrow" element={<Borrows />} loader={getBorrows} />
             <Route path="return" element={<Returns />} loader={getReturns} />
+            <Route path="penalty" element={<Penalty />} loader={getPenalties} />  
             <Route path="login" element={<Login />} />
         </Route>,
     ),

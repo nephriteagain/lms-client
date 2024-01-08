@@ -125,3 +125,11 @@ export type Return = {
     borrowDate: number;
     approvedBy: string;
 }
+
+export type Penalty = {
+    _id: string;
+    bookId: string;
+    borrower: string;
+    penalty: number;
+    approvedBy: string;    
+}

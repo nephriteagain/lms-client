@@ -25,6 +25,10 @@ const pages = [
     {
         name: "Returns",
         link: "return"
+    },
+    {
+        name: "Penalty",
+        link: "penalty"
     }
 ] as const;
 

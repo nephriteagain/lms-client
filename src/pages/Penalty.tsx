@@ -7,14 +7,13 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
-import { useLoaderData } from "react-router-dom";
-import { numberToDateString } from "@/lib/utils";
+import { Penalty as PenaltyType } from "@/schemas"
 
-import { Return } from "@/schemas";
+import { useLoaderData } from "react-router-dom"
 
-export default function Returns() {
+export default function Penalty() {
 
-    const returns = useLoaderData() as Return[]
+    const penaltyList = useLoaderData() as PenaltyType[]
 
     return (
         <div className="py-12">
@@ -22,24 +21,22 @@ export default function Returns() {
                 <TableCaption>A record of book returns.</TableCaption>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="w-2/12">title</TableHead>
-                        <TableHead className="w-2/12">book id</TableHead>
+                        <TableHead className="w-2/12">id</TableHead>
+                        <TableHead className="w-2/12">bookId</TableHead>
                         <TableHead className="w-2/12">borrower</TableHead>
-                        <TableHead className="w-2/12">date borrowed</TableHead>
-                        <TableHead className="w-2/12">promised return date</TableHead>
-                        <TableHead className="w-2/12">borrow id</TableHead>
+                        <TableHead className="w-2/12">penalty</TableHead>
+                        <TableHead className="w-2/12">approvedBy</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {
-                        returns.map(({_id,  bookId, borrower, returnDate, borrowDate, approvedBy}) => {
+                        penaltyList.map(({_id,  bookId, borrower, penalty, approvedBy}) => {
                             return (
                                 <TableRow key={_id}>
                                     <TableCell className="w-2/12">{_id.substring(0,5)}...</TableCell>
                                     <TableCell className="w-2/12">{bookId.substring(0,5)}...</TableCell>
                                     <TableCell className="w-2/12">{borrower.substring(0,5)}...</TableCell>
-                                    <TableCell className="w-2/12">{numberToDateString(borrowDate)}</TableCell>
-                                    <TableCell className="w-2/12">{numberToDateString(returnDate)}</TableCell>
+                                    <TableCell className="w-2/12">{penalty}</TableCell>
                                     <TableCell className="w-2/12">{approvedBy.substring(0,5)}...</TableCell>
                                 </TableRow>
                             )
