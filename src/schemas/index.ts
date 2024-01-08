@@ -116,3 +116,12 @@ export type Borrow = {
     promisedReturnDate: number;
     title: string;
 }
+
+export type Return = {
+    _id: string;
+    bookId: string;
+    borrower: string;
+    returnDate: number;
+    borrowDate: number;
+    approvedBy: string;
+}

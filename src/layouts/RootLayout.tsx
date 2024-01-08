@@ -15,7 +15,7 @@ export default function RootLayout() {
     }, []);
 
     return (
-        <div className="w-screen h-screen flex flex-col items-center overflow-x-hidden">
+        <div className="w-screen h-screen flex flex-col items-center">
             <Navbar />
             <div className="px-12 py-6">
                 <Outlet />

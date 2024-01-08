@@ -20,12 +20,14 @@ import Members from "./pages/Members.tsx";
 import MemberDelete from "./pages/MemberDelete.tsx";
 import MemberCreate from "./pages/MemberCreate.tsx";
 import Borrows from "./pages/Borrows.tsx";
+import Returns from "./pages/Returns.tsx";
 
 import { getBooks } from "./loaders/getBooks.ts";
 import { getBook } from "./loaders/getBook.ts";
 import { getInventory } from "./loaders/getInventory.ts";
 import { getMembers } from "./loaders/getMembers.ts";
 import { getBorrows } from "./loaders/getBorrows.ts";
+import { getReturns } from "./loaders/getReturns.ts";
 
 import { createBook } from "./actions/newBook.ts";
 import { updateBook } from "./actions/updateBook.ts";
@@ -69,6 +71,7 @@ const router = createBrowserRouter(
                 <Route path=":id" element={<Member />} />
             </Route>
             <Route path="borrow" element={<Borrows />} loader={getBorrows} />
+            <Route path="return" element={<Returns />} loader={getReturns} />
             <Route path="login" element={<Login />} />
         </Route>,
     ),

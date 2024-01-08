@@ -8,19 +8,19 @@ import {
     TableRow,
   } from "@/components/ui/table"
 import { Borrow } from "@/schemas";
-
 import { useLoaderData } from "react-router-dom";
-
 import { numberToDateString } from "@/lib/utils";
 
-export default function Borrows() {
-    const borrows = useLoaderData() as Borrow[]
-    
+import { Return } from "@/schemas";
+
+export default function Returns() {
+
+    const returns = useLoaderData() as Return[]
 
     return (
         <div className="py-12">
             <Table className="w-screen xs:w-[576px]">
-                <TableCaption>A record of borrowed books.</TableCaption>
+                <TableCaption>A record of book returns.</TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-2/12">title</TableHead>
@@ -33,21 +33,21 @@ export default function Borrows() {
                 </TableHeader>
                 <TableBody>
                     {
-                        borrows.map(({_id, title, bookId, borrower, date, promisedReturnDate}) => {
+                        returns.map(({_id,  bookId, borrower, returnDate, borrowDate, approvedBy}) => {
                             return (
                                 <TableRow key={_id}>
-                                    <TableCell className="w-2/12">{title.length > 20 ? `${title.substring(0,20)}...` : title}</TableCell>
+                                    <TableCell className="w-2/12">{_id.substring(0,5)}...</TableCell>
                                     <TableCell className="w-2/12">{bookId.substring(0,5)}...</TableCell>
                                     <TableCell className="w-2/12">{borrower.substring(0,5)}...</TableCell>
-                                    <TableCell className="w-2/12">{numberToDateString(date)}</TableCell>
-                                    <TableCell className="w-2/12">{numberToDateString(promisedReturnDate)}</TableCell>
-                                    <TableCell className="w-2/12">{_id.substring(0,5)}...</TableCell>
+                                    <TableCell className="w-2/12">{numberToDateString(borrowDate)}</TableCell>
+                                    <TableCell className="w-2/12">{numberToDateString(returnDate)}</TableCell>
+                                    <TableCell className="w-2/12">{approvedBy.substring(0,5)}...</TableCell>
                                 </TableRow>
                             )
                         })
-                    }
-                    
+                    }                    
                 </TableBody>
             </Table>
-        </div>);
+        </div>
+    )
 }

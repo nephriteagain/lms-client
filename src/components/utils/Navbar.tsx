@@ -22,6 +22,10 @@ const pages = [
         name: "Borrows",
         link: "borrow",
     },
+    {
+        name: "Returns",
+        link: "return"
+    }
 ] as const;
 
 export default function Navbar() {
