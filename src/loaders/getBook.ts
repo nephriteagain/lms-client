@@ -19,11 +19,8 @@ export async function getBook({
             withCredentials: true,
         }),
     ]);
-
-    const [bookInfo, inventory]: [Book, BookInventory] = await Promise.all([
-        bookRes.data,
-        bookSupplyRes.data,
-    ]);
+    const bookInfo = bookRes.data;
+    const inventory = bookSupplyRes.data;
 
     return [bookInfo, inventory];
 }

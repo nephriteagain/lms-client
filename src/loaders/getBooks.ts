@@ -18,10 +18,16 @@ export async function getBooks({
           ? `${constants.server}/books?authors=${authors}`
           : `${constants.server}/books`;
 
-    const response = await axios.get(server, {
-        withCredentials: true,
-    });    
-    
-    return response.data as Book[]
+    try {
+        const response = await axios.get(server, {
+            withCredentials: true,
+        });
+        if (response.status === 200) {
+            return response.data as Book[];
+        }
+    } catch (error) {
+        dev.error(error);
+    }
 
+    return [];
 }

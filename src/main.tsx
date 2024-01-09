@@ -23,6 +23,7 @@ import Borrows from "./pages/Borrows.tsx";
 import Returns from "./pages/Returns.tsx";
 import Member from "./pages/Member.tsx";
 import Penalty from "./pages/Penalty.tsx";
+import Error from "./components/utils/Error.tsx";
 
 import { getBooks } from "./loaders/getBooks.ts";
 import { getBook } from "./loaders/getBook.ts";
@@ -40,7 +41,7 @@ import { deleteMember } from "./actions/deleteMember.ts";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" element={<RootLayout />}>
+        <Route path="/" element={<RootLayout />} errorElement={<Error />}>
             <Route
                 index
                 element={<Books />}
@@ -65,7 +66,11 @@ const router = createBrowserRouter(
                 />
             </Route>
             <Route path="members" element={<Members />} loader={getMembers}>
-                <Route path=":id/delete" element={<MemberDelete />} action={deleteMember} />
+                <Route
+                    path=":id/delete"
+                    element={<MemberDelete />}
+                    action={deleteMember}
+                />
                 <Route
                     path="create"
                     element={<MemberCreate />}
@@ -75,7 +80,7 @@ const router = createBrowserRouter(
             </Route>
             <Route path="borrow" element={<Borrows />} loader={getBorrows} />
             <Route path="return" element={<Returns />} loader={getReturns} />
-            <Route path="penalty" element={<Penalty />} loader={getPenalties} />  
+            <Route path="penalty" element={<Penalty />} loader={getPenalties} />
             <Route path="login" element={<Login />} />
         </Route>,
     ),

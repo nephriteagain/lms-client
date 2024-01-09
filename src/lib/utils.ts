@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { constants, dev } from "../constants";
@@ -53,7 +54,16 @@ export async function sleep(t: number) {
     });
 }
 
-export async function copyToClipboard(textToCopy: string): P<void> {
+/**
+ *
+ * @param textToCopy the text to be saved to clipboard
+ * @note this function stops propagation
+ */
+export async function copyToClipboard(
+    e: MouseEvent<HTMLSpanElement>,
+    textToCopy: string,
+): P<void> {
+    e.stopPropagation();
     try {
         await navigator.clipboard.writeText(textToCopy);
         dev.log("copied");
@@ -105,7 +115,6 @@ function traverseAndFindInputElements(
 }
 //-------------------------------------------------------------//
 
-
-export function numberToDateString(num:number) : string {
-    return new Date(num).toDateString().split(' ').splice(1).join(', ')
+export function numberToDateString(num: number): string {
+    return new Date(num).toDateString().split(" ").splice(1).join(", ");
 }

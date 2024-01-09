@@ -9,9 +9,7 @@ export default function RootLayout() {
     const { userData } = useAuthContext();
     const navigate = useNavigate();
 
-    useEffect(() => {        
-
-
+    useEffect(() => {
         if (!userData) {
             navigate("/login", { replace: true });
         }

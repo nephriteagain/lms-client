@@ -15,13 +15,17 @@ export async function updateInventory({ request, params }: ActionFunctionArgs) {
     }
     UpdateInventorySchema.parse(newInventoryEntry);
 
-    const response = await axios.patch(`${constants.server}/inventory/${params.id}`, newInventoryEntry, {
-        withCredentials: true
-    })
+    const response = await axios.patch(
+        `${constants.server}/inventory/${params.id}`,
+        newInventoryEntry,
+        {
+            withCredentials: true,
+        },
+    );
 
     if (response.status === 200) {
-        return redirect("/inventory")
+        return redirect("/inventory");
     }
 
-    return null
+    return null;
 }

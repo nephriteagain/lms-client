@@ -24,13 +24,15 @@ export async function createMember({ request }: ActionFunctionArgs) {
 
     NewMemberSchema.parse(newMember);
 
-    const response = await axios.post(`${constants.server}/members`, newMember, {
-        withCredentials: true
-    })
+    const response = await axios.post(
+        `${constants.server}/members`,
+        newMember,
+        {
+            withCredentials: true,
+        },
+    );
     if (response.status === 201) {
-
         return redirect("/members");
     }
-    return null
-
+    return null;
 }

@@ -1,5 +1,8 @@
 import { Book } from "../../schemas";
 import { Link, useNavigate } from "react-router-dom";
+import { IoCopyOutline } from "react-icons/io5";
+
+import ClipboardCopy from "../utils/ClipboardCopy";
 
 import {
     Table,
@@ -22,24 +25,26 @@ export default function BookTable({ books }: { books: Book[] }) {
                     <TableHead>author/s</TableHead>
                     <TableHead>year</TableHead>
                     <TableHead>date added</TableHead>
+                    <TableHead>id</TableHead>
                 </TableRow>
             </TableHeader>
-            { books.length > 0 ? <TableBody>{
-                books.map((book) => {
-                    return <BookTableRow {...book} key={book._id} />;
-                })}
-            </TableBody> :
-            <div className="py-8  flex items-center justify-center gap-4">
-                <p className="text-lg font-semibold">
-                    No Result Found...
-                </p>
-                <Link
-                    to={"/"}
-                    className="border-b border-black hover:text-green-800 hover:border-green transition-all duration-150"                    
-                >
-                    go back
-                </Link>
-            </div>}
+            {books.length > 0 ? (
+                <TableBody>
+                    {books.map((book) => {
+                        return <BookTableRow {...book} key={book._id} />;
+                    })}
+                </TableBody>
+            ) : (
+                <div className="py-8  flex items-center justify-center gap-4">
+                    <p className="text-lg font-semibold">No Result Found...</p>
+                    <Link
+                        to={"/"}
+                        className="border-b border-black hover:text-green-800 hover:border-green transition-all duration-150"
+                    >
+                        go back
+                    </Link>
+                </div>
+            )}
         </Table>
     );
 }
@@ -67,6 +72,10 @@ function BookTableRow({ title, authors, yearPublished, dateAdded, _id }: Book) {
                     .split(" ")
                     .splice(1)
                     .join(" ")}
+            </TableCell>
+            <TableCell className="flex flex-row gap-2 justify-center items-center">
+                <span>{_id.substring(0, 5)}...</span>
+                <ClipboardCopy copyItem={_id} />
             </TableCell>
         </TableRow>
     );

@@ -6,14 +6,13 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-  } from "@/components/ui/table"
-import { Penalty as PenaltyType } from "@/schemas"
+} from "@/components/ui/table";
+import { Penalty as PenaltyType } from "@/schemas";
 
-import { useLoaderData } from "react-router-dom"
+import { useLoaderData } from "react-router-dom";
 
 export default function Penalty() {
-
-    const penaltyList = useLoaderData() as PenaltyType[]
+    const penaltyList = useLoaderData() as PenaltyType[];
 
     return (
         <div className="py-12">
@@ -29,21 +28,31 @@ export default function Penalty() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {
-                        penaltyList.map(({_id,  bookId, borrower, penalty, approvedBy}) => {
+                    {penaltyList.map(
+                        ({ _id, bookId, borrower, penalty, approvedBy }) => {
                             return (
                                 <TableRow key={_id}>
-                                    <TableCell className="w-2/12">{_id.substring(0,5)}...</TableCell>
-                                    <TableCell className="w-2/12">{bookId.substring(0,5)}...</TableCell>
-                                    <TableCell className="w-2/12">{borrower.substring(0,5)}...</TableCell>
-                                    <TableCell className="w-2/12">{penalty}</TableCell>
-                                    <TableCell className="w-2/12">{approvedBy.substring(0,5)}...</TableCell>
+                                    <TableCell className="w-2/12">
+                                        {_id.substring(0, 5)}...
+                                    </TableCell>
+                                    <TableCell className="w-2/12">
+                                        {bookId.substring(0, 5)}...
+                                    </TableCell>
+                                    <TableCell className="w-2/12">
+                                        {borrower.substring(0, 5)}...
+                                    </TableCell>
+                                    <TableCell className="w-2/12">
+                                        {penalty}
+                                    </TableCell>
+                                    <TableCell className="w-2/12">
+                                        {approvedBy.substring(0, 5)}...
+                                    </TableCell>
                                 </TableRow>
-                            )
-                        })
-                    }                    
+                            );
+                        },
+                    )}
                 </TableBody>
             </Table>
         </div>
-    )
+    );
 }

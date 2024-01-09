@@ -107,7 +107,6 @@ export const NewMemberSchema = z.object({
 
 export type NewMember = z.infer<typeof NewMemberSchema>;
 
-
 export type Borrow = {
     _id: string;
     bookId: string;
@@ -115,7 +114,7 @@ export type Borrow = {
     date: number;
     promisedReturnDate: number;
     title: string;
-}
+};
 
 export type Return = {
     _id: string;
@@ -124,15 +123,15 @@ export type Return = {
     returnDate: number;
     borrowDate: number;
     approvedBy: string;
-}
+};
 
 export type Penalty = {
     _id: string;
     bookId: string;
     borrower: string;
     penalty: number;
-    approvedBy: string;    
-}
+    approvedBy: string;
+};
 
 export type User = {
     email: string;
@@ -140,4 +139,4 @@ export type User = {
     age: number;
     joinDate: number;
     _id: string;
-}
+};

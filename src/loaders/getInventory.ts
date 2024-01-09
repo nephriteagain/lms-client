@@ -1,13 +1,18 @@
-import axios from 'axios';
-import { constants } from "@/constants";
+import axios from "axios";
+import { constants, dev } from "@/constants";
 import type { BookInventory, P } from "@/schemas";
 
 export async function getInventory(): P<BookInventory[]> {
-    const response = await axios.get(`${constants.server}/inventory`, {
-        withCredentials: true
-    });
+    try {
+        const response = await axios.get(`${constants.server}/inventory`, {
+            withCredentials: true,
+        });
 
-    const inventory: BookInventory[] = response.data;
+        const inventory: BookInventory[] = response.data;
 
-    return inventory;
+        return inventory;
+    } catch (error) {
+        dev.error(error);
+    }
+    return [];
 }
