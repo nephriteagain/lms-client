@@ -32,11 +32,7 @@ export async function updateBook({ request, params }: LoaderFunctionArgs) {
 
     const schema = newBookEntry as UpdateBook;
     UpdateBookSchema.parse(schema);
-    await fetch(`${constants.server}/books/${params.id}`, {
-        method: "PATCH",
-        headers: constants.jsonHeaders,
-        body: JSON.stringify(schema),
-    });
+
     const response = await axios.patch(`${constants.server}/books/${params.id}`, schema, {
         withCredentials: true
     })
