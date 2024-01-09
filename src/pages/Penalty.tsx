@@ -7,8 +7,9 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import TableCellCopy from "@/components/utils/TableCellCopy";
 import { Penalty as PenaltyType } from "@/schemas";
-
+import ClipboardCopy from "@/components/utils/ClipboardCopy";
 import { useLoaderData } from "react-router-dom";
 
 export default function Penalty() {
@@ -32,21 +33,13 @@ export default function Penalty() {
                         ({ _id, bookId, borrower, penalty, approvedBy }) => {
                             return (
                                 <TableRow key={_id}>
-                                    <TableCell className="w-2/12">
-                                        {_id.substring(0, 5)}...
-                                    </TableCell>
-                                    <TableCell className="w-2/12">
-                                        {bookId.substring(0, 5)}...
-                                    </TableCell>
-                                    <TableCell className="w-2/12">
-                                        {borrower.substring(0, 5)}...
-                                    </TableCell>
+                                    <TableCellCopy item={_id} />
+                                    <TableCellCopy item={bookId} />
+                                    <TableCellCopy item={borrower} />
                                     <TableCell className="w-2/12">
                                         {penalty}
                                     </TableCell>
-                                    <TableCell className="w-2/12">
-                                        {approvedBy.substring(0, 5)}...
-                                    </TableCell>
+                                    <TableCellCopy item={approvedBy} />
                                 </TableRow>
                             );
                         },

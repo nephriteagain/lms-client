@@ -40,6 +40,7 @@ import { getPenalties } from "./loaders/getPenalties.ts";
 import { deleteMember } from "./actions/deleteMember.ts";
 
 const router = createBrowserRouter(
+    // TODO: handle each route error independently
     createRoutesFromElements(
         <Route path="/" element={<RootLayout />} errorElement={<Error />}>
             <Route

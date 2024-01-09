@@ -14,6 +14,7 @@ import { Member } from "@/schemas";
 import { useLoaderData, useNavigate, Outlet, Link } from "react-router-dom";
 
 import { MdDelete } from "react-icons/md";
+import TableCellCopy from "@/components/utils/TableCellCopy";
 
 export default function Members() {
     const members = useLoaderData() as Member[];
@@ -35,8 +36,9 @@ export default function Members() {
                 <TableHeader className="bg-slate-200">
                     <TableRow>
                         <TableHead>name</TableHead>
+                        <TableHead>id</TableHead>
                         <TableHead className="text-center">age</TableHead>
-                        <TableHead className="text-center">join age</TableHead>
+                        <TableHead className="text-center">join date</TableHead>
                         <TableHead className="text-center">
                             approved By
                         </TableHead>
@@ -58,6 +60,7 @@ export default function Members() {
                                 <TableCell className="text-left w-4/12 font-medium">
                                     {name}
                                 </TableCell>
+                                <TableCellCopy item={_id} />
                                 <TableCell className="text-center w-1/12">
                                     {age}
                                 </TableCell>
@@ -68,9 +71,7 @@ export default function Members() {
                                         .splice(1)
                                         .join(", ")}
                                 </TableCell>
-                                <TableCell className="text-center w-3/12 ">
-                                    {approvedBy}
-                                </TableCell>
+                                <TableCellCopy item={approvedBy} />
                                 <TableCell
                                     className="w-1/12 relative hover:bg-red-300 active:bg-red-300 transition-all duration-200 cursor-hover"
                                     onClick={(e) => {

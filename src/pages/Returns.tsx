@@ -11,24 +11,27 @@ import { useLoaderData } from "react-router-dom";
 import { numberToDateString } from "@/lib/utils";
 
 import { Return } from "@/schemas";
+import TableCellCopy from "@/components/utils/TableCellCopy";
 
 export default function Returns() {
     const returns = useLoaderData() as Return[];
 
+    // TODO: where is the Borrow ID????
     return (
         <div className="py-12">
             <Table className="w-screen xs:w-[576px]">
                 <TableCaption>A record of book returns.</TableCaption>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="w-2/12">title</TableHead>
-                        <TableHead className="w-2/12">book id</TableHead>
-                        <TableHead className="w-2/12">borrower</TableHead>
-                        <TableHead className="w-2/12">date borrowed</TableHead>
-                        <TableHead className="w-2/12">
+                        <TableHead >id</TableHead>
+                        <TableHead >title</TableHead>
+                        <TableHead >book id</TableHead>
+                        <TableHead >date borrowed</TableHead>
+                        <TableHead >borrower id</TableHead>
+                        <TableHead >
                             promised return date
                         </TableHead>
-                        <TableHead className="w-2/12">borrow id</TableHead>
+                        <TableHead >approved by</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -43,24 +46,18 @@ export default function Returns() {
                         }) => {
                             return (
                                 <TableRow key={_id}>
-                                    <TableCell className="w-2/12">
-                                        {_id.substring(0, 5)}...
-                                    </TableCell>
-                                    <TableCell className="w-2/12">
-                                        {bookId.substring(0, 5)}...
-                                    </TableCell>
-                                    <TableCell className="w-2/12">
-                                        {borrower.substring(0, 5)}...
-                                    </TableCell>
-                                    <TableCell className="w-2/12">
+                                    <TableCellCopy item={_id} />
+                                    {/* TODO: add title schema for returns */}
+                                    <TableCell>title</TableCell>
+                                    <TableCellCopy item={bookId} />                                   
+                                    <TableCell >
                                         {numberToDateString(borrowDate)}
                                     </TableCell>
-                                    <TableCell className="w-2/12">
+                                    <TableCellCopy item={borrower} />
+                                    <TableCell>
                                         {numberToDateString(returnDate)}
                                     </TableCell>
-                                    <TableCell className="w-2/12">
-                                        {approvedBy.substring(0, 5)}...
-                                    </TableCell>
+                                    <TableCellCopy item={approvedBy} />
                                 </TableRow>
                             );
                         },

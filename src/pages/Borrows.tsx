@@ -12,6 +12,7 @@ import { Borrow } from "@/schemas";
 import { useLoaderData } from "react-router-dom";
 
 import { numberToDateString } from "@/lib/utils";
+import TableCellCopy from "@/components/utils/TableCellCopy";
 
 export default function Borrows() {
     const borrows = useLoaderData() as Borrow[];
@@ -23,13 +24,13 @@ export default function Borrows() {
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-2/12">title</TableHead>
-                        <TableHead className="w-2/12">book id</TableHead>
-                        <TableHead className="w-2/12">borrower</TableHead>
+                        <TableHead className="w-2/12">id</TableHead>
                         <TableHead className="w-2/12">date borrowed</TableHead>
+                        <TableHead className="w-2/12">borrower id</TableHead>
                         <TableHead className="w-2/12">
                             promised return date
                         </TableHead>
-                        <TableHead className="w-2/12">borrow id</TableHead>
+                        <TableHead className="w-2/12">book id</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -49,21 +50,16 @@ export default function Borrows() {
                                             ? `${title.substring(0, 20)}...`
                                             : title}
                                     </TableCell>
-                                    <TableCell className="w-2/12">
-                                        {bookId.substring(0, 5)}...
-                                    </TableCell>
-                                    <TableCell className="w-2/12">
-                                        {borrower.substring(0, 5)}...
-                                    </TableCell>
+                                    <TableCellCopy item={_id} />                                    
                                     <TableCell className="w-2/12">
                                         {numberToDateString(date)}
                                     </TableCell>
+                                    <TableCellCopy item={borrower} />
                                     <TableCell className="w-2/12">
                                         {numberToDateString(promisedReturnDate)}
                                     </TableCell>
-                                    <TableCell className="w-2/12">
-                                        {_id.substring(0, 5)}...
-                                    </TableCell>
+                                    <TableCellCopy item={bookId} />
+
                                 </TableRow>
                             );
                         },

@@ -11,6 +11,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import TableCellCopy from "@/components/utils/TableCellCopy";
 
 export default function Inventory() {
     const inventory = useLoaderData() as BookInventory[];
@@ -22,10 +23,11 @@ export default function Inventory() {
                 <TableCaption>list of book inventory.</TableCaption>
                 <TableHeader className="bg-slate-200">
                     <TableRow>
-                        <TableHead>Title</TableHead>
-                        <TableHead>Available</TableHead>
-                        <TableHead>Borrowed</TableHead>
-                        <TableHead>Total</TableHead>
+                        <TableHead>title</TableHead>
+                        <TableHead>id</TableHead>
+                        <TableHead>available</TableHead>
+                        <TableHead>borrowed</TableHead>
+                        <TableHead>total</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -43,6 +45,7 @@ export default function Inventory() {
                                 <TableCell className="text-left w-8/12 font-medium">
                                     {title}
                                 </TableCell>
+                                <TableCellCopy item={_id} />
                                 <TableCell className="text-center w-1/12">
                                     {available}
                                 </TableCell>

@@ -1,6 +1,6 @@
 import { Book } from "../../schemas";
 import { Link, useNavigate } from "react-router-dom";
-import { IoCopyOutline } from "react-icons/io5";
+import TableCellCopy from "../utils/TableCellCopy";
 
 import ClipboardCopy from "../utils/ClipboardCopy";
 
@@ -73,10 +73,7 @@ function BookTableRow({ title, authors, yearPublished, dateAdded, _id }: Book) {
                     .splice(1)
                     .join(" ")}
             </TableCell>
-            <TableCell className="flex flex-row gap-2 justify-center items-center">
-                <span>{_id.substring(0, 5)}...</span>
-                <ClipboardCopy copyItem={_id} />
-            </TableCell>
+            <TableCellCopy item={_id} />
         </TableRow>
     );
 }
