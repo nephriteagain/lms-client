@@ -2,6 +2,7 @@ import { ActionFunctionArgs, redirect } from "react-router-dom";
 import { constants } from "@/constants";
 import { sleep } from "@/lib/utils";
 import { UpdateInventorySchema } from "@/schemas";
+import axios from "axios";
 
 export async function updateInventory({ request, params }: ActionFunctionArgs) {
     await sleep(2000);
@@ -14,11 +15,13 @@ export async function updateInventory({ request, params }: ActionFunctionArgs) {
     }
     UpdateInventorySchema.parse(newInventoryEntry);
 
-    await fetch(`${constants.server}/inventory/${params.id}`, {
-        method: "PATCH",
-        headers: constants.jsonHeaders,
-        body: JSON.stringify(newInventoryEntry),
-    });
+    const response = await axios.patch(`${constants.server}/inventory/${params.id}`, newInventoryEntry, {
+        withCredentials: true
+    })
 
-    return redirect("/inventory");
+    if (response.status === 200) {
+        return redirect("/inventory")
+    }
+
+    return null
 }

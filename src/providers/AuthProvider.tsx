@@ -3,61 +3,62 @@ import {
     createContext,
     useState,
     ReactNode,
-    useEffect,
 } from "react";
-import { constants } from "../constants";
-import { LoginSchema, Login } from "../schemas";
+import { constants, dev } from "../constants";
+import { LoginSchema, Login, User } from "../schemas";
+import { NavigateOptions } from 'react-router-dom'
+
+import axios from 'axios'
+
 
 type AuthContextType = {
-    accessToken: string | null;
-    login(loginCred: Login): Promise<number | undefined>;
+    userData: User | null;
+    login(loginCred: Login, callback: (link:string, options:NavigateOptions) => any ): Promise<number | undefined>;
     logout(): void;
 };
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-    const [accessToken, setAccessToken] = useState<string | null>(null);
+    const [userData, setUserData] = useState<User| null>(null);
 
     async function login({
         email,
         password,
-    }: Login): Promise<number | undefined> {
+    }: Login, callback: (link:string, options: NavigateOptions) => any): Promise<any> {
         try {
             LoginSchema.parse({ email, password });
-            const response = await fetch(`${constants.server}/auth/login`, {
-                method: "POST",
-                body: JSON.stringify({ email, password }),
-                headers: constants.jsonHeaders,
+            const response = await axios.post(`${constants.server}/auth/login`, {
+                email,
+                password,
+            }, {
+                withCredentials: true
             });
-            if (response.ok) {
-                const data: Awaited<{ access_token: string }> =
-                    await response.json();
-                setAccessToken(data.access_token);
-                localStorage.setItem("jwt", data.access_token);
+            if (response.status===200) {                
+                setUserData(response.data)
+                return callback('/', {replace: true});
             }
-            return response.status;
         } catch (error) {
             console.error(error);
         }
     }
 
-    function logout() {
-        setAccessToken(null);
-        localStorage.removeItem("jwt");
+    async function logout() {
+        try {
+            await axios.post(`${constants.server}/auth/logout`, {}, {
+                withCredentials: true
+            })
+            setUserData(null);
+        } catch (error) {
+            dev.error(error)
+        }
     }
 
-    useEffect(() => {
-        const localJwt = localStorage.getItem("jwt");
-        if (localJwt) {
-            setAccessToken(localJwt);
-        }
-    }, []);
 
     return (
         <AuthContext.Provider
             value={{
-                accessToken,
+                userData,
                 login,
                 logout,
             }}

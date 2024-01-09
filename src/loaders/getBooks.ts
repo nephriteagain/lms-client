@@ -1,6 +1,6 @@
 import { constants, dev } from "../constants";
-import { injectJwtToken } from "../lib/utils";
 import { Book } from "../schemas";
+import axios from "axios";
 
 export async function getBooks({
     request,
@@ -18,13 +18,10 @@ export async function getBooks({
           ? `${constants.server}/books?authors=${authors}`
           : `${constants.server}/books`;
 
-    const response = await fetch(server, {
-        method: "GET",
-        headers: injectJwtToken(constants.jsonHeaders),
-    });
-    if (response.ok) {
-        const books: Book[] = await response.json();
-        return books;
-    }
-    return [];
+    const response = await axios.get(server, {
+        withCredentials: true,
+    });    
+    
+    return response.data as Book[]
+
 }

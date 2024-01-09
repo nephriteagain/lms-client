@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import { useAuthContext } from "../../providers/AuthProvider";
 import Button from "./Button";
@@ -33,7 +33,7 @@ const pages = [
 ] as const;
 
 export default function Navbar() {
-    const { accessToken, logout } = useAuthContext();
+    const { userData, logout } = useAuthContext();
     const navigate = useNavigate();
 
     function logoutUser() {
@@ -43,7 +43,7 @@ export default function Navbar() {
 
     return (
         <div className="z-10 bg-slate-100 sticky top-0 left-0 px-4 py-2 w-full flex flex-row items-center gap-4 border-b shadow-md">
-            {pages.map(({ name, link }) => {
+            {userData && pages.map(({ name, link }) => {
                 return (
                     <NavLink
                         key={link}
@@ -58,14 +58,21 @@ export default function Navbar() {
                     </NavLink>
                 );
             })}
-            {!!accessToken && (
+            {!!userData ?
                 <Button
                     className="ms-auto bg-red-300 hover:bg-red-400 rounded-md hover:rounded-lg shadow-md hover:shadow-lg px-2 py-1 transition-all duration-150"
                     onClick={logoutUser}
                 >
                     logout
-                </Button>
-            )}
+                </Button> : 
+                <Link 
+                to={'login'}
+                className="ms-auto bg-green-300 hover:bg-green-400 rounded-md hover:rounded-lg shadow-md hover:shadow-lg px-2 py-1 transition-all duration-150"
+                >
+                    login
+                </Link>
+
+            }
         </div>
     );
 }

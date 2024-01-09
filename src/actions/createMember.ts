@@ -1,7 +1,8 @@
 import { ActionFunctionArgs, redirect } from "react-router-dom";
 import { NewMember, NewMemberSchema } from "@/schemas";
 import { constants } from "@/constants";
-import { injectJwtToken, sleep } from "@/lib/utils";
+import { sleep } from "@/lib/utils";
+import axios from "axios";
 
 // TODO: use zod transform functions for some of the schematypes
 export async function createMember({ request }: ActionFunctionArgs) {
@@ -23,11 +24,13 @@ export async function createMember({ request }: ActionFunctionArgs) {
 
     NewMemberSchema.parse(newMember);
 
-    await fetch(`${constants.server}/members`, {
-        method: "POST",
-        headers: injectJwtToken(constants.jsonHeaders),
-        body: JSON.stringify(newMember),
-    });
+    const response = await axios.post(`${constants.server}/members`, newMember, {
+        withCredentials: true
+    })
+    if (response.status === 201) {
 
-    return redirect("/members");
+        return redirect("/members");
+    }
+    return null
+
 }

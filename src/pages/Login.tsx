@@ -10,7 +10,7 @@ export default function Login() {
     const [disabled, setDisabled] = useState(true);
     const [loading, setLoading] = useState(false);
 
-    const { login, accessToken } = useAuthContext();
+    const { login } = useAuthContext();
 
     const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ export default function Login() {
         setLoading(true);
         try {
             LoginSchema.parse(loginCred);
-            const responseStatus = await login(loginCred);
+            const responseStatus = await login(loginCred, navigate);
             if (responseStatus === 200) {
                 navigate("/", { replace: true });
             }
@@ -31,11 +31,6 @@ export default function Login() {
         }
     }
 
-    useEffect(() => {
-        if (accessToken) {
-            navigate("/", { replace: true });
-        }
-    }, [accessToken]);
 
     useEffect(() => {
         try {

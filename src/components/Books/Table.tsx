@@ -24,25 +24,22 @@ export default function BookTable({ books }: { books: Book[] }) {
                     <TableHead>date added</TableHead>
                 </TableRow>
             </TableHeader>
-            <TableBody>
-                {books.length > 0 ? (
-                    books.map((book) => {
-                        return <BookTableRow {...book} key={book._id} />;
-                    })
-                ) : (
-                    <div className="py-8  flex items-center justify-center gap-4">
-                        <p className="text-lg font-semibold">
-                            No Result Found...
-                        </p>
-                        <Link
-                            to={"/"}
-                            className="border-b border-black hover:text-green-800 hover:border-green transition-all duration-150"
-                        >
-                            go back
-                        </Link>
-                    </div>
-                )}
-            </TableBody>
+            { books.length > 0 ? <TableBody>{
+                books.map((book) => {
+                    return <BookTableRow {...book} key={book._id} />;
+                })}
+            </TableBody> :
+            <div className="py-8  flex items-center justify-center gap-4">
+                <p className="text-lg font-semibold">
+                    No Result Found...
+                </p>
+                <Link
+                    to={"/"}
+                    className="border-b border-black hover:text-green-800 hover:border-green transition-all duration-150"                    
+                >
+                    go back
+                </Link>
+            </div>}
         </Table>
     );
 }

@@ -36,6 +36,7 @@ import { updateBook } from "./actions/updateBook.ts";
 import { updateInventory } from "./actions/updateInventory.ts";
 import { createMember } from "./actions/createMember.ts";
 import { getPenalties } from "./loaders/getPenalties.ts";
+import { deleteMember } from "./actions/deleteMember.ts";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -64,7 +65,7 @@ const router = createBrowserRouter(
                 />
             </Route>
             <Route path="members" element={<Members />} loader={getMembers}>
-                <Route path=":id/delete" element={<MemberDelete />} />
+                <Route path=":id/delete" element={<MemberDelete />} action={deleteMember} />
                 <Route
                     path="create"
                     element={<MemberCreate />}

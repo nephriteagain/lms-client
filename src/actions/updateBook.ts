@@ -3,6 +3,7 @@ import { sleep } from "@/lib/utils";
 import { constants } from "@/constants";
 
 import { UpdateBookSchema, UpdateBook } from "@/schemas";
+import axios from "axios";
 
 export async function updateBook({ request, params }: LoaderFunctionArgs) {
     await sleep(2000);
@@ -36,5 +37,14 @@ export async function updateBook({ request, params }: LoaderFunctionArgs) {
         headers: constants.jsonHeaders,
         body: JSON.stringify(schema),
     });
-    return redirect(`/books/${params.id}`);
+    const response = await axios.patch(`${constants.server}/books/${params.id}`, schema, {
+        withCredentials: true
+    })
+    if (response.status === 200) {
+        return redirect(`/books/${params.id}`);
+    }
+
+    return null;
+
+
 }

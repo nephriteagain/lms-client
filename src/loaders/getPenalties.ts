@@ -1,10 +1,14 @@
+import axios from 'axios';
 import { constants } from "@/constants";
-import { P, Penalty } from "@/schemas";
+import type { P, Penalty } from "@/schemas";
 
-export async function getPenalties() : P<Penalty[]> {
+export async function getPenalties(): P<Penalty[]> {
+    const response = await axios.get(`${constants.server}/penalty`, {
+        withCredentials: true
+    });
 
-    const res = await fetch(`${constants.server}/penalty`);
-    const penaltyList = await res.json() as Penalty[];
+    // Access the response data directly
+    const penaltyList: Penalty[] = response.data;
 
-    return penaltyList
+    return penaltyList;
 }

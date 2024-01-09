@@ -1,10 +1,14 @@
+import axios from 'axios';
 import { constants } from "@/constants";
-import { Member, P } from "@/schemas";
+import type { Member, P } from "@/schemas";
 
 export async function getMembers(): P<Member[]> {
-    const res = await fetch(`${constants.server}/members`, {
-        method: "GET",
+    const response = await axios.get(`${constants.server}/members`, {
+        withCredentials: true
     });
-    const members = (await res.json()) as Member[];
+
+    // Access the response data directly
+    const members: Member[] = response.data;
+
     return members;
 }

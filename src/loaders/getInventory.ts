@@ -1,10 +1,13 @@
+import axios from 'axios';
 import { constants } from "@/constants";
-import { BookInventory, P } from "@/schemas";
+import type { BookInventory, P } from "@/schemas";
 
 export async function getInventory(): P<BookInventory[]> {
-    const res = await fetch(`${constants.server}/inventory`, {
-        method: "GET",
+    const response = await axios.get(`${constants.server}/inventory`, {
+        withCredentials: true
     });
-    const inventory = (await res.json()) as BookInventory[];
+
+    const inventory: BookInventory[] = response.data;
+
     return inventory;
 }

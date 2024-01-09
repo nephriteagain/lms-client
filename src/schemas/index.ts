@@ -133,3 +133,11 @@ export type Penalty = {
     penalty: number;
     approvedBy: string;    
 }
+
+export type User = {
+    email: string;
+    name: string;
+    age: number;
+    joinDate: number;
+    _id: string;
+}

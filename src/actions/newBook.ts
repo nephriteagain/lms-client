@@ -1,9 +1,9 @@
 import { NewBookSchema, NewBook } from "@/schemas";
 import { constants } from "@/constants";
-import { injectJwtToken } from "@/lib/utils";
 import { redirect } from "react-router-dom";
 
 import { sleep } from "@/lib/utils";
+import axios from "axios";
 export async function createBook({ request }: { request: Request }) {
     await sleep(200);
 
@@ -32,11 +32,14 @@ export async function createBook({ request }: { request: Request }) {
 
     const schema = newBookEntry as NewBook;
     NewBookSchema.parse(schema);
-    await fetch(`${constants.server}/books`, {
-        method: "POST",
-        body: JSON.stringify(schema),
-        headers: injectJwtToken(constants.jsonHeaders),
-    });
 
-    return redirect("/");
+    const response = await axios.post(`${constants.server}/books`, schema, {
+        withCredentials: true
+    })
+
+    if (response.status === 201) {
+        return redirect("/");
+    }
+
+    return null
 }
