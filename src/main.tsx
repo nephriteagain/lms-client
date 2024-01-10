@@ -14,7 +14,7 @@ import RootLayout from "./layouts/RootLayout.tsx";
 import Login from "./pages/Login.tsx";
 import Books from "./pages/Books.tsx";
 import Book from "./pages/Book.tsx";
-import NewBook from "./pages/NewBook.tsx";
+import NewBook from "./pages/BookNew.tsx";
 import BookUpdate from "./pages/BookUpdate.tsx";
 import Inventory from "./pages/Inventory.tsx";
 import InventoryUpdate from "./pages/InventoryUpdate.tsx";

@@ -5,6 +5,8 @@ import { dev } from "@/constants";
 
 import { positiveInt, nonNegativeInt, totalSum } from "@/schemas";
 
+import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
+
 // TODO: extract all this logic to a hook
 export default function InventoryUpdate() {
     const fetcher = useFetcher();
@@ -68,81 +70,91 @@ export default function InventoryUpdate() {
     }, [noNegativeNum, totalNonZero, totalEqual, difference]);
 
     return (
-        <div className="z-20 fixed top-0 left-0">
-            <Link
-                to={".."}
-                className="fixed top-0 left-0 w-screen h-screen bg-black opacity-60"
-            />
-            <fetcher.Form
-                className="flex flex-col items-center gap-4 z-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-200 p-6 rounded-lg shadow-inner shadow-gray-500"
-                action=""
-                method="patch"
-            >
-                <div className="flex flex-col items-center">
-                    <h1 className="font-bold text-xl">Update Inventory Data</h1>
-                    <p className="text-lg font-semibold">{title}</p>
-                </div>
-                <div className="flex gap-2 justify-between w-full">
-                    <label className="font-semibold">available</label>
-                    <input
-                        type="number"
-                        className="w-1/4 text-center p-[2px] rounded-md shadow-inner shadow-gray-400"
-                        name="available"
-                        value={a}
-                        onChange={(e) => setA(Number(e.currentTarget.value))}
-                    />
-                </div>
-                <div className="flex gap-2 justify-between w-full">
-                    <label className="font-semibold">borrowed</label>
-                    <input
-                        type="number"
-                        className="w-1/4 text-center p-[2px] rounded-md shadow-inner shadow-gray-400"
-                        name="borrowed"
-                        value={b}
-                        onChange={(e) => setB(Number(e.currentTarget.value))}
-                    />
-                </div>
-                <div className="flex gap-2 justify-between w-full">
-                    <label className="font-semibold">total</label>
-                    <input
-                        type="number"
-                        className="w-1/4 text-center p-[2px] rounded-md shadow-inner shadow-gray-400"
-                        name="total"
-                        value={t}
-                        onChange={(e) => setT(Number(e.currentTarget.value))}
-                    />
-                </div>
-                <div className="flex flex-col items-center text-sm  w-full text-red-800">
-                    <p className={totalNonZero ? `invisible` : "visible"}>
-                        total should be greater than zero
-                    </p>
-                    <p className={noNegativeNum ? ` invisible` : "visible"}>
-                        negative numbers is not allowed
-                    </p>
-                    <p className={totalEqual ? ` invisible` : "visible"}>
-                        total should equals to available and borrowed
-                    </p>
-                    <p className={difference === 0 ? `invisible` : "visible"}>
-                        difference {difference}
-                    </p>
-                </div>
-                <div className="flex flex-row gap-8">
-                    <Button
-                        type="submit"
-                        className="bg-green-300 hover:bg-green-400 active:bg-green-400 rounded-md shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-60 px-4 py-1  font-semibold"
-                        loading={fetcher.state === "submitting"}
-                        disabled={disableSubmit}
-                    >
-                        Save
-                    </Button>
-                    <Link
-                        to=".."
-                        className="bg-red-300 hover:bg-red-400 rounded-md shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-60 px-4 py-1  font-semibold"
-                    >
-                        Cancel
-                    </Link>
-                </div>
-            </fetcher.Form>
-        </div>
+        <AlertDialog open={true}>
+            <AlertDialogContent>
+                <fetcher.Form
+                    className="flex flex-col items-center gap-4 bg-slate-200 p-6 rounded-lg shadow-inner shadow-gray-500"
+                    action=""
+                    method="patch"
+                >
+                    <div className="flex flex-col items-center">
+                        <h1 className="font-bold text-xl">
+                            Update Inventory Data
+                        </h1>
+                        <p className="text-lg font-semibold">{title}</p>
+                    </div>
+                    <div className="flex gap-2 justify-between w-full">
+                        <label className="font-semibold">available</label>
+                        <input
+                            type="number"
+                            className="w-1/4 text-center p-[2px] rounded-md shadow-inner shadow-gray-400"
+                            name="available"
+                            value={a}
+                            onChange={(e) =>
+                                setA(Number(e.currentTarget.value))
+                            }
+                        />
+                    </div>
+                    <div className="flex gap-2 justify-between w-full">
+                        <label className="font-semibold">borrowed</label>
+                        <input
+                            type="number"
+                            className="w-1/4 text-center p-[2px] rounded-md shadow-inner shadow-gray-400"
+                            name="borrowed"
+                            value={b}
+                            onChange={(e) =>
+                                setB(Number(e.currentTarget.value))
+                            }
+                        />
+                    </div>
+                    <div className="flex gap-2 justify-between w-full">
+                        <label className="font-semibold">total</label>
+                        <input
+                            type="number"
+                            className="w-1/4 text-center p-[2px] rounded-md shadow-inner shadow-gray-400"
+                            name="total"
+                            value={t}
+                            onChange={(e) =>
+                                setT(Number(e.currentTarget.value))
+                            }
+                        />
+                    </div>
+                    <div className="flex flex-col items-center text-sm  w-full text-red-800">
+                        <p className={totalNonZero ? `invisible` : "visible"}>
+                            total should be greater than zero
+                        </p>
+                        <p className={noNegativeNum ? ` invisible` : "visible"}>
+                            negative numbers is not allowed
+                        </p>
+                        <p className={totalEqual ? ` invisible` : "visible"}>
+                            total should equals to available and borrowed
+                        </p>
+                        <p
+                            className={
+                                difference === 0 ? `invisible` : "visible"
+                            }
+                        >
+                            difference {difference}
+                        </p>
+                    </div>
+                    <div className="flex flex-row gap-8">
+                        <Button
+                            type="submit"
+                            className="bg-green-300 hover:bg-green-400 active:bg-green-400 rounded-md shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-60 px-4 py-1  font-semibold"
+                            loading={fetcher.state === "submitting"}
+                            disabled={disableSubmit}
+                        >
+                            Save
+                        </Button>
+                        <Link
+                            to=".."
+                            className="bg-red-300 hover:bg-red-400 rounded-md shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-60 px-4 py-1  font-semibold"
+                        >
+                            Cancel
+                        </Link>
+                    </div>
+                </fetcher.Form>
+            </AlertDialogContent>
+        </AlertDialog>
     );
 }

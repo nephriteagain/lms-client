@@ -2,17 +2,7 @@ import { useLoaderData, Link } from "react-router-dom";
 
 import { BookData } from "@/schemas";
 
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
 
 export default function Book() {
     const [bookInfo, bookInventory] = useLoaderData() as BookData;
