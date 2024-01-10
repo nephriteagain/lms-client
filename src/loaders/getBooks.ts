@@ -9,17 +9,10 @@ export async function getBooks({
 }): Promise<Book[]> {
     dev.log("getbooks loader");
     const url = new URL(request.url);
-    const title = url.searchParams.get("title");
-    const authors = url.searchParams.get("authors");
-
-    const server = title
-        ? `${constants.server}/books?title=${title}`
-        : authors
-          ? `${constants.server}/books?authors=${authors}`
-          : `${constants.server}/books`;
+    const params = url.toString().split('?').length === 1 ? '' : ('?' + url.toString().split('?')[1])
 
     try {
-        const response = await axios.get(server, {
+        const response = await axios.get(`${constants.server}/books${params}`, {
             withCredentials: true,
         });
         if (response.status === 200) {

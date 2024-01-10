@@ -41,7 +41,7 @@ export default function SearchBar() {
                     className="bg-gray-200 px-2 py-1 text-sm rounded-md shadow-md"
                 />
                 <Button
-                    className="bg-green-300 px-2 rounded-md shadow-md hover:scale-105 hover:bg-green-400 active:bg-green-400 transition-all duration-200"
+                    className="bg-green-300  px-2 rounded-md shadow-md hover:scale-105 hover:bg-green-400 active:bg-green-400 transition-all duration-200"
                     type="submit"
                     disabled={loading}
                     loading={loading}
@@ -55,6 +55,8 @@ export default function SearchBar() {
                 >
                     <option value="title">TITLE</option>
                     <option value="authors">AUTHOR</option>
+                    <option value="_id">ID</option>
+                    <option value="yearPublished" >YEAR PUBLISHED</option>
                 </select>
             </form>
         </div>
