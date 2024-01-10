@@ -14,9 +14,7 @@ export async function deleteMember({ params }: ActionFunctionArgs) {
             throw new Error("missing id");
         }
     
-        const response = await axios.delete(`${constants.server}/members/${id}`, {
-            withCredentials: true,
-        });
+        const response = await axios.delete(`${constants.server}/members/${id}`);
         if (response.status === 200) {
             return redirect("/members");
         }

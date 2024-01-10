@@ -16,10 +16,10 @@ import { useState, useRef, useEffect } from "react";
 import { generateRandomString, getAllChildInputs } from "@/lib/utils";
 import { useFetcher } from "react-router-dom";
 
-import InputList from "../utils/InputList";
-import Button from "../utils/Button";
+import InputList from "@/components/utils/InputList";
+import Button from "@/components/utils/Button";
 
-export default function NewBookEntryBtn() {
+export default function NewBook() {
     const fetcher = useFetcher({ key: "create_book" });
     const [inputList, setInputList] = useState([generateRandomString()]);
 

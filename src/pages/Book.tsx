@@ -2,6 +2,18 @@ import { useLoaderData, Link } from "react-router-dom";
 
 import { BookData } from "@/schemas";
 
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+  } from "@/components/ui/alert-dialog"
+
 export default function Book() {
     const [bookInfo, bookInventory] = useLoaderData() as BookData;
 
@@ -9,8 +21,8 @@ export default function Book() {
     const { available, borrowed, total } = bookInventory;
 
     return (
-        <div className="py-12">
-            <div className="flex flex-col gap-6 p-6 w-[95vw] xs:w-[500px] bg-slate-200 rounded-xl shadow-xl">
+        <AlertDialog open={true}>
+            <AlertDialogContent>
                 <section className="flex flex-col gap-3 p-4 bg-zinc-200 rounded-lg shadow-inner shadow-gray-400">
                     <div className="text-center">
                         <p className="font-bold text-xl">Title</p>
@@ -37,7 +49,6 @@ export default function Book() {
                     <div className="text-center py-4">
                         <Link
                             to={"update"}
-                            state={bookInfo}
                             className="bg-slate-600 hover:bg-slate-700 text-white font-semibold px-3 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-150"
                         >
                             UPDATE
@@ -66,7 +77,7 @@ export default function Book() {
                         back
                     </Link>
                 </div>
-            </div>
-        </div>
+            </AlertDialogContent>
+        </AlertDialog>
     );
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation, useFetcher, Link, useActionData } from "react-router-dom";
+import { useFetcher, Link, useLoaderData } from "react-router-dom";
 import { Book } from "@/schemas";
 
 import { generateRandomString } from "@/lib/utils";
@@ -7,10 +7,21 @@ import { generateRandomString } from "@/lib/utils";
 import InputList from "@/components/utils/InputList";
 import Button from "@/components/utils/Button";
 
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+  } from "@/components/ui/alert-dialog"
+
 export default function BookUpdate() {
     const fetcher = useFetcher();
-    const location = useLocation();
-    const bookToUpdate = location.state as Book;
+    const [bookToUpdate] = useLoaderData() as [Book];    
 
     const { title, authors, yearPublished } = bookToUpdate;
     const [inputList, setInputList] = useState(
@@ -18,11 +29,10 @@ export default function BookUpdate() {
     );
 
     const loading = Boolean(fetcher.state === "submitting");
-    const action = useActionData();
 
     return (
-        <div className="py-12">
-            <div className="w-[95%] xs:w-[500px] bg-slate-300 p-6 rounded-lg shadow-lg">
+        <AlertDialog open={true}>
+            <AlertDialogContent>
                 <fetcher.Form
                     className="flex flex-col gap-8"
                     method="patch"
@@ -78,7 +88,8 @@ export default function BookUpdate() {
                         </Link>
                     </div>
                 </fetcher.Form>
-            </div>
-        </div>
+            </AlertDialogContent>
+        </AlertDialog>
+
     );
 }

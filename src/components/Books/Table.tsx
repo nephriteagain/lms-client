@@ -56,7 +56,7 @@ function BookTableRow({ title, authors, yearPublished, dateAdded, _id }: Book) {
         <TableRow
             tabIndex={5}
             className="hover:bg-slate-300 cursor-pointer"
-            onClick={() => navigate(`books/${_id}`)}
+            onClick={() => navigate(`${_id}`)}
             onKeyUp={(e) => {
                 if (e.key === "Enter") {
                     e.currentTarget.click();

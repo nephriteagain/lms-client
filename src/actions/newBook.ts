@@ -33,9 +33,7 @@ export async function createBook({ request }: { request: Request }) {
     try {
         NewBookSchema.parse(schema);
 
-        const response = await axios.post(`${constants.server}/books`, schema, {
-            withCredentials: true,
-        });
+        const response = await axios.post(`${constants.server}/books`, schema);
     if (response.status === 201) {
         return redirect("/");
     }

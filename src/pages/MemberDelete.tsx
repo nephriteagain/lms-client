@@ -15,8 +15,8 @@ import {
 export default function MemberDelete() {
     const [disableBtn, setDisableBtn] = useState(true);
     const [seconds, setSeconds] = useState(3);
-    const { state } = useLocation();
-    const { name } = state as { name: string };
+    const { state } = useLocation()
+    const { name } = state ?? { name: 'User' } as { name: string };
     const navigate = useNavigate();
     const fetcher = useFetcher();
 

@@ -20,7 +20,10 @@ type AuthContextType = {
     logout(): void;
 };
 
+
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+
+
 
 export function AuthProvider({ children }: { children: ReactNode }) {
     const [userData, setUserData] = useState<User | null>(null);
@@ -36,10 +39,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 {
                     email,
                     password,
-                },
-                {
-                    withCredentials: true,
-                },
+                }
             );
             if (response.status === 200) {
                 setUserData(response.data);
@@ -52,13 +52,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     async function logout() {
         try {
-            await axios.post(
-                `${constants.server}/auth/logout`,
-                {},
-                {
-                    withCredentials: true,
-                },
-            );
+            await axios.post(`${constants.server}/auth/logout`);
             setUserData(null);
         } catch (error) {
             dev.error(error);
@@ -69,9 +63,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const response = await axios.post(
             `${constants.server}/auth/credentials`,
             {},
-            {
-                withCredentials: true,
-            },
+             
         );
         if (response.status === 200) {
             dev.log("login credentials found, logging in");

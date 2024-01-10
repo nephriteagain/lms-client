@@ -58,7 +58,7 @@ export default function Inventory() {
                                 tabIndex={5}
                                 className="hover:bg-slate-300 cursor-pointer"
                                 onClick={() =>
-                                    navigate(`update/${_id}`, { state: item })
+                                    navigate(`update/${_id}`)
                                 }
                             >
                                 <TableCell className="text-left w-8/12 font-medium">

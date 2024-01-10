@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useFetcher, Link } from "react-router-dom";
+import { useFetcher, Link, useLoaderData } from "react-router-dom";
 import Button from "@/components/utils/Button";
 import { dev } from "@/constants";
 
@@ -7,10 +7,10 @@ import { positiveInt, nonNegativeInt, totalSum } from "@/schemas";
 
 // TODO: extract all this logic to a hook
 export default function InventoryUpdate() {
-    const location = useLocation();
     const fetcher = useFetcher();
 
-    const { title, total, borrowed, available } = location.state;
+    // TODO: type this
+    const { title, total, borrowed, available } = useLoaderData() as any
     const [t, setT] = useState<number>(total);
     const [a, setA] = useState<number>(available);
     const [b, setB] = useState<number>(borrowed);

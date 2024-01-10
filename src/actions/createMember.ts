@@ -26,10 +26,7 @@ export async function createMember({ request }: ActionFunctionArgs) {
 
         const response = await axios.post(
             `${constants.server}/members`,
-            newMember,
-            {
-                withCredentials: true,
-            },
+            newMember
         );
         if (response.status === 201) {
             return redirect("/members");

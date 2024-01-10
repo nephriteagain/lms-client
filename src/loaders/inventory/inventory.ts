@@ -8,9 +8,7 @@ export async function getInventory({request}: LoaderFunctionArgs): P<BookInvento
     const params = url.toString().split('?').length === 1 ? '' : ('?' + url.toString().split('?')[1])
 
     try {
-        const response = await axios.get(`${constants.server}/inventory${params}`, {
-            withCredentials: true,
-        });
+        const response = await axios.get(`${constants.server}/inventory${params}`);
 
         const inventory: BookInventory[] = response.data;
 

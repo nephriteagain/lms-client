@@ -12,12 +12,8 @@ export async function getBook({
     dev.log("get book loader");
 
     const [bookRes, bookSupplyRes] = await Promise.all([
-        axios.get(`${constants.server}/books/${params.id}`, {
-            withCredentials: true,
-        }),
-        axios.get(`${constants.server}/inventory/${params.id}`, {
-            withCredentials: true,
-        }),
+        axios.get(`${constants.server}/books/${params.id}`),
+        axios.get(`${constants.server}/inventory/${params.id}`),
     ]);
     const bookInfo = bookRes.data;
     const inventory = bookSupplyRes.data;

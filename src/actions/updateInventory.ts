@@ -20,9 +20,7 @@ export async function updateInventory({ request, params }: ActionFunctionArgs) {
         const response = await axios.patch(
             `${constants.server}/inventory/${params.id}`,
             newInventoryEntry,
-            {
-                withCredentials: true,
-            },
+             
         );
 
         if (response.status === 200) {
