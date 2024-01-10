@@ -35,17 +35,14 @@ export async function updateBook({ request, params }: LoaderFunctionArgs) {
         const response = await axios.patch(
             `${constants.server}/books/${params.id}`,
             schema,
-             
         );
         if (response.status === 200) {
             return redirect(`/books/${params.id}`);
         }
     } catch (error) {
-        dev.error(error)
+        dev.error(error);
     }
     UpdateBookSchema.parse(schema);
-
-    
 
     return null;
 }

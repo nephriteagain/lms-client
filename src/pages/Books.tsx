@@ -10,8 +10,11 @@ export default function Books() {
     return (
         <div>
             <div className="flex justify-center py-12">
-                <Link to='/books/new' className="bg-green-300 hover:bg-green-400 active:bg-green-400 rounded-md hover:rounded-xl shadow-md hover:shadow-xl px-3 py-1 text-xl font-bold hover:scale-105 transition-all duration-200">
-                        Add New Book
+                <Link
+                    to="/books/new"
+                    className="bg-green-300 hover:bg-green-400 active:bg-green-400 rounded-md hover:rounded-xl shadow-md hover:shadow-xl px-3 py-1 text-xl font-bold hover:scale-105 transition-all duration-200"
+                >
+                    Add New Book
                 </Link>
             </div>
             <div className="flex flex-row justify-end">

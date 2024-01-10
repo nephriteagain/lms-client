@@ -50,7 +50,7 @@ export default function Borrows() {
                                             ? `${title.substring(0, 20)}...`
                                             : title}
                                     </TableCell>
-                                    <TableCellCopy item={_id} />                                    
+                                    <TableCellCopy item={_id} />
                                     <TableCell className="w-2/12">
                                         {numberToDateString(date)}
                                     </TableCell>
@@ -59,7 +59,6 @@ export default function Borrows() {
                                         {numberToDateString(promisedReturnDate)}
                                     </TableCell>
                                     <TableCellCopy item={bookId} />
-
                                 </TableRow>
                             );
                         },

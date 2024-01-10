@@ -20,10 +20,7 @@ type AuthContextType = {
     logout(): void;
 };
 
-
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
-
-
 
 export function AuthProvider({ children }: { children: ReactNode }) {
     const [userData, setUserData] = useState<User | null>(null);
@@ -39,7 +36,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 {
                     email,
                     password,
-                }
+                },
             );
             if (response.status === 200) {
                 setUserData(response.data);
@@ -63,7 +60,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const response = await axios.post(
             `${constants.server}/auth/credentials`,
             {},
-             
         );
         if (response.status === 200) {
             dev.log("login credentials found, logging in");

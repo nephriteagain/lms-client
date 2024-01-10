@@ -34,14 +34,12 @@ export async function createBook({ request }: { request: Request }) {
         NewBookSchema.parse(schema);
 
         const response = await axios.post(`${constants.server}/books`, schema);
-    if (response.status === 201) {
-        return redirect("/");
-    }
+        if (response.status === 201) {
+            return redirect("/");
+        }
     } catch (error) {
-        dev.error(error)
+        dev.error(error);
     }
-
-    
 
     return null;
 }

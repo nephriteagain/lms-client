@@ -56,7 +56,7 @@ export default function SearchBar() {
                     <option value="title">TITLE</option>
                     <option value="authors">AUTHOR</option>
                     <option value="_id">ID</option>
-                    <option value="yearPublished" >YEAR PUBLISHED</option>
+                    <option value="yearPublished">YEAR PUBLISHED</option>
                 </select>
             </form>
         </div>

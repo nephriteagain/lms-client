@@ -53,9 +53,7 @@ export default function Members() {
                                 key={_id}
                                 tabIndex={5}
                                 className="hover:bg-slate-300 cursor-pointer"
-                                onClick={() =>
-                                    navigate(`${_id}`)
-                                }
+                                onClick={() => navigate(`${_id}`)}
                             >
                                 <TableCell className="text-left w-4/12 font-medium">
                                     {name}

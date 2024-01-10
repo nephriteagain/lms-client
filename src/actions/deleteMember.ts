@@ -5,7 +5,7 @@ import { sleep } from "@/lib/utils";
 
 // TODO: test this after done making createMember
 export async function deleteMember({ params }: ActionFunctionArgs) {
-    await sleep(2000)
+    await sleep(2000);
     const id = params.id;
     console.log(id);
 
@@ -13,15 +13,16 @@ export async function deleteMember({ params }: ActionFunctionArgs) {
         if (!id) {
             throw new Error("missing id");
         }
-    
-        const response = await axios.delete(`${constants.server}/members/${id}`);
+
+        const response = await axios.delete(
+            `${constants.server}/members/${id}`,
+        );
         if (response.status === 200) {
             return redirect("/members");
         }
     } catch (error) {
-        dev.error(error)
+        dev.error(error);
     }
-    
 
     return null;
 }

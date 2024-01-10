@@ -26,14 +26,14 @@ export async function createMember({ request }: ActionFunctionArgs) {
 
         const response = await axios.post(
             `${constants.server}/members`,
-            newMember
+            newMember,
         );
         if (response.status === 201) {
             return redirect("/members");
         }
     } catch (error) {
-        dev.error(error)
+        dev.error(error);
     }
-    
+
     return null;
 }

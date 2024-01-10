@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 import { AuthProvider } from "./providers/AuthProvider.tsx";
 
-
 import RootLayout from "./layouts/RootLayout.tsx";
 import Login from "./pages/Login.tsx";
 import Books from "./pages/Books.tsx";
@@ -44,11 +43,10 @@ import { getPenalties } from "./loaders/penalty/penalties.ts";
 import { deleteMember } from "./actions/deleteMember.ts";
 import { getMember } from "./loaders/members/member.ts";
 
-
 /**
  * global axios config
  */
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;
 
 const router = createBrowserRouter(
     // TODO: handle each route error independently
@@ -67,13 +65,9 @@ const router = createBrowserRouter(
                     loader={getBook}
                     action={updateBook}
                 />
-                <Route 
-                    path=":id" 
-                    element={<Book />} 
-                    loader={getBook} 
-                />
+                <Route path=":id" element={<Book />} loader={getBook} />
             </Route>
-            
+
             <Route
                 path="inventory"
                 element={<Inventory />}
@@ -106,8 +100,6 @@ const router = createBrowserRouter(
         </Route>,
     ),
 );
-
-
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>

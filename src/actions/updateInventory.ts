@@ -20,15 +20,14 @@ export async function updateInventory({ request, params }: ActionFunctionArgs) {
         const response = await axios.patch(
             `${constants.server}/inventory/${params.id}`,
             newInventoryEntry,
-             
         );
 
         if (response.status === 200) {
             return redirect("/inventory");
         }
     } catch (error) {
-        dev.error(error)
+        dev.error(error);
     }
-    
+
     return null;
 }

@@ -8,7 +8,7 @@ import Button from "./Button";
 const pages = [
     {
         name: "Books",
-        link: "",
+        link: "books",
     },
     {
         name: "Inventory",

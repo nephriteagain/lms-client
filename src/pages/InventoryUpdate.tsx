@@ -10,7 +10,7 @@ export default function InventoryUpdate() {
     const fetcher = useFetcher();
 
     // TODO: type this
-    const { title, total, borrowed, available } = useLoaderData() as any
+    const { title, total, borrowed, available } = useLoaderData() as any;
     const [t, setT] = useState<number>(total);
     const [a, setA] = useState<number>(available);
     const [b, setB] = useState<number>(borrowed);

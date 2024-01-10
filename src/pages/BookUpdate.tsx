@@ -17,11 +17,11 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
     AlertDialogTrigger,
-  } from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog";
 
 export default function BookUpdate() {
     const fetcher = useFetcher();
-    const [bookToUpdate] = useLoaderData() as [Book];    
+    const [bookToUpdate] = useLoaderData() as [Book];
 
     const { title, authors, yearPublished } = bookToUpdate;
     const [inputList, setInputList] = useState(
@@ -90,6 +90,5 @@ export default function BookUpdate() {
                 </fetcher.Form>
             </AlertDialogContent>
         </AlertDialog>
-
     );
 }

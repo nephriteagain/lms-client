@@ -13,7 +13,8 @@ import { IoCopyOutline } from "react-icons/io5";
 import { copyToClipboard } from "@/lib/utils";
 
 export default function Member() {
-    const { _id, name, age, joinDate, approvedBy } = useLoaderData() as MemberType;
+    const { _id, name, age, joinDate, approvedBy } =
+        useLoaderData() as MemberType;
 
     return (
         <AlertDialog open={true}>
@@ -35,7 +36,7 @@ export default function Member() {
                         <span>{_id}</span>
                         <span
                             className="hover:scale-125 p-1 rounded-full shadow-sm active:scale-95 hover:bg-gray-200 active:bg-gray-200 transition-all duration-150"
-                            onClick={(e) => copyToClipboard(e,_id)}
+                            onClick={(e) => copyToClipboard(e, _id)}
                         >
                             <IoCopyOutline />
                         </span>

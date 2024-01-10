@@ -8,28 +8,32 @@ import { cn } from "@/lib/utils";
 
 type SearchBarProps = SelectHTMLAttributes<HTMLSelectElement> & {
     options: {
-        text: string
+        text: string;
         value: string;
     }[];
-    loading?:boolean;
-}
+    loading?: boolean;
+};
 
-export default function SearchBar({options,  className, loading=false, ...props}: SearchBarProps) {
+export default function SearchBar({
+    options,
+    className,
+    loading = false,
+    ...props
+}: SearchBarProps) {
+    const navigate = useNavigate();
 
-    const navigate = useNavigate()
-
-    const selectRef = useRef<HTMLSelectElement>(null)
-    const inputRef = useRef<HTMLInputElement>(null)
+    const selectRef = useRef<HTMLSelectElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     function search(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (loading) return
+        if (loading) return;
         const selectEl = selectRef.current;
         if (!selectEl) return;
         const inputEl = inputRef.current;
         if (!inputEl) return;
         const selectVal = selectEl.value;
-        const searchVal  = inputEl.value;
+        const searchVal = inputEl.value;
 
         try {
             if (!selectVal) {
@@ -42,7 +46,7 @@ export default function SearchBar({options,  className, loading=false, ...props}
     }
 
     return (
-        <div >
+        <div>
             <form
                 onSubmit={search}
                 className="flex flex-row justify-center gap-3"
@@ -63,20 +67,21 @@ export default function SearchBar({options,  className, loading=false, ...props}
                 <select
                     ref={selectRef}
                     defaultValue={options[0].value}
-                    className={cn("bg-gray-300 text-sm px-1 rounded-md shadow-md", className)}
+                    className={cn(
+                        "bg-gray-300 text-sm px-1 rounded-md shadow-md",
+                        className,
+                    )}
                     {...props}
-                >                    
-                    {
-                        options.map(({text, value}) => {
-                            return (
-                                <option key={value} value={value}>
-                                    {text}
-                                </option>
-                            )
-                        })
-                    }
+                >
+                    {options.map(({ text, value }) => {
+                        return (
+                            <option key={value} value={value}>
+                                {text}
+                            </option>
+                        );
+                    })}
                 </select>
             </form>
-        </div>     
-    )
+        </div>
+    );
 }

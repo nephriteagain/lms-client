@@ -1,7 +1,6 @@
 import { useLoaderData, Outlet, useNavigate } from "react-router-dom";
 import type { BookInventory } from "@/schemas";
 
-
 import {
     Table,
     TableBody,
@@ -17,20 +16,18 @@ import SearchBar from "@/components/utils/SearchBar";
 
 const inventoryOptions = [
     {
-        value: 'title',
-        text: 'TITLE'
+        value: "title",
+        text: "TITLE",
     },
     {
-        value: '_id',
-        text: 'ID'
+        value: "_id",
+        text: "ID",
     },
-    
-]
+];
 
 export default function Inventory() {
     const inventory = useLoaderData() as BookInventory[];
     const navigate = useNavigate();
-    
 
     return (
         <div className="py-12 flex flex-col items-center gap-4">
@@ -57,9 +54,7 @@ export default function Inventory() {
                                 key={_id}
                                 tabIndex={5}
                                 className="hover:bg-slate-300 cursor-pointer"
-                                onClick={() =>
-                                    navigate(`update/${_id}`)
-                                }
+                                onClick={() => navigate(`update/${_id}`)}
                             >
                                 <TableCell className="text-left w-8/12 font-medium">
                                     {title}

@@ -23,15 +23,13 @@ export default function Returns() {
                 <TableCaption>A record of book returns.</TableCaption>
                 <TableHeader>
                     <TableRow>
-                        <TableHead >id</TableHead>
-                        <TableHead >title</TableHead>
-                        <TableHead >book id</TableHead>
-                        <TableHead >date borrowed</TableHead>
-                        <TableHead >borrower id</TableHead>
-                        <TableHead >
-                            promised return date
-                        </TableHead>
-                        <TableHead >approved by</TableHead>
+                        <TableHead>id</TableHead>
+                        <TableHead>title</TableHead>
+                        <TableHead>book id</TableHead>
+                        <TableHead>date borrowed</TableHead>
+                        <TableHead>borrower id</TableHead>
+                        <TableHead>promised return date</TableHead>
+                        <TableHead>approved by</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -49,8 +47,8 @@ export default function Returns() {
                                     <TableCellCopy item={_id} />
                                     {/* TODO: add title schema for returns */}
                                     <TableCell>title</TableCell>
-                                    <TableCellCopy item={bookId} />                                   
-                                    <TableCell >
+                                    <TableCellCopy item={bookId} />
+                                    <TableCell>
                                         {numberToDateString(borrowDate)}
                                     </TableCell>
                                     <TableCellCopy item={borrower} />

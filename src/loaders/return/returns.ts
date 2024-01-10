@@ -3,9 +3,12 @@ import { constants, dev } from "@/constants";
 import type { P, Return } from "@/schemas";
 import { LoaderFunctionArgs } from "react-router-dom";
 
-export async function getReturns({request}:LoaderFunctionArgs): P<Return[]> {
+export async function getReturns({ request }: LoaderFunctionArgs): P<Return[]> {
     const url = new URL(request.url);
-    const params = url.toString().split('?').length === 1 ? '' : ('?' + url.toString().split('?')[1])
+    const params =
+        url.toString().split("?").length === 1
+            ? ""
+            : "?" + url.toString().split("?")[1];
     try {
         const response = await axios.get(`${constants.server}/return${params}`);
 
