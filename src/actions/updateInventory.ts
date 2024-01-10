@@ -1,5 +1,5 @@
 import { ActionFunctionArgs, redirect } from "react-router-dom";
-import { constants } from "@/constants";
+import { constants, dev } from "@/constants";
 import { sleep } from "@/lib/utils";
 import { UpdateInventorySchema } from "@/schemas";
 import axios from "axios";
@@ -13,19 +13,24 @@ export async function updateInventory({ request, params }: ActionFunctionArgs) {
     for (const k in formObj) {
         newInventoryEntry[k] = parseInt(formObj[k]);
     }
-    UpdateInventorySchema.parse(newInventoryEntry);
 
-    const response = await axios.patch(
-        `${constants.server}/inventory/${params.id}`,
-        newInventoryEntry,
-        {
-            withCredentials: true,
-        },
-    );
+    try {
+        UpdateInventorySchema.parse(newInventoryEntry);
 
-    if (response.status === 200) {
-        return redirect("/inventory");
+        const response = await axios.patch(
+            `${constants.server}/inventory/${params.id}`,
+            newInventoryEntry,
+            {
+                withCredentials: true,
+            },
+        );
+
+        if (response.status === 200) {
+            return redirect("/inventory");
+        }
+    } catch (error) {
+        dev.error(error)
     }
-
+    
     return null;
 }

@@ -7,7 +7,6 @@ export async function getBooks({
 }: {
     request: Request;
 }): Promise<Book[]> {
-    dev.log("getbooks loader");
     const url = new URL(request.url);
     const params = url.toString().split('?').length === 1 ? '' : ('?' + url.toString().split('?')[1])
 

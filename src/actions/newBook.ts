@@ -1,5 +1,5 @@
 import { NewBookSchema, NewBook } from "@/schemas";
-import { constants } from "@/constants";
+import { constants, dev } from "@/constants";
 import { redirect } from "react-router-dom";
 
 import { sleep } from "@/lib/utils";
@@ -29,17 +29,21 @@ export async function createBook({ request }: { request: Request }) {
             newBookEntry[k] = parseInt(newBookEntry[k]);
         }
     }
-
     const schema = newBookEntry as NewBook;
-    NewBookSchema.parse(schema);
+    try {
+        NewBookSchema.parse(schema);
 
-    const response = await axios.post(`${constants.server}/books`, schema, {
-        withCredentials: true,
-    });
-
+        const response = await axios.post(`${constants.server}/books`, schema, {
+            withCredentials: true,
+        });
     if (response.status === 201) {
         return redirect("/");
     }
+    } catch (error) {
+        dev.error(error)
+    }
+
+    
 
     return null;
 }

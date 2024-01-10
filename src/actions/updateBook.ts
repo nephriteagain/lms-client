@@ -1,6 +1,6 @@
 import { LoaderFunctionArgs, redirect } from "react-router-dom";
 import { sleep } from "@/lib/utils";
-import { constants } from "@/constants";
+import { constants, dev } from "@/constants";
 
 import { UpdateBookSchema, UpdateBook } from "@/schemas";
 import axios from "axios";
@@ -31,18 +31,23 @@ export async function updateBook({ request, params }: LoaderFunctionArgs) {
     }
 
     const schema = newBookEntry as UpdateBook;
+    try {
+        const response = await axios.patch(
+            `${constants.server}/books/${params.id}`,
+            schema,
+            {
+                withCredentials: true,
+            },
+        );
+        if (response.status === 200) {
+            return redirect(`/books/${params.id}`);
+        }
+    } catch (error) {
+        dev.error(error)
+    }
     UpdateBookSchema.parse(schema);
 
-    const response = await axios.patch(
-        `${constants.server}/books/${params.id}`,
-        schema,
-        {
-            withCredentials: true,
-        },
-    );
-    if (response.status === 200) {
-        return redirect(`/books/${params.id}`);
-    }
+    
 
     return null;
 }

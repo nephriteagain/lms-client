@@ -1,6 +1,6 @@
 import { ActionFunctionArgs, redirect } from "react-router-dom";
 import { NewMember, NewMemberSchema } from "@/schemas";
-import { constants } from "@/constants";
+import { constants, dev } from "@/constants";
 import { sleep } from "@/lib/utils";
 import axios from "axios";
 
@@ -21,18 +21,22 @@ export async function createMember({ request }: ActionFunctionArgs) {
             newMember[k] = formObj[k];
         }
     }
+    try {
+        NewMemberSchema.parse(newMember);
 
-    NewMemberSchema.parse(newMember);
-
-    const response = await axios.post(
-        `${constants.server}/members`,
-        newMember,
-        {
-            withCredentials: true,
-        },
-    );
-    if (response.status === 201) {
-        return redirect("/members");
+        const response = await axios.post(
+            `${constants.server}/members`,
+            newMember,
+            {
+                withCredentials: true,
+            },
+        );
+        if (response.status === 201) {
+            return redirect("/members");
+        }
+    } catch (error) {
+        dev.error(error)
     }
+    
     return null;
 }
