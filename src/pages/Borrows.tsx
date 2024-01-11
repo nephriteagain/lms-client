@@ -19,27 +19,26 @@ import { Option } from "@/schemas";
 
 const borrowOptions = [
     {
-        value: '_id',
-        text: 'ID'
+        value: "_id",
+        text: "ID",
     },
     {
-        value: 'title',
-        text: 'TITLE'
+        value: "title",
+        text: "TITLE",
     },
     {
-       value: 'borrower',
-       text: 'BORROWER ID' 
+        value: "borrower",
+        text: "BORROWER ID",
     },
     {
-        value: 'approvedBy',
-        text: 'APPROVED BY'
+        value: "approvedBy",
+        text: "APPROVED BY",
     },
     {
-        value: 'bookId',
-        text: 'BOOK ID'
-    }
-] as const satisfies Option[]
-
+        value: "bookId",
+        text: "BOOK ID",
+    },
+] as const satisfies Option[];
 
 export default function Borrows() {
     const borrows = useLoaderData() as Borrow[];

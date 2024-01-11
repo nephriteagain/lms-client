@@ -18,11 +18,10 @@ import {
 export default function MemberCreate() {
     const [name, setName] = useState("");
     const [age, setAge] = useState(0);
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState("");
     const [disabled, setDisabled] = useState(true);
     const navigate = useNavigate();
     const fetcher = useFetcher();
-
     useEffect(() => {
         try {
             NewMemberSchema.parse({ name, age, email });
@@ -30,7 +29,7 @@ export default function MemberCreate() {
         } catch (error) {
             setDisabled(true);
         }
-    }, [name, age]);
+    }, [name, age, email]);
 
     return (
         <AlertDialog open={true}>

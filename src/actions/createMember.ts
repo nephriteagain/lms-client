@@ -20,8 +20,8 @@ export async function createMember({ request }: ActionFunctionArgs) {
         if (k === "name") {
             newMember[k] = formObj[k];
         }
-        if (k === 'email') {
-            newMember[k] = formObj[k]
+        if (k === "email") {
+            newMember[k] = formObj[k];
         }
     }
     try {

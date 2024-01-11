@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { z } from "zod";
 
 /** @description shorthand for Promise*/
@@ -95,6 +96,7 @@ function isSumEqTotal(data: unknown) {
 export type Member = {
     _id: string;
     name: string;
+    email: string;
     age: string;
     joinDate: string;
     approvedBy: string;
@@ -145,4 +147,11 @@ export type User = {
 export type Option = {
     value: string;
     text: string;
-}
+};
+
+export type BookSearchResults = {
+    _id: string;
+    title: string;
+};
+
+export type ReactDispatch<T> = Dispatch<SetStateAction<T>>

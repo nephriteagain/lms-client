@@ -73,7 +73,7 @@ const router = createBrowserRouter(
                 path="inventory"
                 element={<Inventory />}
                 loader={getInventory}
-            >   
+            >
                 <Route path="new" element={<NewBook />} />
                 <Route
                     path="update/:id"
@@ -97,7 +97,7 @@ const router = createBrowserRouter(
             </Route>
             <Route path="borrow" element={<Borrows />} loader={getBorrows}>
                 <Route path="new" element={<BorrowNew />} />
-            </Route> 
+            </Route>
             <Route path="return" element={<Returns />} loader={getReturns} />
             <Route path="penalty" element={<Penalty />} loader={getPenalties} />
             <Route path="login" element={<Login />} />

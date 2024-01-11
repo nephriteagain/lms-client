@@ -13,7 +13,7 @@ import { IoCopyOutline } from "react-icons/io5";
 import { copyToClipboard } from "@/lib/utils";
 
 export default function Member() {
-    const { _id, name, age, joinDate, approvedBy } =
+    const { _id, name, age, joinDate, approvedBy, email } =
         useLoaderData() as MemberType;
 
     return (
@@ -24,13 +24,24 @@ export default function Member() {
                 </AlertDialogHeader>
 
                 <div className="flex flex-col gap-2">
-                    <div className="font-semibold text-lg">{`${name}, ${age}, member since ${new Date(
-                        joinDate,
-                    )
-                        .toDateString()
-                        .split(" ")
-                        .splice(1)
-                        .join(", ")}`}</div>
+                    <div className="font-semibold text-lg">
+                        <p>
+                            {`${name}, ${age}, member since ${new Date(joinDate)
+                                .toDateString()
+                                .split(" ")
+                                .splice(1)
+                                .join(", ")}`}
+                        </p>
+                        <p className="flex flex-row gap-2">
+                            <span>{email}</span>
+                            <span
+                                className="hover:scale-125 p-1 rounded-full shadow-sm active:scale-95 hover:bg-gray-200 active:bg-gray-200 transition-all duration-150"
+                                onClick={(e) => copyToClipboard(e, email)}
+                            >
+                                <IoCopyOutline />
+                            </span>
+                        </p>
+                    </div>
                     <div className="flex flex-row gap-2 items-center">
                         <span>id:</span>
                         <span>{_id}</span>
