@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useFetcher } from "react-router-dom";
 import Button from "@/components/utils/Button";
 
-import TitleCombobox from "@/components/Borrow/TitleCombobox";
 
 import {
     AlertDialog,
@@ -11,8 +10,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { AlertDialogDescription } from "@radix-ui/react-alert-dialog";
 import { BookSearchResults, MemberSearchResults } from "@/schemas";
-import MemberCombobox from "@/components/Borrow/MemberCombobox";
 import DatePicker from "@/components/Borrow/Datepicker";
+import ComboBox from "@/components/utils/ComboBox";
 
 export default function BorrowNew() {
     const fetcher = useFetcher({ key: "borrow_create" });
@@ -52,21 +51,30 @@ export default function BorrowNew() {
                     className="flex flex-col items-start gap-8"
                     action=""
                     method="post"
-                >
+                >                    
                     <div className="flex flex-col gap-1 font-semibold">
                         <p>title</p>
-                        <TitleCombobox
-                            selectedBook={selectedBook}
-                            setSelectedBook={setSelectedBook}
+                        <ComboBox
+                        setSelected={setSelectedBook}
+                        to="books"
+                        searchCriteria="title"
+                        searchPlaceholder="Search Books..."
+                        selectPlaceholder="Select a Book"
+                        notFoundText="No Books found."
+
                         />
                     </div>
                     <div className="flex flex-col gap-1 font-semibold">
                         <p>member</p>
-                        <MemberCombobox
-                            selectedMember={selectedMember}
-                            setSelectedMember={setSelectedMember}
+                        <ComboBox
+                            setSelected={setSelectedMember}
+                            to="members"
+                            searchCriteria="name"
+                            searchPlaceholder="Search Members..."
+                            selectPlaceholder="Seleect a Member"
+                            notFoundText="No Members found."
                         />
-                    </div>
+                    </div>                   
                     <div className="flex flex-col gap-1 font-semibold">
                         <p>date</p>
                         <DatePicker date={date} setDate={setDate} />
@@ -74,7 +82,7 @@ export default function BorrowNew() {
                             {Boolean(date && date.getTime() <= Date.now()) &&
                                 "Please choose a future date."}
                         </p>
-                    </div>
+                    </div>                    
                     <div>
                         <Button
                             type="submit"
