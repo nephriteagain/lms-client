@@ -14,7 +14,7 @@ import RootLayout from "./layouts/RootLayout.tsx";
 import Login from "./pages/Login.tsx";
 import Books from "./pages/Books.tsx";
 import Book from "./pages/Book.tsx";
-import NewBook from "./pages/BookNew.tsx";
+import BookNew from "./pages/BookNew.tsx";
 import BookUpdate from "./pages/BookUpdate.tsx";
 import Inventory from "./pages/Inventory.tsx";
 import InventoryUpdate from "./pages/InventoryUpdate.tsx";
@@ -36,7 +36,7 @@ import { getMembers } from "./loaders/members/members.ts";
 import { getBorrows } from "./loaders/borrow/borrows.ts";
 import { getReturns } from "./loaders/return/returns.ts";
 
-import { createBook } from "./actions/newBook.ts";
+import { newBook } from "./actions/newBook.ts";
 import { updateBook } from "./actions/updateBook.ts";
 import { updateInventory } from "./actions/updateInventory.ts";
 import { createMember } from "./actions/newMember.ts";
@@ -54,13 +54,8 @@ const router = createBrowserRouter(
     // TODO: handle each route error independently
     createRoutesFromElements(
         <Route path="" element={<RootLayout />} errorElement={<Error />}>
-            <Route
-                path="books"
-                element={<Books />}
-                loader={getBooks}
-                action={createBook}
-            >
-                <Route path="new" element={<NewBook />} />
+            <Route path="books" element={<Books />} loader={getBooks}>
+                <Route path="new" element={<BookNew />} action={newBook} />
                 <Route
                     path=":id/update"
                     element={<BookUpdate />}
@@ -75,7 +70,7 @@ const router = createBrowserRouter(
                 element={<Inventory />}
                 loader={getInventory}
             >
-                <Route path="new" element={<NewBook />} />
+                <Route path="new" element={<BookNew />} action={newBook} />
                 <Route
                     path="update/:id"
                     element={<InventoryUpdate />}

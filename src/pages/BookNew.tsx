@@ -13,7 +13,7 @@ import { useFetcher } from "react-router-dom";
 import InputList from "@/components/utils/InputList";
 import Button from "@/components/utils/Button";
 
-export default function NewBook() {
+export default function BookNew() {
     const fetcher = useFetcher({ key: "book_create" });
     const [inputList, setInputList] = useState([generateRandomString()]);
 
@@ -78,6 +78,7 @@ export default function NewBook() {
                     </div>
                     <AlertDialogFooter className="pt-8">
                         <Button
+                            type="submit"
                             className="bg-green-300 hover:bg-green-400 active:bg-green-400 rounded-lg hover:rounded-xl px-4 py-1 text-xl font-bold shadow-lg hover:shadow-xl transition-all duration-150"
                             disabled={fetcher.state === "submitting"}
                             loading={fetcher.state === "submitting"}

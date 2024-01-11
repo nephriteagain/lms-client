@@ -4,9 +4,8 @@ import { redirect } from "react-router-dom";
 
 import { sleep } from "@/lib/utils";
 import axios from "axios";
-export async function createBook({ request }: { request: Request }) {
-    await sleep(200);
-
+export async function newBook({ request }: { request: Request }) {
+    await sleep(2000);
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
 
@@ -35,7 +34,11 @@ export async function createBook({ request }: { request: Request }) {
 
         const response = await axios.post(`${constants.server}/books`, schema);
         if (response.status === 201) {
-            return redirect("/");
+            const path = new URL(request.url).pathname;
+
+            return redirect(
+                `${path.startsWith("/books") ? "/books" : "/inventory"}`,
+            );
         }
     } catch (error) {
         dev.error(error);

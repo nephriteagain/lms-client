@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -53,9 +51,7 @@ export default function TitleCombobox({
                         className="w-[200px] justify-between"
                     >
                         {value
-                            ? books.find(
-                                  (b) => b.title === value || b._id === value,
-                              )?.title
+                            ? books.find((b) => b.title === value)?.title
                             : "Select a Book..."}
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
