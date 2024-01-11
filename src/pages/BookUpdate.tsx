@@ -10,7 +10,7 @@ import Button from "@/components/utils/Button";
 import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
 
 export default function BookUpdate() {
-    const fetcher = useFetcher();
+    const fetcher = useFetcher({ key: "book_update" });
     const [bookToUpdate] = useLoaderData() as [Book];
 
     const { title, authors, yearPublished } = bookToUpdate;

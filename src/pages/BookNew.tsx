@@ -14,7 +14,7 @@ import InputList from "@/components/utils/InputList";
 import Button from "@/components/utils/Button";
 
 export default function NewBook() {
-    const fetcher = useFetcher({ key: "create_book" });
+    const fetcher = useFetcher({ key: "book_create" });
     const [inputList, setInputList] = useState([generateRandomString()]);
 
     const formRef = useRef<HTMLFormElement>(null);

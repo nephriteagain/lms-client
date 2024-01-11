@@ -39,10 +39,11 @@ import { getReturns } from "./loaders/return/returns.ts";
 import { createBook } from "./actions/newBook.ts";
 import { updateBook } from "./actions/updateBook.ts";
 import { updateInventory } from "./actions/updateInventory.ts";
-import { createMember } from "./actions/createMember.ts";
+import { createMember } from "./actions/newMember.ts";
 import { getPenalties } from "./loaders/penalty/penalties.ts";
 import { deleteMember } from "./actions/deleteMember.ts";
 import { getMember } from "./loaders/members/member.ts";
+import { newBorrow } from "./actions/newBorrow.ts";
 
 /**
  * global axios config
@@ -96,7 +97,7 @@ const router = createBrowserRouter(
                 <Route path=":id" element={<Member />} loader={getMember} />
             </Route>
             <Route path="borrow" element={<Borrows />} loader={getBorrows}>
-                <Route path="new" element={<BorrowNew />} />
+                <Route path="new" element={<BorrowNew />} action={newBorrow} />
             </Route>
             <Route path="return" element={<Returns />} loader={getReturns} />
             <Route path="penalty" element={<Penalty />} loader={getPenalties} />

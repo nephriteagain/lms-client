@@ -28,7 +28,7 @@ export default forwardRef(function Button(
         <button
             ref={ref}
             className={cn(
-                "relative disabled:opacity-60 active:scale-95",
+                "bg-green-300 px-2 py-1 rounded-lg  relative disabled:opacity-60 hover:scale-105 active:scale-95 transition-all duration-150",
                 className,
             )}
             // if document loading, auto disable, used to to prevent multiple fetch

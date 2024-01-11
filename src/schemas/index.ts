@@ -154,4 +154,28 @@ export type BookSearchResults = {
     title: string;
 };
 
-export type ReactDispatch<T> = Dispatch<SetStateAction<T>>
+function timeChecker(value: unknown) {
+    const now = Date.now() - 1;
+    return (
+        typeof value === "number" &&
+        value > 0 &&
+        Math.floor(value) === value &&
+        value > now
+    );
+}
+
+export const NewBorrowSchema = z
+    .object({
+        bookId: z.string().min(20),
+        borrower: z.string().min(20),
+        promisedReturnDate: z.custom<typeof timeChecker>(timeChecker),
+    })
+    .required();
+
+export type MemberSearchResults = {
+    _id: string;
+    name: string;
+    email: string;
+};
+
+export type ReactDispatch<T> = Dispatch<SetStateAction<T>>;

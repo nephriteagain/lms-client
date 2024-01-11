@@ -18,85 +18,89 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 
-
-
 import { useAxiosGet } from "@/hooks/useAxios";
 
-import { BookSearchResults, ReactDispatch } from "@/schemas";
+import { ReactDispatch, MemberSearchResults } from "@/schemas";
 import { constants } from "@/constants";
 
+type MemberComboBox = {
+    selectedMember: MemberSearchResults | null;
+    setSelectedMember: ReactDispatch<MemberSearchResults | null>;
+};
 
-
-
-export default function MemberCombobox({selectedMember, setSelectedMember}) {
+export default function MemberCombobox({
+    selectedMember,
+    setSelectedMember,
+}: MemberComboBox) {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("");
     const [query, setQuery] = useState("");
 
-    const books = useAxiosGet<BookSearchResults[]>(
-        `${constants.server}/books/search?q=${query}`,
+    const members = useAxiosGet<MemberSearchResults[]>(
+        `${constants.server}/members/search?q=${query}`,
         [],
     );
-
 
     return (
         <div>
             <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                     <Button
+                        type="button"
                         variant="outline"
                         role="combobox"
                         aria-expanded={open}
                         className="w-[200px] justify-between"
                     >
                         {value
-                            ? books.find(
-                                  (b) => b.title === value || b._id === value,
-                              )?.title
-                            : "Select a Book..."}
+                            ? members.find((m) => m.name === value)?.name
+                            : "Select a Member..."}
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-[200px] p-0">
                     <Command>
                         <CommandInput
-                            placeholder="Search Books..."
+                            placeholder="Search Members..."
                             onChangeCapture={(e) =>
                                 setQuery(e.currentTarget.value)
                             }
                         />
-                        <CommandEmpty>No Books found.</CommandEmpty>
+                        <CommandEmpty>No Members found.</CommandEmpty>
                         <CommandGroup>
-                            {books.map((b) => (
+                            {members.map((m) => (
                                 <CommandItem
-                                    key={b._id}
-                                    value={b.title}
+                                    key={m._id}
+                                    value={m.name}
                                     onSelect={(currentValue) => {
                                         setValue(
                                             currentValue === value
                                                 ? ""
                                                 : currentValue,
                                         );
-                                        const book = books.find(b => b.title === currentValue) ?? null;
-                                        setSelectedBook(book)
+                                        const member =
+                                            members.find(
+                                                (m) => m.name === currentValue,
+                                            ) ?? null;
+                                        setSelectedMember(member);
                                         setOpen(false);
                                     }}
                                 >
                                     <Check
                                         className={cn(
                                             "mr-2 h-4 w-4",
-                                            value === b.title
+                                            value === m.name
                                                 ? "opacity-100"
                                                 : "opacity-0",
                                         )}
                                     />
-                                    {b.title}
+                                    {m.name}
                                 </CommandItem>
                             ))}
                         </CommandGroup>
                     </Command>
                 </PopoverContent>
-            </Popover>            
+            </Popover>
         </div>
     );
 }

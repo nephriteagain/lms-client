@@ -18,19 +18,20 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 
-
-
 import { useAxiosGet } from "@/hooks/useAxios";
 
 import { BookSearchResults, ReactDispatch } from "@/schemas";
 import { constants } from "@/constants";
 
 type TitleComboboxType = {
-    selectedBook: BookSearchResults|null;
-    setSelectedBook: ReactDispatch<BookSearchResults|null>
-}
+    selectedBook: BookSearchResults | null;
+    setSelectedBook: ReactDispatch<BookSearchResults | null>;
+};
 
-export default function TitleCombobox({selectedBook, setSelectedBook}:TitleComboboxType) {
+export default function TitleCombobox({
+    selectedBook,
+    setSelectedBook,
+}: TitleComboboxType) {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("");
     const [query, setQuery] = useState("");
@@ -40,12 +41,12 @@ export default function TitleCombobox({selectedBook, setSelectedBook}:TitleCombo
         [],
     );
 
-
     return (
         <div>
             <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                     <Button
+                        type="button"
                         variant="outline"
                         role="combobox"
                         aria-expanded={open}
@@ -79,8 +80,11 @@ export default function TitleCombobox({selectedBook, setSelectedBook}:TitleCombo
                                                 ? ""
                                                 : currentValue,
                                         );
-                                        const book = books.find(b => b.title === currentValue) ?? null;
-                                        setSelectedBook(book)
+                                        const book =
+                                            books.find(
+                                                (b) => b.title === currentValue,
+                                            ) ?? null;
+                                        setSelectedBook(book);
                                         setOpen(false);
                                     }}
                                 >
@@ -98,7 +102,7 @@ export default function TitleCombobox({selectedBook, setSelectedBook}:TitleCombo
                         </CommandGroup>
                     </Command>
                 </PopoverContent>
-            </Popover>            
+            </Popover>
         </div>
     );
 }

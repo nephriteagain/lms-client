@@ -18,7 +18,7 @@ export default function MemberDelete() {
     const { state } = useLocation();
     const { name } = state ?? ({ name: "User" } as { name: string });
     const navigate = useNavigate();
-    const fetcher = useFetcher();
+    const fetcher = useFetcher({ key: "member_delete" });
 
     useEffect(() => {
         if (seconds === 0) {

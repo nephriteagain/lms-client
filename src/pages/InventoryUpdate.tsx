@@ -9,7 +9,7 @@ import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
 
 // TODO: extract all this logic to a hook
 export default function InventoryUpdate() {
-    const fetcher = useFetcher();
+    const fetcher = useFetcher({ key: "inventory_update" });
 
     // TODO: type this
     const { title, total, borrowed, available } = useLoaderData() as any;

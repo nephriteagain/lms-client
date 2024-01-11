@@ -21,7 +21,7 @@ export default function MemberCreate() {
     const [email, setEmail] = useState("");
     const [disabled, setDisabled] = useState(true);
     const navigate = useNavigate();
-    const fetcher = useFetcher();
+    const fetcher = useFetcher({ key: "member_create" });
     useEffect(() => {
         try {
             NewMemberSchema.parse({ name, age, email });
