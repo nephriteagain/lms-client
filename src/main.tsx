@@ -22,6 +22,7 @@ import Members from "./pages/Members.tsx";
 import MemberDelete from "./pages/MemberDelete.tsx";
 import MemberCreate from "./pages/MemberCreate.tsx";
 import Borrows from "./pages/Borrows.tsx";
+import BorrowNew from "./pages/BorrowNew.tsx";
 import Returns from "./pages/Returns.tsx";
 import Member from "./pages/Member.tsx";
 import Penalty from "./pages/Penalty.tsx";
@@ -72,7 +73,8 @@ const router = createBrowserRouter(
                 path="inventory"
                 element={<Inventory />}
                 loader={getInventory}
-            >
+            >   
+                <Route path="new" element={<NewBook />} />
                 <Route
                     path="update/:id"
                     element={<InventoryUpdate />}
@@ -93,7 +95,9 @@ const router = createBrowserRouter(
                 />
                 <Route path=":id" element={<Member />} loader={getMember} />
             </Route>
-            <Route path="borrow" element={<Borrows />} loader={getBorrows} />
+            <Route path="borrow" element={<Borrows />} loader={getBorrows}>
+                <Route path="new" element={<BorrowNew />} />
+            </Route> 
             <Route path="return" element={<Returns />} loader={getReturns} />
             <Route path="penalty" element={<Penalty />} loader={getPenalties} />
             <Route path="login" element={<Login />} />

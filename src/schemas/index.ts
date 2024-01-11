@@ -103,6 +103,7 @@ export type Member = {
 export const NewMemberSchema = z.object({
     name: z.string().min(1),
     age: z.number().int().positive().max(150).min(6),
+    email: z.string().email(),
 });
 
 export type NewMember = z.infer<typeof NewMemberSchema>;
@@ -140,3 +141,8 @@ export type User = {
     joinDate: number;
     _id: string;
 };
+
+export type Option = {
+    value: string;
+    text: string;
+}

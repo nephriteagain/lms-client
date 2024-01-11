@@ -26,9 +26,9 @@ export default function Members() {
             <div className="pb-8 flex justify-center">
                 <Link
                     to="create"
-                    className="bg-green-300 px-4 py-2 font-bold rounded-lg hover:rounded-xl active:rounded-xl shadow-lg hover:shadow-xl active:shadow-xl hover:scale-105 active:scale-95 transition-all duration-150"
+                    className="text-xl bg-green-300 px-4 py-2 font-bold rounded-lg hover:rounded-xl active:rounded-xl shadow-lg hover:shadow-xl active:shadow-xl hover:scale-105 active:scale-95 transition-all duration-150"
                 >
-                    Add New Member
+                    New Member
                 </Link>
             </div>
             <Table className="bg-slate-100 rounded-xl shadow-lg w-[95%] xs:w-[500px] sm:w-[600px] md:w-[700px] overflow-hidden">

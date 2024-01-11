@@ -9,16 +9,54 @@ import {
 } from "@/components/ui/table";
 import { Borrow } from "@/schemas";
 
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link, Outlet } from "react-router-dom";
 
 import { numberToDateString } from "@/lib/utils";
 import TableCellCopy from "@/components/utils/TableCellCopy";
+import SearchBar from "@/components/utils/SearchBar";
+
+import { Option } from "@/schemas";
+
+const borrowOptions = [
+    {
+        value: '_id',
+        text: 'ID'
+    },
+    {
+        value: 'title',
+        text: 'TITLE'
+    },
+    {
+       value: 'borrower',
+       text: 'BORROWER ID' 
+    },
+    {
+        value: 'approvedBy',
+        text: 'APPROVED BY'
+    },
+    {
+        value: 'bookId',
+        text: 'BOOK ID'
+    }
+] as const satisfies Option[]
+
 
 export default function Borrows() {
     const borrows = useLoaderData() as Borrow[];
 
     return (
-        <div className="py-12">
+        <div className="py-12 flex flex-col items-center gap-4">
+            <div className="pb-10">
+                <Link
+                    to="new"
+                    className="bg-green-300 hover:bg-green-400 active:bg-green-400 rounded-md hover:rounded-xl shadow-md hover:shadow-xl px-3 py-1 text-xl font-bold hover:scale-105 active:scale-95 transition-all duration-200"
+                >
+                    New Borrow Entry
+                </Link>
+            </div>
+            <div className="w-full flex flex-row justify-end">
+                <SearchBar options={borrowOptions} />
+            </div>
             <Table className="w-screen xs:w-[576px]">
                 <TableCaption>A record of borrowed books.</TableCaption>
                 <TableHeader>
@@ -65,6 +103,7 @@ export default function Borrows() {
                     )}
                 </TableBody>
             </Table>
+            <Outlet />
         </div>
     );
 }

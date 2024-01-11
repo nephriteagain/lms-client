@@ -1,5 +1,5 @@
-import { useLoaderData, Outlet, useNavigate } from "react-router-dom";
-import type { BookInventory } from "@/schemas";
+import { useLoaderData, Outlet, useNavigate, Link } from "react-router-dom";
+import type { BookInventory, Option } from "@/schemas";
 
 import {
     Table,
@@ -23,7 +23,7 @@ const inventoryOptions = [
         value: "_id",
         text: "ID",
     },
-];
+] as const satisfies Option[];
 
 export default function Inventory() {
     const inventory = useLoaderData() as BookInventory[];
@@ -31,6 +31,14 @@ export default function Inventory() {
 
     return (
         <div className="py-12 flex flex-col items-center gap-4">
+            <div className="pb-10">
+                <Link
+                    to="new"
+                    className="bg-green-300 hover:bg-green-400 active:bg-green-400 rounded-md hover:rounded-xl shadow-md hover:shadow-xl px-3 py-1 text-xl font-bold hover:scale-105 active:scale-95 transition-all duration-200"
+                >
+                    New Inventory
+                </Link>
+            </div>
             <div className="w-full flex flex-row justify-end">
                 <SearchBar options={inventoryOptions} />
             </div>

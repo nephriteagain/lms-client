@@ -18,13 +18,14 @@ import {
 export default function MemberCreate() {
     const [name, setName] = useState("");
     const [age, setAge] = useState(0);
+    const [email, setEmail] = useState('')
     const [disabled, setDisabled] = useState(true);
     const navigate = useNavigate();
     const fetcher = useFetcher();
 
     useEffect(() => {
         try {
-            NewMemberSchema.parse({ name, age });
+            NewMemberSchema.parse({ name, age, email });
             setDisabled(false);
         } catch (error) {
             setDisabled(true);
@@ -67,6 +68,21 @@ export default function MemberCreate() {
                                 value={age}
                                 onChange={(e) =>
                                     setAge(Number(e.currentTarget.value))
+                                }
+                            />
+                        </div>
+                        <div className="flex flex-row gap-2 justify-between items-center">
+                            <label htmlFor="email" className="font-semibold">
+                                email
+                            </label>
+                            <input
+                                type="text"
+                                name="email"
+                                className="bg-gray-200 focus:bg-gray-300 px-3 py-1 rounded-md shadow-md "
+                                required
+                                value={email}
+                                onChange={(e) =>
+                                    setEmail(e.currentTarget.value)
                                 }
                             />
                         </div>
