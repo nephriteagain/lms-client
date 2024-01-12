@@ -21,20 +21,17 @@ import { useAxiosGet } from "@/hooks/useAxios";
 import { ReactDispatch } from "@/schemas";
 import { constants } from "@/constants";
 
-
-
 type ComboBoxProps<T> = {
     setSelected: ReactDispatch<T & any>;
     to: string;
-    searchCriteria:  ('title'|'name'|'_id'|'email') & keyof T;
+    searchCriteria: ("title" | "name" | "_id" | "email") & keyof T;
     searchPlaceholder: string;
-    selectPlaceholder:string;
+    selectPlaceholder: string;
     notFoundText: string;
-} & HTMLAttributes<HTMLDivElement>
-
+} & HTMLAttributes<HTMLDivElement>;
 
 export default function ComboBox<T>({
-    setSelected, 
+    setSelected,
     to,
     searchCriteria,
     searchPlaceholder,
@@ -42,19 +39,18 @@ export default function ComboBox<T>({
     notFoundText,
     className,
     ...props
-    
 }: ComboBoxProps<T>) {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("");
     const [query, setQuery] = useState("");
 
-    const items = useAxiosGet<(T & {_id:string})[]>(
+    const items = useAxiosGet<(T & { _id: string })[]>(
         `${constants.server}/${to}/search?q=${query}`,
         [],
     );
 
-    const item = items.find((i) => i[searchCriteria] === value)
-    const v = item ? item[searchCriteria] :  selectPlaceholder
+    const item = items.find((i) => i[searchCriteria] === value);
+    const v = item ? item[searchCriteria] : selectPlaceholder;
 
     return (
         <div className={cn(`ps-8`, className)} {...props}>
@@ -93,7 +89,9 @@ export default function ComboBox<T>({
                                         );
                                         const item =
                                             items.find(
-                                                (i) => i[searchCriteria] === currentValue,
+                                                (i) =>
+                                                    i[searchCriteria] ===
+                                                    currentValue,
                                             ) ?? null;
                                         setSelected(item as T);
                                         setOpen(false);
@@ -115,5 +113,5 @@ export default function ComboBox<T>({
                 </PopoverContent>
             </Popover>
         </div>
-    )
+    );
 }

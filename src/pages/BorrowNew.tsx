@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useFetcher } from "react-router-dom";
 import Button from "@/components/utils/Button";
 
-
 import {
     AlertDialog,
     AlertDialogContent,
@@ -10,8 +9,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { AlertDialogDescription } from "@radix-ui/react-alert-dialog";
 
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 import DatePicker from "@/components/Borrow/Datepicker";
 import ComboBox from "@/components/utils/ComboBox";
@@ -19,8 +18,10 @@ import { BookSearchResults, MemberSearchResults } from "@/schemas";
 
 export default function BorrowNew() {
     const fetcher = useFetcher({ key: "borrow_create" });
-    const [ bookSearchBy, setBookSearchBy ] = useState<'title'|'_id'>('title')
-    const [ memberSearchBy, setMemberSearchBy ] = useState<'name'|'_id'|'email'>('name')
+    const [bookSearchBy, setBookSearchBy] = useState<"title" | "_id">("title");
+    const [memberSearchBy, setMemberSearchBy] = useState<
+        "name" | "_id" | "email"
+    >("name");
     const [selectedBook, setSelectedBook] = useState<BookSearchResults | null>(
         null,
     );
@@ -57,45 +58,75 @@ export default function BorrowNew() {
                     className="flex flex-col items-start gap-8"
                     action=""
                     method="post"
-                >                    
-                    <div className="w-full flex flex-col gap-2 font-semibold bg-zinc-200 p-4 shadow-inner shadow-gray-500">                        
+                >
+                    <div className="w-full flex flex-col gap-2 font-semibold bg-zinc-200 p-4 shadow-inner shadow-gray-500">
                         <p className="text-lg">Book</p>
-                        <p className="ps-4 text-sm opacity-70" >searching by: {bookSearchBy}</p>
-                        <RadioGroup defaultValue="title" className="ps-4 flex flex-row gap-2">
+                        <p className="ps-4 text-sm opacity-70">
+                            searching by: {bookSearchBy}
+                        </p>
+                        <RadioGroup
+                            defaultValue="title"
+                            className="ps-4 flex flex-row gap-2"
+                        >
                             <div className="flex items-center space-x-2">
                                 <Label htmlFor="r1">Title</Label>
-                                <RadioGroupItem value="title" id="r1" onClick={() => setBookSearchBy('title')} />
+                                <RadioGroupItem
+                                    value="title"
+                                    id="r1"
+                                    onClick={() => setBookSearchBy("title")}
+                                />
                             </div>
                             <div className="flex items-center space-x-2">
                                 <Label htmlFor="r2">Id</Label>
-                                <RadioGroupItem value="_id" id="r2" onClick={() => setBookSearchBy('_id')} />
-                            </div>                            
+                                <RadioGroupItem
+                                    value="_id"
+                                    id="r2"
+                                    onClick={() => setBookSearchBy("_id")}
+                                />
+                            </div>
                         </RadioGroup>
                         <ComboBox
-                        setSelected={setSelectedBook}
-                        to="books"
-                        searchCriteria={bookSearchBy}
-                        searchPlaceholder="Search Books"
-                        selectPlaceholder="Select a Book"
-                        notFoundText="No Books found."
+                            setSelected={setSelectedBook}
+                            to="books"
+                            searchCriteria={bookSearchBy}
+                            searchPlaceholder="Search Books"
+                            selectPlaceholder="Select a Book"
+                            notFoundText="No Books found."
                         />
                     </div>
                     <div className="w-full flex flex-col gap-2 font-semibold bg-gray-200 p-4 shadow-inner shadow-gray-500">
                         <p className="text-lg">Member</p>
-                        <p className="ps-4 text-sm opacity-70" >searching by: {memberSearchBy}</p>
-                        <RadioGroup defaultValue="name" className="ps-4 flex flex-row gap-2">
+                        <p className="ps-4 text-sm opacity-70">
+                            searching by: {memberSearchBy}
+                        </p>
+                        <RadioGroup
+                            defaultValue="name"
+                            className="ps-4 flex flex-row gap-2"
+                        >
                             <div className="flex items-center space-x-2">
                                 <Label htmlFor="r1">Name</Label>
-                                <RadioGroupItem value="name" id="r1" onClick={() => setMemberSearchBy('name')} />
+                                <RadioGroupItem
+                                    value="name"
+                                    id="r1"
+                                    onClick={() => setMemberSearchBy("name")}
+                                />
                             </div>
                             <div className="flex items-center space-x-2">
                                 <Label htmlFor="r2">Email</Label>
-                                <RadioGroupItem value="email" id="r2" onClick={() => setMemberSearchBy('email')} />
-                            </div>  
+                                <RadioGroupItem
+                                    value="email"
+                                    id="r2"
+                                    onClick={() => setMemberSearchBy("email")}
+                                />
+                            </div>
                             <div className="flex items-center space-x-2">
                                 <Label htmlFor="r2">Id</Label>
-                                <RadioGroupItem value="_id" id="r2" onClick={() => setMemberSearchBy('_id')} />
-                            </div>                           
+                                <RadioGroupItem
+                                    value="_id"
+                                    id="r2"
+                                    onClick={() => setMemberSearchBy("_id")}
+                                />
+                            </div>
                         </RadioGroup>
                         <ComboBox
                             setSelected={setSelectedMember}
@@ -105,7 +136,7 @@ export default function BorrowNew() {
                             selectPlaceholder="Select a Member"
                             notFoundText="No Members found."
                         />
-                    </div>                   
+                    </div>
                     <div className="w-full flex flex-col gap-1 font-semibold bg-neutral-200 p-4 shadow-inner shadow-gray-500">
                         <p>date</p>
                         <DatePicker date={date} setDate={setDate} />
@@ -113,7 +144,7 @@ export default function BorrowNew() {
                             {Boolean(date && date.getTime() <= Date.now()) &&
                                 "Please choose a future date."}
                         </p>
-                    </div>                    
+                    </div>
                     <div>
                         <Button
                             type="submit"

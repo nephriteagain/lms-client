@@ -9,13 +9,14 @@ import {
 } from "@/components/ui/table";
 import { Borrow } from "@/schemas";
 
-import { useLoaderData, Link, Outlet } from "react-router-dom";
+import { useLoaderData, Link, Outlet, useNavigate } from "react-router-dom";
 
 import { numberToDateString } from "@/lib/utils";
 import TableCellCopy from "@/components/utils/TableCellCopy";
 import SearchBar from "@/components/utils/SearchBar";
 
 import { Option } from "@/schemas";
+import { GiReturnArrow } from "react-icons/gi";
 
 const borrowOptions = [
     {
@@ -42,6 +43,7 @@ const borrowOptions = [
 
 export default function Borrows() {
     const borrows = useLoaderData() as Borrow[];
+    const navigate = useNavigate();
 
     return (
         <div className="py-12 flex flex-col items-center gap-4">
@@ -63,11 +65,12 @@ export default function Borrows() {
                         <TableHead className="w-2/12">title</TableHead>
                         <TableHead className="w-2/12">id</TableHead>
                         <TableHead className="w-2/12">date borrowed</TableHead>
-                        <TableHead className="w-2/12">borrower id</TableHead>
+                        <TableHead className="w-1/12">borrower id</TableHead>
                         <TableHead className="w-2/12">
                             promised return date
                         </TableHead>
                         <TableHead className="w-2/12">book id</TableHead>
+                        <TableHead className="w-1/12">return</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -96,6 +99,14 @@ export default function Borrows() {
                                         {numberToDateString(promisedReturnDate)}
                                     </TableCell>
                                     <TableCellCopy item={bookId} />
+                                    <TableCell
+                                        className="group relative hover:bg-blue-200"
+                                        onClick={() =>
+                                            navigate(`return/${_id}`)
+                                        }
+                                    >
+                                        <GiReturnArrow className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl fill-blue-600 group-hover:scale-125 group-active:scale-95 transition-all duration-200 drop-shadow-md group-hover:drop-shadow-lg" />
+                                    </TableCell>
                                 </TableRow>
                             );
                         },
