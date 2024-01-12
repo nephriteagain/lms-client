@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactNode, useState } from "react";
+import { FunctionComponent, ReactNode, useState, HTMLAttributes } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -26,11 +26,11 @@ import { constants } from "@/constants";
 type ComboBoxProps<T> = {
     setSelected: ReactDispatch<T & any>;
     to: string;
-    searchCriteria:  ('title'|'name') & keyof T;
+    searchCriteria:  ('title'|'name'|'_id'|'email') & keyof T;
     searchPlaceholder: string;
     selectPlaceholder:string;
     notFoundText: string;
-}
+} & HTMLAttributes<HTMLDivElement>
 
 
 export default function ComboBox<T>({
@@ -40,6 +40,8 @@ export default function ComboBox<T>({
     searchPlaceholder,
     selectPlaceholder,
     notFoundText,
+    className,
+    ...props
     
 }: ComboBoxProps<T>) {
     const [open, setOpen] = useState(false);
@@ -55,7 +57,7 @@ export default function ComboBox<T>({
     const v = item ? item[searchCriteria] :  selectPlaceholder
 
     return (
-        <div>
+        <div className={cn(`ps-8`, className)} {...props}>
             <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                     <Button
