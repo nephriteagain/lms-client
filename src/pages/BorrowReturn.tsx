@@ -36,14 +36,25 @@ export default function BorrowReturn() {
                             This action cannot be undone.
                         </AlertDialogDescription>
                     </AlertDialogHeader>
-                    <div>
-                        <p>title: {title}</p>
-                        <p>borrower: {name}</p>
-                        <p>borrow date: {numberToDateString(date)}</p>
-                        <p>
-                            promised return date:{" "}
-                            {numberToDateString(promisedReturnDate)}
-                        </p>
+                    <div className="py-4">                      
+                        <div className="bg-zinc-300 p-2 rounded-md shadow-inner shadow-zinc-500">
+                            <p className="flex gap-6">
+                                <span className="font-semibold opacity-80">title: </span>
+                                <span className="font-bold">{title}</span>
+                            </p>
+                            <p className="flex gap-6">
+                                <span className="font-semibold opacity-80">borrower: </span>
+                                <span className="font-bold">{name}</span>
+                            </p>
+                            <p className="flex gap-6">
+                                <span className="font-semibold opacity-80">borrow date: </span>
+                                <span className="font-bold">{numberToDateString(date)}</span>
+                            </p>
+                            <p className="flex gap-6">
+                                <span className="font-semibold opacity-80">promised return date:</span>
+                                <span className="font-bold">{numberToDateString(promisedReturnDate)}</span>
+                            </p>
+                        </div>
                     </div>
                     <AlertDialogFooter>
                         <AlertDialogCancel
