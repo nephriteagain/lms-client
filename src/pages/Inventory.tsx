@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table";
 import TableCellCopy from "@/components/utils/TableCellCopy";
 import SearchBar from "@/components/utils/SearchBar";
+import EmptyTable from "@/components/utils/EmptyTable";
 
 const inventoryOptions = [
     {
@@ -54,7 +55,7 @@ export default function Inventory() {
                         <TableHead>total</TableHead>
                     </TableRow>
                 </TableHeader>
-                <TableBody>
+                { inventory.length > 0 ? <TableBody>
                     {inventory.map((item) => {
                         const { _id, title, available, borrowed, total } = item;
                         return (
@@ -80,7 +81,9 @@ export default function Inventory() {
                             </TableRow>
                         );
                     })}
-                </TableBody>
+                </TableBody> :
+                <EmptyTable />
+                }
             </Table>
             {/* this is where the /inventory/update/:id will go */}
             <Outlet />

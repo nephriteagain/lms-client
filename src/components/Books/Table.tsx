@@ -1,8 +1,8 @@
 import { Book } from "../../schemas";
 import { Link, useNavigate } from "react-router-dom";
 import TableCellCopy from "../utils/TableCellCopy";
+import EmptyTable from "../utils/EmptyTable";
 
-import ClipboardCopy from "../utils/ClipboardCopy";
 
 import {
     Table,
@@ -34,17 +34,9 @@ export default function BookTable({ books }: { books: Book[] }) {
                         return <BookTableRow {...book} key={book._id} />;
                     })}
                 </TableBody>
-            ) : (
-                <div className="py-8  flex items-center justify-center gap-4">
-                    <p className="text-lg font-semibold">No Result Found...</p>
-                    <Link
-                        to={"/"}
-                        className="border-b border-black hover:text-green-800 hover:border-green transition-all duration-150"
-                    >
-                        go back
-                    </Link>
-                </div>
-            )}
+            ) : 
+                <EmptyTable />
+            }
         </Table>
     );
 }

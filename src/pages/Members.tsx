@@ -9,12 +9,12 @@ import {
     TableRow,
 } from "@/components/ui/table";
 
-import { dev } from "@/constants";
 import { Member } from "@/schemas";
 import { useLoaderData, useNavigate, Outlet, Link } from "react-router-dom";
 
 import { MdDelete } from "react-icons/md";
 import TableCellCopy from "@/components/utils/TableCellCopy";
+import EmptyTable from "@/components/utils/EmptyTable";
 
 export default function Members() {
     const members = useLoaderData() as Member[];
@@ -45,7 +45,7 @@ export default function Members() {
                         <TableHead className="text-center">delete</TableHead>
                     </TableRow>
                 </TableHeader>
-                <TableBody>
+                { members.length > 0 ? <TableBody>
                     {members.map((member) => {
                         const { _id, name, age, joinDate, approvedBy } = member;
                         return (
@@ -84,7 +84,9 @@ export default function Members() {
                             </TableRow>
                         );
                     })}
-                </TableBody>
+                </TableBody> : 
+                <EmptyTable />
+                }
             </Table>
             <Outlet />
         </div>

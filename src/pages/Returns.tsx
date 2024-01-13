@@ -13,6 +13,7 @@ import { numberToDateString } from "@/lib/utils";
 import { Return } from "@/schemas";
 import TableCellCopy from "@/components/utils/TableCellCopy";
 import SearchBar from "@/components/utils/SearchBar";
+import EmptyTable from "@/components/utils/EmptyTable";
 
 const returnOptions = [
     {
@@ -42,6 +43,7 @@ export default function Returns() {
                 <TableCaption>A record of book returns.</TableCaption>
                 <TableHeader>
                     <TableRow>
+                        <TableHead>title</TableHead>
                         <TableHead>id</TableHead>
                         <TableHead>book id</TableHead>
                         <TableHead>date borrowed</TableHead>
@@ -50,7 +52,7 @@ export default function Returns() {
                         <TableHead>approved by</TableHead>
                     </TableRow>
                 </TableHeader>
-                <TableBody>
+                { returns.length > 0 ? <TableBody>
                     {returns.map(
                         ({
                             _id,
@@ -59,12 +61,12 @@ export default function Returns() {
                             returnDate,
                             borrowDate,
                             approvedBy,
+                            title,
                         }) => {
                             return (
                                 <TableRow key={_id}>
+                                    <TableCell>{title}</TableCell>
                                     <TableCellCopy item={_id} />
-                                    {/* TODO: add title schema for returns */}
-                                    {/* <TableCell>title</TableCell> */}
                                     <TableCellCopy item={bookId} />
                                     <TableCell>
                                         {numberToDateString(borrowDate)}
@@ -78,7 +80,9 @@ export default function Returns() {
                             );
                         },
                     )}
-                </TableBody>
+                </TableBody> :
+                <EmptyTable />
+                }
             </Table>
         </div>
     );

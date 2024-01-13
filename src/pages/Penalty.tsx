@@ -9,9 +9,9 @@ import {
 } from "@/components/ui/table";
 import TableCellCopy from "@/components/utils/TableCellCopy";
 import { Option, Penalty as PenaltyType } from "@/schemas";
-import ClipboardCopy from "@/components/utils/ClipboardCopy";
 import { useLoaderData } from "react-router-dom";
 import SearchBar from "@/components/utils/SearchBar";
+import EmptyTable from "@/components/utils/EmptyTable";
 
 const penaltyOptions = [
     {
@@ -28,7 +28,7 @@ const penaltyOptions = [
     },
     {
         value: "approvedBy",
-        text: "BORROWER"
+        text: "APPROVED BY"
     }
 ] as const satisfies Option[]
 
@@ -42,7 +42,7 @@ export default function Penalty() {
                 <SearchBar options={penaltyOptions} />
             </div>
             <Table className="w-screen xs:w-[576px]">
-                <TableCaption>A record of book returns.</TableCaption>
+                <TableCaption>A record of penalty.</TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-2/12">id</TableHead>
@@ -52,7 +52,7 @@ export default function Penalty() {
                         <TableHead className="w-2/12">approvedBy</TableHead>
                     </TableRow>
                 </TableHeader>
-                <TableBody>
+                { penaltyList.length > 0 ? <TableBody>
                     {penaltyList.map(
                         ({ _id, bookId, borrower, penalty, approvedBy }) => {
                             return (
@@ -68,7 +68,9 @@ export default function Penalty() {
                             );
                         },
                     )}
-                </TableBody>
+                </TableBody> :
+                <EmptyTable />
+                }
             </Table>
         </div>
     );

@@ -10,7 +10,7 @@ const Table = React.forwardRef<
         <table
             ref={ref}
             className={cn(
-                "bg-slate-100 rounded-xl shadow-lg w-screen xs:w-[500px] sm:w-[600px] md:w-[700px] overflow-x-scroll caption-bottom text-sm",
+                "bg-slate-100 rounded-xl shadow-lg w-screen xs:w-[500px] sm:w-[600px] md:w-[700px] lg:w-[900px] overflow-x-scroll caption-bottom text-sm",
                 className,
             )}
             {...props}

@@ -130,6 +130,7 @@ export type Return = {
     returnDate: number;
     borrowDate: number;
     approvedBy: string;
+    title: string;
 };
 
 export type Penalty = {

@@ -14,6 +14,7 @@ import { useLoaderData, Link, Outlet, useNavigate } from "react-router-dom";
 import { numberToDateString } from "@/lib/utils";
 import TableCellCopy from "@/components/utils/TableCellCopy";
 import SearchBar from "@/components/utils/SearchBar";
+import EmptyTable from "@/components/utils/EmptyTable";
 
 import { Option } from "@/schemas";
 import { GiReturnArrow } from "react-icons/gi";
@@ -74,7 +75,7 @@ export default function Borrows() {
                         <TableHead className="w-1/12">return</TableHead>
                     </TableRow>
                 </TableHeader>
-                <TableBody>
+                { borrows.length > 0 ? <TableBody>
                     {borrows.map(
                         ({
                             _id,
@@ -120,7 +121,9 @@ export default function Borrows() {
                             );
                         },
                     )}
-                </TableBody>
+                </TableBody> :
+                <EmptyTable />
+                }
             </Table>
             <Outlet />
         </div>
