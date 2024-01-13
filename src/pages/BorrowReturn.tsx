@@ -10,12 +10,22 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import Button from "@/components/utils/Button";
+import { numberToDateString } from "@/lib/utils";
+import { BorrowReturnLoaderType } from "@/schemas";
 
-import { useFetcher, useNavigate } from "react-router-dom";
+import { useFetcher, useNavigate, useLoaderData } from "react-router-dom";
 
 export default function BorrowReturn() {
     const fetcher = useFetcher();
     const navigate = useNavigate();
+    const borrowData = useLoaderData() as null|BorrowReturnLoaderType
+
+    if (!borrowData) {
+        throw new Error('borrow data not found')
+    }
+
+    const { name, date, promisedReturnDate, title } = borrowData
+
 
     return (
         <AlertDialog open={true}>
@@ -27,6 +37,12 @@ export default function BorrowReturn() {
                             This action cannot be undone.
                         </AlertDialogDescription>
                     </AlertDialogHeader>
+                    <div>
+                        <p>title: {title}</p>
+                        <p>borrower: {name}</p>
+                        <p>borrow date: {numberToDateString(date)}</p>
+                        <p>promised return date: {numberToDateString(promisedReturnDate)}</p>
+                    </div>
                     <AlertDialogFooter>
                         <AlertDialogCancel
                             type="button"

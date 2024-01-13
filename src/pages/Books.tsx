@@ -1,8 +1,28 @@
 import { useLoaderData, Outlet, Link } from "react-router-dom";
-import { Book } from "../schemas";
+import { Book, Option } from "../schemas";
 
 import BookTable from "@/components/Books/Table";
-import SearchBar from "@/components/Books/SearchBar";
+import SearchBar from "@/components/utils/SearchBar";
+
+
+const bookOptions = [
+    { 
+        value: 'title',
+        text: 'TITLE'    
+    },
+    {
+        value: 'authors',
+        text: 'AUTHOR'
+    },
+    {
+        value: '_id',
+        text: 'ID'
+    },
+    {
+        value: 'yearPublished',
+        text: 'YEAR PUBLISHED'
+    }
+] as const satisfies Option[]
 
 export default function Books() {
     const books = useLoaderData() as Awaited<Book[]>;
@@ -18,7 +38,7 @@ export default function Books() {
                 </Link>
             </div>
             <div className="flex flex-row justify-end">
-                <SearchBar />
+                <SearchBar options={bookOptions} />
             </div>
             <div className="py-4">
                 <BookTable books={books} />

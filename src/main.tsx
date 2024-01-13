@@ -46,6 +46,7 @@ import { deleteMember } from "./actions/deleteMember.ts";
 import { getMember } from "./loaders/members/member.ts";
 import { newBorrow } from "./actions/newBorrow.ts";
 import { newReturn } from "./actions/newReturn.ts";
+import { getBorrow } from "./loaders/borrow/borrow.ts";
 
 /**
  * global axios config
@@ -98,6 +99,7 @@ const router = createBrowserRouter(
                 <Route
                     path="return/:id"
                     element={<BorrowReturn />}
+                    loader={getBorrow}
                     action={newReturn}
                 />
             </Route>

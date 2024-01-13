@@ -8,15 +8,39 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import TableCellCopy from "@/components/utils/TableCellCopy";
-import { Penalty as PenaltyType } from "@/schemas";
+import { Option, Penalty as PenaltyType } from "@/schemas";
 import ClipboardCopy from "@/components/utils/ClipboardCopy";
 import { useLoaderData } from "react-router-dom";
+import SearchBar from "@/components/utils/SearchBar";
+
+const penaltyOptions = [
+    {
+        value: "_id",
+        text: "ID"
+    },
+    {
+        value: "bookId",
+        text: "BOOK ID"
+    },
+    {
+        value: "borrower",
+        text: "BORROWER"
+    },
+    {
+        value: "approvedBy",
+        text: "BORROWER"
+    }
+] as const satisfies Option[]
+
 
 export default function Penalty() {
     const penaltyList = useLoaderData() as PenaltyType[];
 
     return (
-        <div className="py-12">
+        <div className="py-12 flex flex-col items-center gap-4">
+            <div className="w-full flex flex-row justify-end">
+                <SearchBar options={penaltyOptions} />
+            </div>
             <Table className="w-screen xs:w-[576px]">
                 <TableCaption>A record of book returns.</TableCaption>
                 <TableHeader>

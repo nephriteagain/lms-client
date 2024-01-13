@@ -17,6 +17,7 @@ import SearchBar from "@/components/utils/SearchBar";
 
 import { Option } from "@/schemas";
 import { GiReturnArrow } from "react-icons/gi";
+import { FaCheck } from "react-icons/fa";
 
 const borrowOptions = [
     {
@@ -82,6 +83,8 @@ export default function Borrows() {
                             borrower,
                             date,
                             promisedReturnDate,
+                            isReturned
+                            
                         }) => {
                             return (
                                 <TableRow key={_id}>
@@ -99,14 +102,20 @@ export default function Borrows() {
                                         {numberToDateString(promisedReturnDate)}
                                     </TableCell>
                                     <TableCellCopy item={bookId} />
-                                    <TableCell
+                                    {   isReturned ?
+                                        
+                                        <TableCell className="relative">
+                                            <FaCheck  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl fill-green-600 group-hover:scale-125 group-active:scale-95 transition-all duration-200 drop-shadow-md group-hover:drop-shadow-lg" />
+                                        </TableCell> :
+                                        <TableCell
                                         className="group relative hover:bg-blue-200"
                                         onClick={() =>
                                             navigate(`return/${_id}`)
                                         }
-                                    >
-                                        <GiReturnArrow className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl fill-blue-600 group-hover:scale-125 group-active:scale-95 transition-all duration-200 drop-shadow-md group-hover:drop-shadow-lg" />
-                                    </TableCell>
+                                        >
+                                            <GiReturnArrow className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl fill-blue-600 group-hover:scale-125 group-active:scale-95 transition-all duration-200 drop-shadow-md group-hover:drop-shadow-lg" />
+                                        </TableCell>
+                                    }
                                 </TableRow>
                             );
                         },
