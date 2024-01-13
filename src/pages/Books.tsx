@@ -4,25 +4,24 @@ import { Book, Option } from "../schemas";
 import BookTable from "@/components/Books/Table";
 import SearchBar from "@/components/utils/SearchBar";
 
-
 const bookOptions = [
-    { 
-        value: 'title',
-        text: 'TITLE'    
+    {
+        value: "title",
+        text: "TITLE",
     },
     {
-        value: 'authors',
-        text: 'AUTHOR'
+        value: "authors",
+        text: "AUTHOR",
     },
     {
-        value: '_id',
-        text: 'ID'
+        value: "_id",
+        text: "ID",
     },
     {
-        value: 'yearPublished',
-        text: 'YEAR PUBLISHED'
-    }
-] as const satisfies Option[]
+        value: "yearPublished",
+        text: "YEAR PUBLISHED",
+    },
+] as const satisfies Option[];
 
 export default function Books() {
     const books = useLoaderData() as Awaited<Book[]>;

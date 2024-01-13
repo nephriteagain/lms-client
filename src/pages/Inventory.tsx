@@ -55,35 +55,38 @@ export default function Inventory() {
                         <TableHead>total</TableHead>
                     </TableRow>
                 </TableHeader>
-                { inventory.length > 0 ? <TableBody>
-                    {inventory.map((item) => {
-                        const { _id, title, available, borrowed, total } = item;
-                        return (
-                            <TableRow
-                                key={_id}
-                                tabIndex={5}
-                                className="hover:bg-slate-300 cursor-pointer"
-                                onClick={() => navigate(`update/${_id}`)}
-                            >
-                                <TableCell className="text-left w-8/12 font-medium">
-                                    {title}
-                                </TableCell>
-                                <TableCellCopy item={_id} />
-                                <TableCell className="text-center w-1/12">
-                                    {available}
-                                </TableCell>
-                                <TableCell className="text-center w-1/12">
-                                    {borrowed}
-                                </TableCell>
-                                <TableCell className="text-center w-1/12 ">
-                                    {total}
-                                </TableCell>
-                            </TableRow>
-                        );
-                    })}
-                </TableBody> :
-                <EmptyTable />
-                }
+                {inventory.length > 0 ? (
+                    <TableBody>
+                        {inventory.map((item) => {
+                            const { _id, title, available, borrowed, total } =
+                                item;
+                            return (
+                                <TableRow
+                                    key={_id}
+                                    tabIndex={5}
+                                    className="hover:bg-slate-300 cursor-pointer"
+                                    onClick={() => navigate(`update/${_id}`)}
+                                >
+                                    <TableCell className="text-left w-8/12 font-medium">
+                                        {title}
+                                    </TableCell>
+                                    <TableCellCopy item={_id} />
+                                    <TableCell className="text-center w-1/12">
+                                        {available}
+                                    </TableCell>
+                                    <TableCell className="text-center w-1/12">
+                                        {borrowed}
+                                    </TableCell>
+                                    <TableCell className="text-center w-1/12 ">
+                                        {total}
+                                    </TableCell>
+                                </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                ) : (
+                    <EmptyTable />
+                )}
             </Table>
             {/* this is where the /inventory/update/:id will go */}
             <Outlet />

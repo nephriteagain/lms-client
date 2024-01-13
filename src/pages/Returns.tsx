@@ -17,18 +17,18 @@ import EmptyTable from "@/components/utils/EmptyTable";
 
 const returnOptions = [
     {
-        value: '_id',
-        text: 'ID',
+        value: "_id",
+        text: "ID",
     },
     {
-        value: 'bookId',
-        text: 'BOOK ID'
+        value: "bookId",
+        text: "BOOK ID",
     },
     {
-        value: 'borrower',
-        text: 'BORROWER ID',        
+        value: "borrower",
+        text: "BORROWER ID",
     },
-]
+];
 
 export default function Returns() {
     const returns = useLoaderData() as Return[];
@@ -52,37 +52,39 @@ export default function Returns() {
                         <TableHead>approved by</TableHead>
                     </TableRow>
                 </TableHeader>
-                { returns.length > 0 ? <TableBody>
-                    {returns.map(
-                        ({
-                            _id,
-                            bookId,
-                            borrower,
-                            returnDate,
-                            borrowDate,
-                            approvedBy,
-                            title,
-                        }) => {
-                            return (
-                                <TableRow key={_id}>
-                                    <TableCell>{title}</TableCell>
-                                    <TableCellCopy item={_id} />
-                                    <TableCellCopy item={bookId} />
-                                    <TableCell>
-                                        {numberToDateString(borrowDate)}
-                                    </TableCell>
-                                    <TableCellCopy item={borrower} />
-                                    <TableCell>
-                                        {numberToDateString(returnDate)}
-                                    </TableCell>
-                                    <TableCellCopy item={approvedBy} />
-                                </TableRow>
-                            );
-                        },
-                    )}
-                </TableBody> :
-                <EmptyTable />
-                }
+                {returns.length > 0 ? (
+                    <TableBody>
+                        {returns.map(
+                            ({
+                                _id,
+                                bookId,
+                                borrower,
+                                returnDate,
+                                borrowDate,
+                                approvedBy,
+                                title,
+                            }) => {
+                                return (
+                                    <TableRow key={_id}>
+                                        <TableCell>{title}</TableCell>
+                                        <TableCellCopy item={_id} />
+                                        <TableCellCopy item={bookId} />
+                                        <TableCell>
+                                            {numberToDateString(borrowDate)}
+                                        </TableCell>
+                                        <TableCellCopy item={borrower} />
+                                        <TableCell>
+                                            {numberToDateString(returnDate)}
+                                        </TableCell>
+                                        <TableCellCopy item={approvedBy} />
+                                    </TableRow>
+                                );
+                            },
+                        )}
+                    </TableBody>
+                ) : (
+                    <EmptyTable />
+                )}
             </Table>
         </div>
     );

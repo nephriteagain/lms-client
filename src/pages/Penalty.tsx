@@ -16,22 +16,21 @@ import EmptyTable from "@/components/utils/EmptyTable";
 const penaltyOptions = [
     {
         value: "_id",
-        text: "ID"
+        text: "ID",
     },
     {
         value: "bookId",
-        text: "BOOK ID"
+        text: "BOOK ID",
     },
     {
         value: "borrower",
-        text: "BORROWER"
+        text: "BORROWER",
     },
     {
         value: "approvedBy",
-        text: "APPROVED BY"
-    }
-] as const satisfies Option[]
-
+        text: "APPROVED BY",
+    },
+] as const satisfies Option[];
 
 export default function Penalty() {
     const penaltyList = useLoaderData() as PenaltyType[];
@@ -52,25 +51,33 @@ export default function Penalty() {
                         <TableHead className="w-2/12">approvedBy</TableHead>
                     </TableRow>
                 </TableHeader>
-                { penaltyList.length > 0 ? <TableBody>
-                    {penaltyList.map(
-                        ({ _id, bookId, borrower, penalty, approvedBy }) => {
-                            return (
-                                <TableRow key={_id}>
-                                    <TableCellCopy item={_id} />
-                                    <TableCellCopy item={bookId} />
-                                    <TableCellCopy item={borrower} />
-                                    <TableCell className="w-2/12">
-                                        {penalty}
-                                    </TableCell>
-                                    <TableCellCopy item={approvedBy} />
-                                </TableRow>
-                            );
-                        },
-                    )}
-                </TableBody> :
-                <EmptyTable />
-                }
+                {penaltyList.length > 0 ? (
+                    <TableBody>
+                        {penaltyList.map(
+                            ({
+                                _id,
+                                bookId,
+                                borrower,
+                                penalty,
+                                approvedBy,
+                            }) => {
+                                return (
+                                    <TableRow key={_id}>
+                                        <TableCellCopy item={_id} />
+                                        <TableCellCopy item={bookId} />
+                                        <TableCellCopy item={borrower} />
+                                        <TableCell className="w-2/12">
+                                            {penalty}
+                                        </TableCell>
+                                        <TableCellCopy item={approvedBy} />
+                                    </TableRow>
+                                );
+                            },
+                        )}
+                    </TableBody>
+                ) : (
+                    <EmptyTable />
+                )}
             </Table>
         </div>
     );

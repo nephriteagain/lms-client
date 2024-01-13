@@ -88,7 +88,7 @@ const router = createBrowserRouter(
                     action={deleteMember}
                 />
                 <Route
-                    path="create"
+                    path="new"
                     element={<MemberCreate />}
                     action={createMember}
                 />

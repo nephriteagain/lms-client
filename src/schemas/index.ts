@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { z } from "zod";
 
-
 export type ReactDispatch<T> = Dispatch<SetStateAction<T>>;
 
 /** @description shorthand for Promise*/
@@ -149,7 +148,6 @@ export type User = {
     _id: string;
 };
 
-
 export type Option = {
     value: string;
     text: Uppercase<string>;
@@ -173,7 +171,7 @@ function timeChecker(value: unknown) {
 /**
  * @Note check for valid dates number
  */
-const DateChecker = z.custom<number>(timeChecker)
+const DateChecker = z.custom<number>(timeChecker);
 
 export const NewBorrowSchema = z
     .object({
@@ -188,7 +186,7 @@ export type BorrowSchemaType = z.infer<typeof NewBorrowSchema> & {
     date: number;
     approvedBy: string;
     title: string;
-}
+};
 
 export type MemberSearchResults = {
     _id: string;
@@ -196,11 +194,10 @@ export type MemberSearchResults = {
     email: string;
 };
 
-
 export type BorrowReturnLoaderType = {
-    name:string;
-    date:number;
+    name: string;
+    date: number;
     promisedReturnDate: z.infer<typeof DateChecker>;
     title: string;
-    penalty: number
-}
+    penalty: number;
+};

@@ -18,14 +18,13 @@ import { useFetcher, useNavigate, useLoaderData } from "react-router-dom";
 export default function BorrowReturn() {
     const fetcher = useFetcher();
     const navigate = useNavigate();
-    const borrowData = useLoaderData() as null|BorrowReturnLoaderType
+    const borrowData = useLoaderData() as null | BorrowReturnLoaderType;
 
     if (!borrowData) {
-        throw new Error('borrow data not found')
+        throw new Error("borrow data not found");
     }
 
-    const { name, date, promisedReturnDate, title } = borrowData
-
+    const { name, date, promisedReturnDate, title } = borrowData;
 
     return (
         <AlertDialog open={true}>
@@ -41,7 +40,10 @@ export default function BorrowReturn() {
                         <p>title: {title}</p>
                         <p>borrower: {name}</p>
                         <p>borrow date: {numberToDateString(date)}</p>
-                        <p>promised return date: {numberToDateString(promisedReturnDate)}</p>
+                        <p>
+                            promised return date:{" "}
+                            {numberToDateString(promisedReturnDate)}
+                        </p>
                     </div>
                     <AlertDialogFooter>
                         <AlertDialogCancel

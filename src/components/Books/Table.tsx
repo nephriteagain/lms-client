@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import TableCellCopy from "../utils/TableCellCopy";
 import EmptyTable from "../utils/EmptyTable";
 
-
 import {
     Table,
     TableBody,
@@ -34,9 +33,9 @@ export default function BookTable({ books }: { books: Book[] }) {
                         return <BookTableRow {...book} key={book._id} />;
                     })}
                 </TableBody>
-            ) : 
+            ) : (
                 <EmptyTable />
-            }
+            )}
         </Table>
     );
 }

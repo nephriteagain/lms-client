@@ -75,55 +75,58 @@ export default function Borrows() {
                         <TableHead className="w-1/12">return</TableHead>
                     </TableRow>
                 </TableHeader>
-                { borrows.length > 0 ? <TableBody>
-                    {borrows.map(
-                        ({
-                            _id,
-                            title,
-                            bookId,
-                            borrower,
-                            date,
-                            promisedReturnDate,
-                            isReturned
-                            
-                        }) => {
-                            return (
-                                <TableRow key={_id}>
-                                    <TableCell className="w-2/12">
-                                        {title.length > 20
-                                            ? `${title.substring(0, 20)}...`
-                                            : title}
-                                    </TableCell>
-                                    <TableCellCopy item={_id} />
-                                    <TableCell className="w-2/12">
-                                        {numberToDateString(date)}
-                                    </TableCell>
-                                    <TableCellCopy item={borrower} />
-                                    <TableCell className="w-2/12">
-                                        {numberToDateString(promisedReturnDate)}
-                                    </TableCell>
-                                    <TableCellCopy item={bookId} />
-                                    {   isReturned ?
-                                        
-                                        <TableCell className="relative">
-                                            <FaCheck  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl fill-green-600 group-hover:scale-125 group-active:scale-95 transition-all duration-200 drop-shadow-md group-hover:drop-shadow-lg" />
-                                        </TableCell> :
-                                        <TableCell
-                                        className="group relative hover:bg-blue-200"
-                                        onClick={() =>
-                                            navigate(`return/${_id}`)
-                                        }
-                                        >
-                                            <GiReturnArrow className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl fill-blue-600 group-hover:scale-125 group-active:scale-95 transition-all duration-200 drop-shadow-md group-hover:drop-shadow-lg" />
+                {borrows.length > 0 ? (
+                    <TableBody>
+                        {borrows.map(
+                            ({
+                                _id,
+                                title,
+                                bookId,
+                                borrower,
+                                date,
+                                promisedReturnDate,
+                                isReturned,
+                            }) => {
+                                return (
+                                    <TableRow key={_id}>
+                                        <TableCell className="w-2/12">
+                                            {title.length > 20
+                                                ? `${title.substring(0, 20)}...`
+                                                : title}
                                         </TableCell>
-                                    }
-                                </TableRow>
-                            );
-                        },
-                    )}
-                </TableBody> :
-                <EmptyTable />
-                }
+                                        <TableCellCopy item={_id} />
+                                        <TableCell className="w-2/12">
+                                            {numberToDateString(date)}
+                                        </TableCell>
+                                        <TableCellCopy item={borrower} />
+                                        <TableCell className="w-2/12">
+                                            {numberToDateString(
+                                                promisedReturnDate,
+                                            )}
+                                        </TableCell>
+                                        <TableCellCopy item={bookId} />
+                                        {isReturned ? (
+                                            <TableCell className="relative">
+                                                <FaCheck className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl fill-green-600 group-hover:scale-125 group-active:scale-95 transition-all duration-200 drop-shadow-md group-hover:drop-shadow-lg" />
+                                            </TableCell>
+                                        ) : (
+                                            <TableCell
+                                                className="group relative hover:bg-blue-200"
+                                                onClick={() =>
+                                                    navigate(`return/${_id}`)
+                                                }
+                                            >
+                                                <GiReturnArrow className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl fill-blue-600 group-hover:scale-125 group-active:scale-95 transition-all duration-200 drop-shadow-md group-hover:drop-shadow-lg" />
+                                            </TableCell>
+                                        )}
+                                    </TableRow>
+                                );
+                            },
+                        )}
+                    </TableBody>
+                ) : (
+                    <EmptyTable />
+                )}
             </Table>
             <Outlet />
         </div>

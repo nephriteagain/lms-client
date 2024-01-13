@@ -2,6 +2,7 @@ import { useNavigate, useFetcher } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import { NewMemberSchema } from "@/schemas";
+import Button from "@/components/utils/Button";
 
 import {
     AlertDialog,
@@ -90,15 +91,16 @@ export default function MemberCreate() {
                         <AlertDialogCancel onClick={() => navigate("..")}>
                             Cancel
                         </AlertDialogCancel>
-                        <AlertDialogAction
+                        <Button
                             type="submit"
                             disabled={
                                 disabled || fetcher.state === "submitting"
                             }
-                            className="disabled:opacity-60"
+                            loading={fetcher.state === "submitting"}
+                            className="disabled:opacity-60 text-sm font-semibold"
                         >
                             Continue
-                        </AlertDialogAction>
+                        </Button>
                     </AlertDialogFooter>
                 </fetcher.Form>
             </AlertDialogContent>
