@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -28,10 +26,7 @@ type MemberComboBox = {
     setSelectedMember: ReactDispatch<MemberSearchResults | null>;
 };
 
-export default function MemberCombobox({
-    selectedMember,
-    setSelectedMember,
-}: MemberComboBox) {
+export default function MemberCombobox({ setSelectedMember }: MemberComboBox) {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("");
     const [query, setQuery] = useState("");

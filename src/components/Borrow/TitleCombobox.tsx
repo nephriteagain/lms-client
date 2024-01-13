@@ -26,10 +26,7 @@ type TitleComboboxType = {
     setSelectedBook: ReactDispatch<BookSearchResults | null>;
 };
 
-export default function TitleCombobox({
-    selectedBook,
-    setSelectedBook,
-}: TitleComboboxType) {
+export default function TitleCombobox({ setSelectedBook }: TitleComboboxType) {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("");
     const [query, setQuery] = useState("");

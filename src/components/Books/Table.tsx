@@ -1,5 +1,5 @@
 import { Book } from "../../schemas";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import TableCellCopy from "../utils/TableCellCopy";
 import EmptyTable from "../utils/EmptyTable";
 

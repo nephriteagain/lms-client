@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactNode, useState, HTMLAttributes } from "react";
+import { ReactNode, useState, HTMLAttributes } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
