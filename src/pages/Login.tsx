@@ -10,7 +10,7 @@ export default function Login() {
     const [disabled, setDisabled] = useState(true);
     const [loading, setLoading] = useState(false);
 
-    const { login } = useAuthContext();
+    const { login, userData } = useAuthContext();
 
     const navigate = useNavigate();
 

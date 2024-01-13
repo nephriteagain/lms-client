@@ -201,3 +201,15 @@ export type BorrowReturnLoaderType = {
     title: string;
     penalty: number;
 };
+
+export const RegisterSchema = z
+    .object({
+        name: z.string(),
+        age: z.number().int().min(14),
+        email: z.string().email(),
+        password: z.string().min(4),
+        secret: z.string().min(4),
+    })
+    .required();
+
+export type Register = z.infer<typeof RegisterSchema>;

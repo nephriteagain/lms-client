@@ -28,6 +28,7 @@ import Member from "./pages/Member.tsx";
 import Penalty from "./pages/Penalty.tsx";
 import Error from "./components/utils/Error.tsx";
 import BorrowReturn from "./pages/BorrowReturn.tsx";
+import Register from "./pages/Register.tsx";
 
 import { getBooks } from "./loaders/books/books.ts";
 import { getBook } from "./loaders/books/book.ts";
@@ -47,6 +48,7 @@ import { getMember } from "./loaders/members/member.ts";
 import { newBorrow } from "./actions/newBorrow.ts";
 import { newReturn } from "./actions/newReturn.ts";
 import { getBorrow } from "./loaders/borrow/borrow.ts";
+import { registerAction } from "./actions/register.ts";
 
 /**
  * global axios config
@@ -106,6 +108,11 @@ const router = createBrowserRouter(
             <Route path="return" element={<Returns />} loader={getReturns} />
             <Route path="penalty" element={<Penalty />} loader={getPenalties} />
             <Route path="login" element={<Login />} />
+            <Route
+                path="register"
+                element={<Register />}
+                action={registerAction}
+            />
         </Route>,
     ),
 );

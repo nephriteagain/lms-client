@@ -67,12 +67,20 @@ export default function Navbar() {
                     logout
                 </Button>
             ) : (
-                <Link
-                    to={"login"}
-                    className="ms-auto hover:scale-105 active:scale-95 bg-green-300 hover:bg-green-400 rounded-md hover:rounded-lg shadow-md hover:shadow-lg px-2 py-1 transition-all duration-150"
-                >
-                    login
-                </Link>
+                <div className="ms-auto flex gap-2">
+                    <Link
+                        to={"login"}
+                        className="hover:scale-105 active:scale-95 bg-green-300 hover:bg-green-400 rounded-md hover:rounded-lg shadow-md hover:shadow-lg px-2 py-1 transition-all duration-150"
+                    >
+                        login
+                    </Link>
+                    <Link
+                        to={"register"}
+                        className="hover:scale-105 active:scale-95 bg-blue-300 hover:bg-blue-400 rounded-md hover:rounded-lg shadow-md hover:shadow-lg px-2 py-1 transition-all duration-150"
+                    >
+                        register
+                    </Link>
+                </div>
             )}
         </div>
     );
